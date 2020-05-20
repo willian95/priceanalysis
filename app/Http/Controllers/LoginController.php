@@ -23,6 +23,8 @@ class LoginController extends Controller
                 return response()->json(["success" => true, "msg" => "Te has logueado"]);
             }
 
+            return response()->json(["success" => false, "msg" => "Usuario no encontrado"]);
+
         }catch(\Exception $e){
             return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
         }

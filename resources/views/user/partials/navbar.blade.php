@@ -17,6 +17,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/post/index') }}">Publicar</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/logout') }}">Cerrar sesión</a>
+                </li>
             @endif
         </ul>
         @if(Auth::check() && Auth::user()->id)

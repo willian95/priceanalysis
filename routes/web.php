@@ -26,6 +26,10 @@ Route::get("/offer/fetch/post/{id}/page/{page}", "OfferController@fetch");
 
 Route::get('/login', "LoginController@index"); 
 Route::post('/login', "LoginController@login"); 
+Route::get('/logout', function(){
+    \Auth::logout();
+    return redirect()->to("/");
+});
 
 Route::get('/register', "RegisterController@index"); 
 Route::post('/register', "RegisterController@register");
