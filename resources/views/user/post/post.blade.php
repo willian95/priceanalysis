@@ -192,6 +192,7 @@
                             this.description = ""
                             this.products = [],
                             this.selectedUsers = ""
+                            $(".card").css("background-color", "white")
 
                         }else{
                             alert(res.data.msg)
