@@ -18,7 +18,7 @@
                                 <label for="description">descripción</label>
                                 <textarea class="form-control" rows="5" id="description" v-model="description"></textarea>
                             </div>
-                            <button class="btn btn-primary" @click="store()">Registro</button>
+                            <button class="btn btn-primary" @click="checkSelectedUsers()">Registro</button>
                             <button class="btn btn-primary" data-toggle="modal" data-target="#businessModal">Enviar a</button>
                             <h5 class="text-center">Productos</h5>
                             <div class="row">
@@ -111,10 +111,10 @@
 
 
                     </div>
-                    <div class="modal-footer">
+                    <!--<div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+                    </div>-->
                     </div>
                 </div>
             </div>
@@ -168,37 +168,41 @@
                     })
 
                 },
-                store(){
+                checkSelectedUsers(){
 
                     if(this.selectedUsers == ""){
                         
                         if(confirm("No has seleccionado empresas para que vean tu publicación. ¿Deseas continuar?")){
+                            this.store()
+                        }
+                    }else{
+                        this.store()
+                    }
 
-                            axios.post("{{ url('/post/store') }}", {title: this.title, description: this.description, products: this.products, selectedUsers: this.selectedUsers})
-                            .then(res => {
+                },
+                store(){
 
-                                if(res.data.success == true){
+                    axios.post("{{ url('/post/store') }}", {title: this.title, description: this.description, products: this.products, selectedUsers: this.selectedUsers})
+                    .then(res => {
 
-                                    alert(res.data.msg)
-                                    this.title = ""
-                                    this.description = ""
-                                    this.products = [],
-                                    this.selectedUsers = ""
+                        if(res.data.success == true){
 
-                                }else{
-                                    alert(res.data.msg)
-                                }
+                            alert(res.data.msg)
+                            this.title = ""
+                            this.description = ""
+                            this.products = [],
+                            this.selectedUsers = ""
 
-                            })
-                            .catch(err => {
-                                $.each(err.response.data.errors, function(key, value) {
-                                    alert(value)
-                                })
-                            })
-
+                        }else{
+                            alert(res.data.msg)
                         }
 
-                    }
+                    })
+                    .catch(err => {
+                        $.each(err.response.data.errors, function(key, value) {
+                            alert(value)
+                        })
+                    })
 
                 },
                 fetch(page = 1){
