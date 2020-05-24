@@ -97,7 +97,7 @@
                 },
                 fetchCategories(){
 
-                    axios.get("{{ url('/categories/fetchAll') }}")
+                    axios.get("{{ url('/category/fetchAll') }}")
                     .then(res => {
                         
                         if(res.data.success == true){
