@@ -231,7 +231,7 @@
                         exists = false
                         this.selectedUsers.forEach((data, index) => {
 
-                            if(data.user.id == user.id){
+                            if(data.id == user.id){
                                 exists = true
                                 this.selectedUsers.splice(index, 1)
                             }   
