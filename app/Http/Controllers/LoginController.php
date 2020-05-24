@@ -20,7 +20,8 @@ class LoginController extends Controller
             $credentials = $request->only('email', 'password');
 
             if (Auth::attempt($credentials)) {
-                return response()->json(["success" => true, "msg" => "Te has logueado"]);
+
+                return response()->json(["success" => true, "msg" => "Te has logueado", "role_id" => Auth::user()->role_id]);
             }
 
             return response()->json(["success" => false, "msg" => "Usuario no encontrado"]);

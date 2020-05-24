@@ -5,25 +5,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            @if(Auth::guest())
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/login') }}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/register') }}">Registro</a>
-                </li>
-            @endif
             @if(Auth::check() && Auth::user()->id)
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/post/index') }}">Publicar</a>
+                    <a class="nav-link" href="{{ url('/admin/category/index') }}">Categorías</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/logout') }}">Cerrar sesión</a>
                 </li>
             @endif
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/businesses') }}">Empresas</a>
-            </li>
         </ul>
         @if(Auth::check() && Auth::user()->id)
         <ul class="navbar-nav">

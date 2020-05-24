@@ -19,6 +19,7 @@
                                 <textarea class="form-control" rows="5" id="description" v-model="description"></textarea>
                             </div>
                             <button class="btn btn-primary" @click="store()">Registro</button>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#businessModal">Enviar a</button>
                             <h5 class="text-center">Productos</h5>
                             <div class="row">
                                 <div class="col-md-5">
@@ -39,6 +40,7 @@
                                     <label for="" style="visibility: hidden">hg</label>
                                     <button class="btn btn-success" @click="add()">agregar</button>
                                 </div>
+
                 
                             </div>
 
@@ -71,6 +73,55 @@
             </div>
         </div>
 
+        <!-- modal -->
+            <div class="modal fade" id="businessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Empresas</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="container">
+                            <div class="row" v-for="category in categories">
+                                <div class="col-12">
+                                    <h3 class="text-center">@{{ category.name }}</h3>
+                                </div>
+                                <div class="col-md-3" v-for="user in category.users">
+                                    <div class="card" :id="'user'+user.id" @click="selectUser(user)">
+                                        <div class="card-body">
+                                            @{{ user.name }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li v-for="page in pages" class="page-item"><a class="page-link"  @click="fetch(page)">@{{ page }}</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        
+
+        <!-- modal -->
+
     </div>
 
 @endsection
@@ -86,6 +137,9 @@
                     title:"",
                     description:"",
                     products:[],
+                    categories:[],
+                    selectedUsers:"",
+                    pages:0,
                     name:"",
                     amount:""
                }
@@ -115,34 +169,84 @@
 
                 },
                 store(){
-                    
-                    axios.post("{{ url('/post/store') }}", {title: this.title, description: this.description, products: this.products})
+
+                    if(this.selectedUsers == ""){
+                        
+                        if(confirm("No has seleccionado empresas para que vean tu publicación. ¿Deseas continuar?")){
+
+                            axios.post("{{ url('/post/store') }}", {title: this.title, description: this.description, products: this.products, selectedUsers: this.selectedUsers})
+                            .then(res => {
+
+                                if(res.data.success == true){
+
+                                    alert(res.data.msg)
+                                    this.title = ""
+                                    this.description = ""
+                                    this.products = [],
+                                    this.selectedUsers = ""
+
+                                }else{
+                                    alert(res.data.msg)
+                                }
+
+                            })
+                            .catch(err => {
+                                $.each(err.response.data.errors, function(key, value) {
+                                    alert(value)
+                                })
+                            })
+
+                        }
+
+                    }
+
+                },
+                fetch(page = 1){
+
+                    axios.get("{{ url('/businesses/fetch/') }}"+"/"+page)
                     .then(res => {
 
                         if(res.data.success == true){
+                            
+                            this.categories = res.data.categories
+                            this.pages = Math.ceil(res.data.categoriesCount / 10)
 
-                            alert(res.data.msg)
-                            this.title = ""
-                            this.description = ""
-                            this.products = []
-
-                        }else{
-                            alert(res.data.msg)
                         }
 
                     })
-                    .catch(err => {
-                        $.each(err.response.data.errors, function(key, value) {
-                            alert(value)
+
+                },
+                selectUser(user){
+
+                    if(this.selectedUsers == ""){
+                        this.selectedUsers = [{user: user}]
+                        $("#user"+user.id).css("background-color", "gray")
+                    }else{
+
+                        exists = false
+                        this.selectedUsers.forEach((data, index) => {
+
+                            if(data.user.id == user.id){
+                                exists = true
+                                this.selectedUsers.splice(index, 1)
+                            }   
+
                         })
-                    })
+
+                        if(exists){
+                            $("#user"+user.id).css("background-color", "white")
+                        }else{
+                            this.selectedUsers.push({user: user})
+                            $("#user"+user.id).css("background-color", "gray")
+                        }
+                        
+                    }
 
                 }
 
             },
             created(){
-                
-                
+                this.fetch()
 
             }
         }); 

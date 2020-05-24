@@ -74,11 +74,27 @@ class PostController extends Controller
 
             }
 
+            foreach($request->selectedUsers as $users){
+                $this->sendEmail($users["name"], $users["email"], $post->id);
+            }
+
             return response()->json(["success" => true, "msg" => "Publicación realizada"]);
 
         }catch(\Exception $e){
             return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
         }
+
+    }
+
+    function sendEmail($name, $email, $id){
+        $data = ["body" => "Hola ".$name.", ".\Auth::user()->name." quiere conocer tus precios, puedes ofertar en el siguiente link", "link" =>url('/')."/post/show/".$id];
+        $subject = "Haz tu oferta";
+        \Mail::send("emails.notification", $data, function($message) use ($email, $subject) {// se envía el email
+
+            $message->to($email)->subject($subject);
+            $message->from("rodriguezwillian95@gmail.com","PriceAnalysis");
+
+        });
 
     }
 

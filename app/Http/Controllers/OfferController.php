@@ -29,10 +29,6 @@ class OfferController extends Controller
                 if($index == 0){
                     $bestPriceId = $statistic->id;
                 }
-                
-                /*if($index == ceil($offersCount/2)+1 && $offersCount > 2){
-                    $midPriceId = $statistic->id;
-                }*/
 
                 if($index == $offersCount - 1 && $offersCount > 1){
                     $worstPriceId = $statistic->id;

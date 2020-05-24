@@ -41,4 +41,8 @@ class User extends Authenticatable
         return $this->hasOne(Offer::class);
     }
 
+    public function category(){
+        return $this->belongsTo(User::class);
+    }
+
 }

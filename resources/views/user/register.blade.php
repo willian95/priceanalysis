@@ -27,6 +27,12 @@
                                 <input type="text" class="form-control" id="telephone" v-model="telephone">
                             </div>
                             <div class="form-group">
+                                <label for="category">Categoría</label>
+                                <select class="form-control">
+                                    <option :value="category.id" v-for="category in categories">@{{ category.name }}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" v-model="password">
                             </div>
@@ -53,20 +59,21 @@
             el: '#dev-register',
             data(){
                return{
-                   name:"",
-                   businessName:"",
-                   email:"",
-                   telephone:"",
-                   password:"",
-                   passwordConfirmation:"",
-
+                    name:"",
+                    businessName:"",
+                    email:"",
+                    telephone:"",
+                    password:"",
+                    passwordConfirmation:"",
+                    categories:[],
+                    category:""
                }
             },
             methods:{
                 
                 register(){
 
-                    axios.post("{{ url('/register') }}", {name: this.name, businessNmae: this.businessName, email: this.email, telephone: this.telephone, password: this.password, password_confirmation: this.passwordConfirmation})
+                    axios.post("{{ url('/register') }}", {name: this.name, businessNmae: this.businessName, email: this.email, telephone: this.telephone, password: this.password, password_confirmation: this.passwordConfirmation, category: this.category})
                     .then(res => {
 
                         if(res.data.success == true){
@@ -76,6 +83,7 @@
                             this.email = ""
                             this.telephone  = ""
                             this.password = ""
+                            this.category = ""
                             this.passwordConfirmation  = ""
                         }
 
@@ -86,11 +94,26 @@
                         })
 
                     })
+                },
+                fetchCategories(){
+
+                    axios.get("{{ url('/categories/fetchAll') }}")
+                    .then(res => {
+                        
+                        if(res.data.success == true){
+                            this.categories = res.data.categories
+                        }else{
+                            alert(res.data.msg)
+                        }
+
+                    })
+
                 }
 
             },
             created(){
                 
+                this.fetchCategories()
 
             }
         }); 
