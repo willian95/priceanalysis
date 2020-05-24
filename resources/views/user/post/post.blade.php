@@ -223,7 +223,7 @@
                 selectUser(user){
 
                     if(this.selectedUsers == ""){
-                        this.selectedUsers = [{user: user}]
+                        this.selectedUsers = [user]
                         $("#user"+user.id).css("background-color", "gray")
                     }else{
 
@@ -240,7 +240,7 @@
                         if(exists){
                             $("#user"+user.id).css("background-color", "white")
                         }else{
-                            this.selectedUsers.push({user: user})
+                            this.selectedUsers.push({user})
                             $("#user"+user.id).css("background-color", "gray")
                         }
                         
