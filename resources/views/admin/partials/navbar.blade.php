@@ -10,6 +10,18 @@
                     <a class="nav-link" href="{{ url('/admin/category/index') }}">Categorías</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/admin/unit/index') }}">Unidades</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/admin/product/index') }}">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/admin/user/index') }}">Usuarios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/admin/email/index') }}">Emails</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ url('/logout') }}">Cerrar sesión</a>
                 </li>
             @endif

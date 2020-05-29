@@ -18,6 +18,12 @@
                     <a class="nav-link" href="{{ url('/post/index') }}">Publicar</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/profile') }}">Mis datos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/my-posts') }}">Mis publicaciones</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ url('/logout') }}">Cerrar sesión</a>
                 </li>
             @endif

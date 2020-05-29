@@ -14,26 +14,47 @@
                     </p>
                 </div>
             </div>
-            <div class="row">
+            <!--div class="row">
                 <div class="offset-md-2 col-md-8">
                     <h5 class="text-center">agregar oferta</h5>
                 </div>
                 <div class="offset-md-2 col-md-8">
                     <div class="form-group" v-for="product in products">
                         <label>@{{ product.product }} - @{{ product.amount }} @{{ product.unit_name }}</label>
-                        <input class="offer form-control" :id="'offer'+product.id" type="text" placeholder="precio">
+                        <input class="offer form-control" :id="'offer'+product.id" type="text" class="form-control">
                     </div>
                     <p class="text-center">
                         <button class="btn btn-success" @click="storeOffer()">Ofertar</button>
                     </p>
                 </div>
-            </div>
-            <!--<div class="row">
+            </>-->
+            <div class="row">
                 <div class="offset-md-2 col-md-8">
                     <h5 class="text-center">Ofertas</h5>
                 </div>
-                <div class="offset-md-2 col-md-8">
-                    <div class="form-group" v-for="offer in offers">
+                <div class="offset-md-2 col-md-8" v-for="offer in offers">
+
+                    <h3 class="text-center">@{{ offer.user.name }}</h3>
+                    <h4>Total: @{{ offer.sum }}</h4>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(product, index) in offer.products" v-bind:class="{'bestPrice': offer.id == bestPriceId,  'worstPrice': offer.id == worstPriceId}">
+                                <td>@{{ index + 1 }}</td>
+                                <td>@{{ product.post_product.product }} - @{{ product.post_product.amount }} @{{ product.post_product.unit_name }} </td>
+                                <td>@{{ product.price }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!--<div class="form-group" v-for="offer in offers">
                         
                         <div class="card" v-if="offer.id == bestPriceId" style="background-color: green;">
                             <div class="card-body">
@@ -68,9 +89,9 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div>-->
                 </div>
-            </div>-->
+            </div>
             <div class="row">
                 <div class="col-12">
                     <nav aria-label="Page navigation example">
@@ -182,7 +203,7 @@
             created(){
                 
                 this.productFetch()
-                //this.fetchOffers(1)
+                this.fetchOffers(1)
 
             }
         }); 

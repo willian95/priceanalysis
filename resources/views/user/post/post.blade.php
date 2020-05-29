@@ -18,6 +18,13 @@
                                 <label for="description">descripción</label>
                                 <textarea class="form-control" rows="5" id="description" v-model="description"></textarea>
                             </div>
+                            <div class="form-group">
+                                <label for="type">Tipo de publicación</label>
+                                <select class="form-control" id="type" v-model="type">
+                                    <option value="public">Pública</option>
+                                    <option value="private">Privada</option>
+                                </select>
+                            </div>
                             <button class="btn btn-primary" @click="checkSelectedUsers()">Registro</button>
                             <button class="btn btn-primary" data-toggle="modal" data-target="#businessModal">Enviar a</button>
                             <h5 class="text-center">Productos</h5>
@@ -25,14 +32,44 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label for="name">Nombre</label>
-                                        <input type="text" class="form-control" id="name" v-model="name" placeholder="Harina de maíz">
+                                        <input type="text" class="form-control" id="name" v-model="name" placeholder="Harina de maíz" @keyup="search()">
+                                        <ul>
+                                            <li v-for="search in searches">
+                                                <a href="#" @click="selectProduct(search)">
+                                                    @{{ search.name }}
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
 
-                                <div class="col-md-5">
+                                <div class="col-md-2" v-if="productId == 0">
                                     <div class="form-group">
                                         <label for="amount">Cantidad</label>
-                                        <input type="text" class="form-control" id="amount" v-model="amount" placeholder="15 bultos">
+                                        <input type="text" class="form-control" id="amount" v-model="amount" placeholder="30">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2" v-if="productId == 0">
+                                    <div class="form-group">
+                                        <label for="unit">Unidad</label>
+                                        <input type="text" class="form-control" id="unit" v-model="unit" placeholder="Kilos">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2" v-if="productId != 0">
+                                    <div class="form-group">
+                                        <label for="amount">Cantidad</label>
+                                        <input type="text" class="form-control" id="amount" v-model="amount" placeholder="15">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2" v-if="productId != 0">
+                                    <div class="form-group">
+                                        <label for="unit">Unidad</label>
+                                        <select class="form-control" v-model="selectedUnit">
+                                            <option :value="unit" v-for="unit in units">@{{ unit.unit.name }}</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -58,8 +95,8 @@
                                         <tbody>
                                             <tr v-for="(product, index) in products">
                                                 <td>@{{ index + 1 }}</td>
-                                                <td>@{{ product.name }}</td>
-                                                <td>@{{ product.amount }}</td>
+                                                <td>@{{ product.displayName }}</td>
+                                                <td>@{{ product.amount }} @{{ product.unitName }}</td>
                                                 <td><button class="btn btn-danger" @click="remove(index)">X</button></td>
                                             </tr>
                                         </tbody>
@@ -138,22 +175,94 @@
                     description:"",
                     products:[],
                     categories:[],
+                    searches:"",
                     selectedUsers:"",
                     pages:0,
                     name:"",
-                    amount:""
+                    amount:"",
+                    productId:0,
+                    selectedUnit:"",
+                    unit:"",
+                    units:[],
+                    type:"public"
                }
             },
             methods:{
                 
                 add(){
 
-                    if(this.name != "" && this.amount != ""){
-                        this.products.push({name: this.name, amount: this.amount})
+                    var exists = false
+                    this.products.forEach((data, index) => {
+
+                        if(this.productId > 0 && data.product_id == this.productId){
+                            exists = true
+                        }
+
+                    })
+
+                    if(!exists){
+                        
+                        if(this.productId > 0){
+                            this.products.push({product_id: this.productId, amount: this.amount,unit_id: this.selectedUnit.unit.id, displayName: this.name, unitName: this.selectedUnit.unit.name})
+                        }else{
+                            this.products.push({product_id: this.productId, amount: this.amount, displayName: this.name, unitName: this.unit})
+                        }
+
                         this.name = ""
+                        this.productId = 0
                         this.amount = ""
+                        this.selectedUnit = ""
                     }else{
-                        alert("nombre y cantidad son requeridos")
+                        alert("Este producto ya existe")
+                    }
+                        
+
+                },
+                selectProduct(product){
+                    this.productId = product.id
+                    this.name = product.name
+                    this.searches = ""
+                    this.fetchUnits(product.id)
+                },
+                fetchUnits(id){
+                    
+                    if(id > 0){
+                        axios.get("{{ url('/product/unit/') }}"+"/"+id)
+                        .then(res => {
+
+                            if(res.data.success == true){
+
+                                this.units = res.data.units;
+
+                            }else{
+                                alert(res.data.msg)
+                            }
+
+                        })
+                    }
+                    
+
+                },
+                search(){  
+
+                    if(this.name != ""){
+                        axios.post("{{ url('/product/search/') }}", {search: this.name})
+                        .then(res => {
+
+                            if(res.data.success == true){
+                                this.searches = res.data.products
+                            }else{
+                                alert(res.data.msg)
+                            }
+
+                        })
+                        .catch(err => {
+                            $.each(err.response.data.errors, function(key, value){
+                                alert(value)
+                            });
+                        })
+                    }else{
+                        this.searches = ""
                     }
 
                 },
@@ -182,7 +291,7 @@
                 },
                 store(){
 
-                    axios.post("{{ url('/post/store') }}", {title: this.title, description: this.description, products: this.products, selectedUsers: this.selectedUsers})
+                    axios.post("{{ url('/post/store') }}", {title: this.title, description: this.description, products: this.products, selectedUsers: this.selectedUsers, type: this.type})
                     .then(res => {
 
                         if(res.data.success == true){

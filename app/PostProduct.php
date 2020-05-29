@@ -13,4 +13,10 @@ class PostProduct extends Model
     public function offerProduct(){
         return $this->hasOne(PostProduct::class);
     }
+
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
+
+
 }

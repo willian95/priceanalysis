@@ -3,16 +3,36 @@
 @section('content')
 
     <div class="container" id="dev-landing">
-        <div class="row" v-for="post in posts">
-            <div class="offset-md-2 col-md-8">
-                <a :href="'{{ url('/post/show/') }}'+'/'+post.code">
-                    <div class="card">
-                        <div class="card-body">
-                            @{{ post.title }}
-                        </div>
-                    </div>
-                </a>
+        <div class="row">
+            
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Titulo</th>
+                            <th>Código</th>
+                            <th>Tipo de publicación</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(post, index) in posts">
+                            <td>@{{ index + 1 }}</td>
+                            <td>@{{ post.title }}</td>
+                            <td>@{{ post.code }}</td>
+                            <td>
+                                <span v-if="post.is_privte == 0">Pública</span>
+                                <span v-else>Privada</span>
+                            </td>
+                            <td>
+                                <a class="btn btn-success" :href="'{{ url('/my-posts/show/') }}'+'/'+post.id">Ver</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            
         </div>
         <div class="row">
             <div class="col-12">
@@ -43,7 +63,7 @@
                 
                 fetch(page = 1){
 
-                    axios.get("{{ url('/post/fetch/') }}"+"/"+page)
+                    axios.get("{{ url('/my-posts/fetch/') }}"+"/"+page)
                     .then(res => {
 
                         if(res.data.success == true){

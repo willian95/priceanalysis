@@ -15,8 +15,12 @@
                                 <input type="text" class="form-control" id="name" v-model="name">
                             </div>
                             <div class="form-group">
-                                <label for="businessName">Nombre de empresa</label>
-                                <input type="text" class="form-control" id="buusinessName" v-model="businessName">
+                                <label for="businessName">Nombre comercial</label>
+                                <input type="text" class="form-control" id="businessName" v-model="businessName">
+                            </div>
+                            <div class="form-group">
+                                <label for="rif">R.I.F</label>
+                                <input type="text" class="form-control" id="rif" v-model="rif">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
@@ -25,12 +29,6 @@
                             <div class="form-group">
                                 <label for="telephone">Telefono</label>
                                 <input type="text" class="form-control" id="telephone" v-model="telephone">
-                            </div>
-                            <div class="form-group">
-                                <label for="category">Categoría</label>
-                                <select class="form-control">
-                                    <option :value="category.id" v-for="category in categories">@{{ category.name }}</option>
-                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
@@ -65,15 +63,14 @@
                     telephone:"",
                     password:"",
                     passwordConfirmation:"",
-                    categories:[],
-                    category:""
+                    rif:""
                }
             },
             methods:{
                 
                 register(){
 
-                    axios.post("{{ url('/register') }}", {name: this.name, businessNmae: this.businessName, email: this.email, telephone: this.telephone, password: this.password, password_confirmation: this.passwordConfirmation, category: this.category})
+                    axios.post("{{ url('/register') }}", {name: this.name, businessNmae: this.businessName, email: this.email, telephone: this.telephone, password: this.password, password_confirmation: this.passwordConfirmation, rif: this.rif})
                     .then(res => {
 
                         if(res.data.success == true){
@@ -83,7 +80,6 @@
                             this.email = ""
                             this.telephone  = ""
                             this.password = ""
-                            this.category = ""
                             this.passwordConfirmation  = ""
                         }
 
@@ -94,26 +90,11 @@
                         })
 
                     })
-                },
-                fetchCategories(){
-
-                    axios.get("{{ url('/category/fetchAll') }}")
-                    .then(res => {
-                        
-                        if(res.data.success == true){
-                            this.categories = res.data.categories
-                        }else{
-                            alert(res.data.msg)
-                        }
-
-                    })
-
                 }
 
             },
             created(){
                 
-                this.fetchCategories()
 
             }
         }); 
