@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Country;
 
-class ProfileController extends Controller
+class CountryController extends Controller
 {
-    public function index(){
+    function fetch(){
 
         try{
 
-            $user = User::with("comercialInfo")->findOrFail(\Auth::user()->id);
-            return view("user.profile", ["user" => $user]);
+            $countries = Country::all();
+            
+            return response()->json(["success" => true, "countries" => $countries]);
 
         }catch(\Exception $e){
             return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);

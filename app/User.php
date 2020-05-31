@@ -45,4 +45,8 @@ class User extends Authenticatable
         return $this->belongsTo(User::class);
     }
 
+    public function comercialInfo(){
+        return $this->hasOne(ComercialInfo::class);
+    }
+
 }

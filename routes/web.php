@@ -49,6 +49,17 @@ Route::get("/my-posts", "PostController@myPosts");
 Route::get('/my-posts/fetch/{page}', "PostController@myPostsFetch");
 Route::get("/my-posts/show/{id}", "PostController@showMyPost");
 
+Route::get("/country/fetch", "CountryController@fetch");
+
+Route::post("/user/general-data/update", "UserController@updateGeneralData");
+Route::post("/user/comercial-activity/update", "UserController@updateCommercialActivity");
+Route::post("/user/contact-info/update", "UserController@updateContactInfo");
+Route::post("/user/other-info/update", "UserController@updateOtherInfo");
+Route::get("/user/countries-info/fetch", "UserController@fetchComercialCountries");
+
+Route::post("user/verify-me", "UserController@updateVerifyMyUser");
+
+Route::get("validate/account/{code}", "RegisterController@validateAccount");
 
 Route::get('/admin/dashboard', "DashboardController@index");
 
@@ -77,10 +88,14 @@ Route::get('/admin/user/index', "UserController@index");
 Route::get('/admin/user/fetch/{page}', "UserController@fetch");
 Route::post('/admin/user/confirmRif', "UserController@update");
 
-
 Route::get("/admin/email/index", "AdminEmailController@index");
 Route::get("/admin/email/fetch/{page}", "AdminEmailController@fetch");
 Route::post('/admin/email/store', "AdminEmailController@store");
 Route::post('/admin/email/update', "AdminEmailController@update");
 Route::post('/admin/email/delete', "AdminEmailController@delete");
 
+Route::get("/admin/verify-user/index", "VerifyUserController@index");
+Route::get("/admin/verify-user/fetch/{page}", "VerifyUserController@fetch");
+Route::get("/admin/verify-user/show/{id}", "VerifyUserController@show");
+Route::get("/admin/verify-info/countries-info/fetch/{id}", "VerifyUserController@countryFetch");
+Route::post("/admin/verify-info/verify/{id}", "VerifyUserController@verify");

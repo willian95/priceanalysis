@@ -19,6 +19,9 @@
                     <a class="nav-link" href="{{ url('/admin/user/index') }}">Usuarios</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/admin/verify-user/index') }}">Solicitudes de verificación</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ url('/admin/email/index') }}">Emails</a>
                 </li>
                 <li class="nav-item">

@@ -70,7 +70,7 @@
                 
                 register(){
 
-                    axios.post("{{ url('/register') }}", {name: this.name, businessNmae: this.businessName, email: this.email, telephone: this.telephone, password: this.password, password_confirmation: this.passwordConfirmation, rif: this.rif})
+                    axios.post("{{ url('/register') }}", {name: this.name, businessName: this.businessName, email: this.email, telephone: this.telephone, password: this.password, password_confirmation: this.passwordConfirmation, rif: this.rif})
                     .then(res => {
 
                         if(res.data.success == true){
