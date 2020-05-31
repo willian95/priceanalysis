@@ -41,6 +41,7 @@ class RegisterController extends Controller
     }
 
     function sendEmail($email, $code){
+        
         $data = ["body" => "Para validar tu correo haz click en el siguiente enlace", "link" =>url('/')."validate/account/".$code];
         $subject = "Validar tu correo";
         \Mail::send("emails.register", $data, function($message) use ($email, $subject) {// se envía el email
@@ -49,6 +50,8 @@ class RegisterController extends Controller
             $message->from("rodriguezwillian95@gmail.com","PriceAnalysis");
 
         });
+
+        dd("sended");
 
     }
 
