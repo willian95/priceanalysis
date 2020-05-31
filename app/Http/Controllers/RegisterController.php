@@ -51,8 +51,6 @@ class RegisterController extends Controller
 
         });
 
-        dd("sended");
-
     }
 
     function validateAccount($code){
