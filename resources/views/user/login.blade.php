@@ -3,27 +3,49 @@
 @section('content')
 
     <div id="dev-login">
-
+<div class="grid__form">
+    <div class="grid__form__item">
+       
+        <div class="overlay">
+            <h3 class="mb-5">Iniciar Sesión</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo minus ratione tenetur officiis explicabo corporis eius rem tempore, quos dicta, repudiandae commodi, eveniet hic illum sed doloremque amet velit asperiores.</p>
+            <a class="logo__1" href="{{ url('/') }}">
+                LOREM IPSUM
+              <!---  <img class="logo" src="{{ asset('assets/img/logo-cap.png') }}" alt="">--->
+            </a>
+        </div>
+        <img class="img-form" src="{{ asset('assets/img/login.JPG') }}" alt="">
+      
+    </div>
+    <div class="grid__form__item">
+        
         <div class="container">
             <div class="row">
                 <div class="offset-md-3 col-md-6">
-                    <div class="card" style="width: 100%;">
+                    <div class="" style="width: 100%;">
                         <div class="card-body">
-                            <h5 class="card-title">Login</h5>
+                        
                             <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" v-model="email">
+                                <label for="email">   <img class="icon__form" src="{{ asset('assets/img/iconos/bx-envelope.svg') }}" alt="">Email</label>
+                             
+                                <input placeholder="holaa" type="email" class="form-control" id="email" v-model="email"   >
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
+                                <label for="password"><img class="icon__form icon__form2" src="{{ asset('assets/img/iconos/bx-lock-alt.svg') }}" alt=""> Password</label>
                                 <input type="password" class="form-control" id="password" v-model="password">
                             </div>
-                            <button class="btn btn-primary" @click="login()">Login</button>
+                         <div class="content__btn">
+                             
+                            <button class="btn-general" @click="login()">Entrar</button>
+                            <p>  ó  <a  href="{{ url('/register') }}">Registrarme</a></p>
+                         </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
     </div>
 
