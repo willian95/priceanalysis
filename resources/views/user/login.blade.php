@@ -28,7 +28,7 @@
                             <div class="form-group">
                                 <label for="email">   <img class="icon__form" src="{{ asset('assets/img/iconos/bx-envelope.svg') }}" alt="">Email</label>
                              
-                                <input placeholder="holaa" type="email" class="form-control" id="email" v-model="email"   >
+                                <input placeholder="user@email.com" type="email" class="form-control" id="email" v-model="email"   >
                             </div>
                             <div class="form-group">
                                 <label for="password"><img class="icon__form icon__form2" src="{{ asset('assets/img/iconos/bx-lock-alt.svg') }}" alt=""> Password</label>
