@@ -24,37 +24,37 @@
             <div class="grid__form__item">
                 <div class="container">
                     <div class="row">
-                        <div class="offset-md-2 col-md-8">
+                        <div class="offset-md-1 col-md-8 mt-5">
                             <div class="" style="width: 100%;">
-                                <div class="card-body">
+                                <div class="card-body box" >
                            
-                                    <div class="form-group">
-                                        <label for="name">Nombre</label>
-                                        <input type="text" class="form-control" id="name" v-model="name">
+                                    <div class="form-group  inputBox ">                              
+                                        <input type="text" class="form-control" required="" id="name" v-model="name">
+                                        <label for="name"><img class="icon__form icon__form4" src="{{ asset('assets/img/iconos/bx-group.svg') }}" alt="">Nombre</label>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="businessName">Nombre comercial</label>
-                                        <input type="text" class="form-control" id="businessName" v-model="businessName">
+                                    <div class="form-group  inputBox">
+                                        <input type="text" class="form-control" required="" id="businessName" v-model="businessName">
+                                        <label for="businessName"><img class="icon__form icon__form3" src="{{ asset('assets/img/iconos/bx-id-card.svg') }}" alt="">Nombre comercial</label>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="rif">R.I.F</label>
-                                        <input type="text" class="form-control" id="rif" v-model="rif">
+                                    <div class="form-group  inputBox">
+                                        <input type="text" class="form-control" required="" id="rif" v-model="rif">
+                                        <label for="rif"><img class="icon__form icon__form4 " src="{{ asset('assets/img/iconos/bx-barcode.svg') }}" alt="">R.I.F</label>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" v-model="email">
+                                    <div class="form-group  inputBox">                                
+                                        <input type="email" class="form-control" required="" id="email" v-model="email">
+                                        <label for="email"> <img class="icon__form" src="{{ asset('assets/img/iconos/bx-envelope.svg') }}" alt="">E-mail</label>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="telephone">Telefono</label>
-                                        <input type="text" class="form-control" id="telephone" v-model="telephone">
+                                    <div class="form-group  inputBox">
+                                        <input type="text" class="form-control" required="" id="telephone" v-model="telephone">
+                                        <label for="telephone"><img class="icon__form icon__form5 " src="{{ asset('assets/img/iconos/bx-phone.svg') }}" alt="">Teléfono</label>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" class="form-control" id="password" v-model="password">
+                                    <div class="form-group  inputBox">
+                                        <input type="password" class="form-control" required="" id="password" v-model="password">
+                                        <label for="password"><img class="icon__form icon__form2" src="{{ asset('assets/img/iconos/bx-lock-alt.svg') }}" alt="">Contraseña</label>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="passwordConfirmation">Confirmar Password</label>
-                                        <input type="password" class="form-control" id="passwordConfirmation" v-model="passwordConfirmation">
+                                    <div class="form-group  inputBox">
+                                        <input type="password" class="form-control" required="" id="passwordConfirmation" v-model="passwordConfirmation">
+                                        <label for="passwordConfirmation"><img class="icon__form icon__form2 icon__form3" src="{{ asset('assets/img/iconos/bx-lock-alt.svg') }}" alt="">Confirmar contraseña</label>
                                     </div>
                                     <div class="content__btn">
                              
