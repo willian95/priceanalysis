@@ -4,50 +4,58 @@
 
     <div id="dev-app">
         <div class="container">
-            <div class="row">
+            <div class="top_title">
+                <h3 class="text-center">Categorías</h3>
+                <button class="btn btn-success" data-toggle="modal" data-target="#createCategory">Crear  <img src="{{ asset('assets/img/iconos/bx-list-plus.svg') }}" alt=""></button>  
+              </div>
+
+        <!--    <div class="row">
                 <div class="col-12">
                     <h2 class="text-center">Categorías</h2>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <p class="text-center">
-                        <button class="btn btn-success" data-toggle="modal" data-target="#createCategory">Crear</button>
-                    </p>
+            </div>-->
+            <div class="bg__tables">
+                <div class="row">
+                    <div class="col-12">
+                        <p class="text-center">
+                            <button class="btn btn-success" data-toggle="modal" data-target="#createCategory">Crear</button>
+                        </p>
+                    </div>
+                    <div class="col-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Categoría</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(category, index) in categories">
+                                    <th>@{{ index + 1 }}</th>
+                                    <td>@{{ category.name }}</td>
+                                    <td>
+                                        <button class="btn btn-success" data-toggle="modal" data-target="#createCategory" @click="edit(category)">editar</button>
+                                        <button class="btn btn-danger" @click="erase(category.id)">eliminar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="col-12">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Categoría</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(category, index) in categories">
-                                <th>@{{ index + 1 }}</th>
-                                <td>@{{ category.name }}</td>
-                                <td>
-                                    <button class="btn btn-success" data-toggle="modal" data-target="#createCategory" @click="edit(category)">editar</button>
-                                    <button class="btn btn-danger" @click="erase(category.id)">eliminar</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="row">
+                    <div class="col-12">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" v-for="index in pages" :key="index" @click="fetch(index)" >@{{ index }}</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" v-for="index in pages" :key="index" @click="fetch(index)" >@{{ index }}</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+         
         </div>
 
         <!-- modal -->
