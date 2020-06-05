@@ -23,9 +23,10 @@
     height: 100vh;
     position: fixed;
     z-index: 999;
-    width: 200px;
+    width: 220px;
     transition: .5s;
-    background: #fb7300;
+    background: #007dc5;
+    box-shadow: 5px 0px 15px #00000026;
 }
 
 .top_title {
@@ -73,8 +74,8 @@
 .top_title .btn-success {
     color: #fff;
     background-color: #28a745;
-    border-color: #fb780a;
-    background: #fb780a;
+    border-color: #007dc5;
+    background: #007dc5;
     padding: 10px 50px;
     font-size: 15px;
     color: #fff;
@@ -83,7 +84,7 @@
 
 .bg__tables {
     background: #fff;
-    padding-top: 50px;
+    padding-top: 8rem;
     border-radius: 10px;
     box-shadow: 0px 0px 15px #00000005;
 }
@@ -125,4 +126,42 @@ tbody tr:nth-child(even) {
     color: #fff;
     background-color: #2a497e;
     border-color: #2a497e;
+}
+.page-item{
+    display: flex;
+}
+.page-item a{
+    margin-right: 10px;
+}
+.page-item a:hover {
+   
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #007dc5;
+    border-color: #007dc5;
+}
+.filter {
+    filter: invert(1);
+}
+.w-90{
+    width: 90px;
+}
+.green{
+    background: #00cf78;
+    border: none;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #fff;
+}
+.admin__grid .navbar-light .navbar-brand {
+    color: rgba(255, 255, 255, 0.9);
+}
+.flex-column .nav-link img{
+    margin-right: 12px;
+    
+}
+.flex-column .nav-link {
+
+    display: flex;
 }
