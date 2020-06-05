@@ -4,17 +4,13 @@
 
     <div id="dev-app">
         <div class="container">
+            <div class="top_title">
+                <h3 class="text-center">Products</h3>
+                <button class="btn btn-success mr-5" data-toggle="modal" data-target="#createProduct">Crear <img src="{{ asset('assets/img/iconos/bx-list-plus.svg') }}" alt=""></button> 
+              </div>
+        <div class="bg__tables ">
             <div class="row">
-                <div class="col-12">
-                    <h2 class="text-center">Productos</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <p class="text-center">
-                        <button class="btn btn-success" data-toggle="modal" data-target="#createProduct">Crear</button>
-                    </p>
-                </div>
+               
                 <div class="col-12">
                     <table class="table">
                         <thead>
@@ -29,8 +25,8 @@
                                 <th>@{{ index + 1 }}</th>
                                 <td>@{{ product.name }}</td>
                                 <td>
-                                    <button class="btn btn-success" data-toggle="modal" data-target="#createProduct" @click="edit(product)">editar</button>
-                                    <button class="btn btn-danger" @click="erase(product.id)">eliminar</button>
+                                    <button class="btn btn-success fa fa-edit btn-transparent__green" data-toggle="modal" data-target="#createProduct" @click="edit(product)"></button>
+                                    <button class="btn btn-danger" @click="erase(product.id)"><img class="filter " src="{{ asset('assets/img/iconos/bx-trash.svg') }}" alt=""></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -48,6 +44,7 @@
                     </nav>
                 </div>
             </div>
+        </div>
         </div>
 
         <!-- modal -->

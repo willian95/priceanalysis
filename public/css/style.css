@@ -1,9 +1,9 @@
 .bestPrice {
-    background-color: green;
+    background-color: #00cf78;
 }
 
 .worstPrice {
-    background-color: red;
+    background-color: #dc3545;
 }
 
 ::-webkit-scrollbar {
@@ -854,4 +854,47 @@ tbody tr:nth-child(even) {
 
 .section__w .box .inputBox label {
     top: -15px;
+}
+
+.categorias{
+    display: flex;
+}
+
+/* hover dropdown menus */
+@media only screen and (max-width: 991px) {
+    .navbar-hover .show>.dropdown-toggle::after {
+        transform: rotate(-90deg);
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .navbar-hover .collapse ul li {
+        position: relative;
+    }
+
+    .navbar-hover .collapse ul li:hover>ul {
+        display: block
+    }
+
+    .navbar-hover .collapse ul ul {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 160px;
+        display: none;
+        margin-top: -10px;
+        padding: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    }
+
+    .navbar-hover .collapse ul ul ul {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        min-width: 250px;
+        display: none
+    }
+
+    /*.navbar-hover .collapse ul ul ul ul{position:absolute;top:0;left:-100%;min-width:250px;display:none;z-index:1}*/
 }

@@ -341,8 +341,11 @@
 
                         <div class="container">
                             <div class="row" v-for="category in categories">
-                                <div class="col-12">
-                                    <h3 class="text-center">@{{ category.name }}</h3>
+                                <div class="col-12 ">
+                                    <div class="categorias">
+                                        <p class="text-center">@{{ category.name }}</p>
+                                    </div>
+                                   
                                 </div>
                                 <div class="col-md-3" v-for="user in category.users">
                                     <div class="card" :id="'user'+user.id" @click="selectUser(user)">

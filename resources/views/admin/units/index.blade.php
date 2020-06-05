@@ -26,7 +26,7 @@
                                 <th>@{{ index + 1 }}</th>
                                 <td>@{{ unit.name }}</td>
                                 <td>
-                                    <button class="btn btn-success fa fa-facebook" data-toggle="modal" data-target="#createUnit" @click="edit(unit)"> <img class="filter " src="{{ asset('assets/img/iconos/bx-edit.svg') }}" alt=""></button>
+                                    <button class="btn btn-success fa fa-edit btn-transparent__green" data-toggle="modal" data-target="#createUnit" @click="edit(unit)"></button>
                                   
                                     <button class="btn btn-danger" @click="erase(unit.id)"><img class="filter " src="{{ asset('assets/img/iconos/bx-trash.svg') }}" alt=""></button>
                                 </td>

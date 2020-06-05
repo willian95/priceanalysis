@@ -165,3 +165,23 @@ tbody tr:nth-child(even) {
 
     display: flex;
 }
+.btn-transparent__green{
+    background: transparent;
+    color: #00cf78;
+    border: 1px solid #00cf78;
+}
+.btn-transparent__green:hover {
+    color: #fff;
+    background-color: #56d07c;
+    border-color: #56d07c;
+}
+.btn-transparent__red{
+    background: transparent;
+    color: #c82333;
+    border: 1px solid #c82333;
+}
+.btn-transparent__red:hover {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #c82333;
+}
