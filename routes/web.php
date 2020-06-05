@@ -86,7 +86,7 @@ Route::get("/product/unit/{product_id}", "UnitController@productUnit");
 
 Route::get('/admin/user/index', "UserController@index");
 Route::get('/admin/user/fetch/{page}', "UserController@fetch");
-Route::post('/admin/user/confirmRif', "UserController@update");
+Route::post('/admin/user/confirmRif', "UserController@confirmRif");
 
 Route::get("/admin/email/index", "AdminEmailController@index");
 Route::get("/admin/email/fetch/{page}", "AdminEmailController@fetch");

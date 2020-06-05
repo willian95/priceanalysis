@@ -28,7 +28,7 @@ class RegisterController extends Controller
             $user->register_code = Str::random(40);
             $user->save();
 
-            //$this->sendEmail($user->email, $user->register_code);
+            $this->sendEmail($user->email, $user->register_code);
 
             return response()->json(["success" => true, "msg" => "Te has registrado exitosamente"]);
 
