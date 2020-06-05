@@ -4,75 +4,252 @@
 
     <div id="dev-profile">
 
-        <div class="container  ">
+        <div class="container mt-50 ">
             <!----indicadores---->
+            <h5 class="card-title mb-5 mb-5">Mis datos</h5>
             <div class="tabs__profile mt-5">
-            
                 <input type="radio" id="tab1" name="tab-control" checked>
                 <input type="radio" id="tab2" name="tab-control">
                 <input type="radio" id="tab3" name="tab-control">  
                 <input type="radio" id="tab4" name="tab-control">
+                <input type="radio" id="tab5" name="tab-control">               
                 <ul>
-                <li title="Features"><label for="tab1" role="button"><br><span>Datos Generales </span></label></li>
-                <li title="Delivery Contents"><label for="tab2" role="button"><br><span>Descripción de act. comercial</span></label></li>
-                <li title="Shipping"><label for="tab3" role="button"><br><span>Información de contacto
-                </span></label></li>  
-                <li title="Returns"><label for="tab4" role="button"><br><span>Información complementaria
-                </span></label></li>
+                    <li title="Datos Generales"><label for="tab1" role="button"><br><span><img class="icon_tab" src="{{ asset('assets/img/iconos/bx-id-card.svg') }}" alt=""> Datos Generales </span></label></li>
+                    <li title="Descripción comercial"><label for="tab2" role="button"><br><span><img class="icon_tab" src="{{ asset('assets/img/iconos/bx-file.svg') }}" alt="">Descripción de act. comercial</span></label></li>
+                    <li title="Información de contacto "><label for="tab3" role="button"><br><span><img class="icon_tab" src="{{ asset('assets/img/iconos/bx-user.svg') }}" alt="">Información de contacto </span></label></li>  
+                    <li title="Informacion"><label for="tab4" role="button" ><br><span><img class="icon_tab icon_tab1" src="{{ asset('assets/img/iconos/bx-user-plus.svg') }}" alt="">Información complementaria </span></label></li>
+                    <li title="verificacion"><label for="tab5" role="button" class="verification mt-5"><br><span>¿Desea que su empresa sea verificada?</span></label></li>
                 </ul>
                 <!----contenido---->
                 <div class="slider__tabs"><div class="indicator"></div></div>
                 <div class="content">
-                   <section>
-                    <div class="row">
-                        <div class="col-12">
-                            <h3 class="text-center">Datos Generales</h3>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name">R.I.F</label>
-                                <input type="text" class="form-control" id="name" v-model="rif">
+
+                    <!----form 1---->
+                    <section class="section__w">
+                        <div class="row box ">
+                            <div class="col-12">
+                                <h4 class="card-title mb-5">Datos Generales</h4>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group  inputBox">
+            
+                                    <input type="text" class="form-control" required="" id="name" v-model="rif" required="">
+                                    <label for="name">R.I.F</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group  inputBox">
+            
+                                    <select class="form-control" required="" v-model="countryId">
+                                        <option :value="country.id" v-for="country in countries">@{{ country.name }}</option>
+                                    </select>
+                                    <label for="name">País</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group  inputBox">
+                                    <input type="text" class="form-control" required="" id="fiscalAddress" v-model="fiscalAddress">
+                                    <label for="fiscalAddress">Dirección fiscal</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group  inputBox">
+                                    <input type="text" class="form-control" required="" id="deliveryAddress"
+                                        v-model="deliveryAddress">
+                                    <label for="deliveryAddress">Dirección de Entrega</label>
+                                </div>
+                            </div>
+            
+                            <div class="col-md-12">
+                                <p class="text-center">
+                                    <button class="btn btn-success" @click="updateGeneralData()">Actualizar</button>
+                                </p>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name">País</label>
-                                <select class="form-control" v-model="countryId">
-                                    <option :value="country.id" v-for="country in countries">@{{ country.name }}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="fiscalAddress">Dirección fiscal</label>
-                                <input type="text" class="form-control" id="fiscalAddress" v-model="fiscalAddress">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="deliveryAddress">Dirección de Entrega</label>
-                                <input type="text" class="form-control" id="deliveryAddress" v-model="deliveryAddress">
-                            </div>
-                        </div>
-        
-                        <div class="col-md-12">
-                            <p class="text-center">
-                                <button class="btn btn-success" @click="updateGeneralData()">Actualizar</button>
-                            </p>
-                        </div>
-                    </div>                    </section>
-                    <section>
-                        <h2>Delivery Contents</h2>
-                        aaaLorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.
                     </section>
-                    <section>
-                        <h2>Shipping</h2>
-                       eee Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.
+                    <!----form 2---->
+                    <section class="section__w">
+                        <div class="row box ">
+                            <div class="col-12">
+                                <h4 class="card-title mb-5 fs">Descripción de la Actividad e información comercial</h4>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group  inputBox">
+                                    <select class="form-control" required="" v-model="categoryId" id="categoryId">
+                                        <option :value="category.id" v-for="category in categories">@{{ category.name }}</option>
+                                    </select>
+                                    <label for="categoryId">Ramo Comercial</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group  inputBox">
+                                    <input type="text" class="form-control" required="" id="products" v-model="products">
+                                    <label for="products">Productos y/o servicios que ofrece (separados por coma)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group  inputBox">
+                                    <input type="date" class="form-control" required="" id="startDate" v-model="startDate">
+                                    <label for="startDate">Fecha de inicio de operaciones</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group  inputBox">
+                                    <input type="text" class="form-control" required="" id="employeeAmount"
+                                        v-model="employeeAmount">
+                                    <label for="employeeAmount">Cantidad de empleados</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group  inputBox">
+                                    <input type="text" class="form-control" required="" id="maleEmployeeAmount"
+                                        v-model="maleEmployeeAmount">
+                                    <label for="maleEmployeeAmount">Cantidad de empleados hombre</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group  inputBox">
+                                    <input type="text" class="form-control" required="" id="femaleEmployeeAmount"
+                                        v-model="femaleEmployeeAmount">
+                                    <label for="femaleEmployeeAmount">Cantidad de empleados mujer</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group  inputBox">
+                                    <input type="text" class="form-control" required="" id="femaleLeadershipAmount"
+                                        v-model="femaleLeadershipAmount">
+                                    <label for="femaleLeadershipAmount">Mujeres lideres en la origanización</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group  inputBox">
+                                    <select class="form-control" required="" v-model="selectedComercialCountry"
+                                        @change="onComercialCountryChange()">
+                                        <option :value="country" v-for="country in countries">@{{ country.name }}</option>
+                                    </select>
+                                    <label for="comercialCountries">Paises con presencia comercial</label>
+                                </div>
+            
+                                <ul>
+                                    <li v-for="comercialCountry in comercialCountries"
+                                        @click="deleteComercialCountry(comercialCountry.id)">@{{ comercialCountry.name }}</li>
+                                </ul>
+            
+                            </div>
+                            <div class="col-md-12">
+                                <p class="text-center">
+                                    <button class="btn btn-success" @click="updateComercialActivity()">actualizar datos
+                                        comerciales</button>
+                                </p>
+                            </div>
+                        </div>
                     </section>
-                    <section>
-                        <h2>Returns</h2>
-                       iiii Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dicta vero rerum? Eaque repudiandae architecto libero reprehenderit aliquam magnam ratione quidem? Nobis doloribus molestiae enim deserunt necessitatibus eaque quidem incidunt.
+                    <!----form 3---->
+                    <section class="section__w">
+                        <div class="row box ">
+                            <div class="col-12">
+                                <h4 class="card-title mb-5">Información de contacto</h4>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group  inputBox">
+                                    <input type="text" class="form-control" required="" id="contactName" v-model="contactName">
+                                    <label for="contactName">Persona de contacto</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group  inputBox">
+                                    <input type="text" class="form-control" required="" id="contactPhone" v-model="contactPhone">
+                                    <label for="contactPhone">Número de teléfono</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <p class="text-center">
+                                    <button class="btn btn-success" @click="updateContactInfo()">actualizar información de
+                                        contacto</button>
+                                </p>
+                            </div>
+                        </div>
                     </section>
+                    <!----form 4---->
+                    <section class="section__w">
+                        <div class="row box ">
+                            <div class="col-12">
+                                <h5 class="card-title mb-5">Información complementaria</h5>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group  inputBox">
+                                    <input type="text" class="form-control" required="" id="mainClients" v-model="mainClients">
+                                    <label for="mainClients">Clientes principales (separados por coma)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" v-model="importCheck" value="true"
+                                        id="importCheck">
+                                    <label class="form-check-label" for="importCheck">
+                                        ¿Importas?
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="true" id="exportCheck"
+                                        v-model="exportCheck">
+                                    <label class="form-check-label" for="exportCheck">
+                                        ¿Exportas?
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="true" v-model="nationalMadeCheck"
+                                        id="nationalMadeCheck">
+                                    <label class="form-check-label" for="nationalMadeCheck">
+                                        ¿Fabricación nacional?
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="true" id="relatedActivitiesCheck"
+                                        v-model="relatedActivitiesCheck">
+                                    <label class="form-check-label" for="relatedActivitiesCheck">
+                                        ¿Desea ser informado sobre negocios relacionados a su actividad comercial?
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <p class="text-center">
+                                    <button class="btn btn-success" @click="updateOtherInfo()">actualizar información
+                                        complementaria</button>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+            
+                    <section class="section__w ">
+                        <div class="row box ">
+                            <div class="col-12" v-if="isVerifyUser == ''">
+                                <h4 class="card-title mb-5">Validación</h4>
+                            </div>
+                            <div class="col-12" v-if="isVerifyUser == ''">
+                                <p class="text-center">
+                                    <strong>¿Desea que su empresa sea verificada?</strong> En esta opcion, si el usuario selecciona
+                                    <strong>SI</strong>, se le hace una verficiacion total de la informacion, se le pediria
+                                    documentacion, en caso que seleccione <strong>NO</strong>, solo se verificaria el numero de
+                                    identificacion tributaria; pero al momento de ser visto por otras empresas o personas se acotara
+                                    si
+                                    la empresa esta validad o No.
+                                </p>
+                                <p class="text-center">
+                                    <button class="btn btn-success" @click="verifyUser(true)">Sí</button>
+                                    <button class="btn btn-danger" @click="verifyUser(false)">No</button>
+                                </p>
+                            </div>
+                        </div>
+            
+                    </section>
+            
                 </div>
             </div>
             <!--indicadores eeeend -->
@@ -85,7 +262,8 @@
 
 
 
-            <div class="mt-5">
+            <!---<div class="mt-5">
+          
                <div class="shadows__content">
                     <div class="row">
                         <div class="col-12">
@@ -125,7 +303,7 @@
                         </div>
                     </div>
                </div>
-                <!-----------2------------->
+               
                 <div class="shadows__content">
                    <div class="row">
                     <div class="col-12">
@@ -195,7 +373,7 @@
                     </div>
                    </div>
                 </div>
-                  <!-----------2------------->
+                 
                   <div class="shadows__content__grid">
                       <div class="shadows__content__item">
                         <div class="row">
@@ -288,7 +466,7 @@
                     </p>
                 </div>
                
-            </div>
+            </div>--->
         </div>
 
     </div>

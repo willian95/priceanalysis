@@ -79,9 +79,12 @@ class UserController extends Controller
             $user->update();
             
             $countries = "";
-            foreach($request->comercialCountries as $country){
-                $countries .= $country["id"].",";
+            if(isset($request->commercialCountries)){
+                foreach($request->comercialCountries as $country){
+                    $countries .= $country["id"].",";
+                }
             }
+            
 
             ComercialInfo::updateOrCreate(
                 ["user_id" => \Auth::user()->id],

@@ -23,9 +23,11 @@
                         <label>@{{ product.product }} - @{{ product.amount }} @{{ product.unit_name }}</label>
                         <input class="offer form-control" :id="'offer'+product.id" type="text" placeholder="precio">
                     </div>
+                    @if(\Auth::check())
                     <p class="text-center">
                         <button class="btn btn-success" @click="storeOffer()">Ofertar</button>
                     </p>
+                    @endif
                 </div>
             </div>
             <!--<div class="row">
@@ -182,6 +184,7 @@
             created(){
                 
                 this.productFetch()
+                localStorage.setItem("previousUrl", "{{ url()->current() }}")
                 //this.fetchOffers(1)
 
             }

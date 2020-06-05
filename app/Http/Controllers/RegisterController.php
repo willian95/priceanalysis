@@ -28,7 +28,7 @@ class RegisterController extends Controller
             $user->register_code = Str::random(40);
             $user->save();
 
-            $this->sendEmail($user->email, $user->register_code);
+            //$this->sendEmail($user->email, $user->register_code);
 
             return response()->json(["success" => true, "msg" => "Te has registrado exitosamente"]);
 
@@ -42,7 +42,7 @@ class RegisterController extends Controller
 
     function sendEmail($email, $code){
         
-        $data = ["body" => "Para validar tu correo haz click en el siguiente enlace", "link" =>url('/')."validate/account/".$code];
+        $data = ["body" => "Para validar tu correo haz click en el siguiente enlace", "link" =>url('/')."/validate/account/".$code];
         $subject = "Validar tu correo";
         \Mail::send("emails.register", $data, function($message) use ($email, $subject) {// se envía el email
 

@@ -23,16 +23,17 @@
             <div class="row">
                 <div class="offset-md-3 col-md-6">
                     <div class="" style="width: 100%;">
-                        <div class="card-body">
                         
-                            <div class="form-group">
-                                <label for="email">   <img class="icon__form" src="{{ asset('assets/img/iconos/bx-envelope.svg') }}" alt="">Email</label>
-                             
-                                <input placeholder="user@email.com" type="email" class="form-control" id="email" v-model="email"   >
+                        <div class="card-body box">
+                            <div class="form-group inputBox">                      
+                                <input  type="text" class="form-control" id="email" v-model="email" required="">
+                                <label for="email">   <img class="icon__form" src="{{ asset('assets/img/iconos/bx-envelope.svg') }}" alt="">E-mail</label>
+
                             </div>
-                            <div class="form-group">
-                                <label for="password"><img class="icon__form icon__form2" src="{{ asset('assets/img/iconos/bx-lock-alt.svg') }}" alt=""> Password</label>
-                                <input type="password" class="form-control" id="password" v-model="password">
+                            <div class="form-group inputBox">
+                                <input type="password" class="form-control" id="password" v-model="password" required="">
+                                <label for="password"><img class="icon__form icon__form2" src="{{ asset('assets/img/iconos/bx-lock-alt.svg') }}" alt="">Contraseña</label>
+
                             </div>
                          <div class="content__btn">
                              
@@ -77,7 +78,15 @@
                             this.password = ""
 
                             if(res.data.role_id == 2)
-                                window.location.href = "{{ url('/') }}"
+                            {
+                                if(localStorage.getItem("previousUrl"))
+                                {
+                                    window.location.href=localStorage.getItem("previousUrl")
+                                }else{
+                                    window.location.href = "{{ url('/') }}"
+                                }
+                                
+                            }
 
                             else if(res.data.role_id == 1)
                                 window.location.href = "{{ url('/admin/dashboard') }}"

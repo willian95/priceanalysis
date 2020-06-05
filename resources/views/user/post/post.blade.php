@@ -50,40 +50,6 @@
                   </div>
                    <!-----Paso 2----->
                   <div id="step2" class="step-content-body out">
-                     <div class="card__shadow">
-                        <h5 class="card-title mb-5">Selecciona empresas para que vean tu publicación.</h5>
-                        <div class="div__step">
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#businessModal">Seleccionar empresa</button>
-                            <!-----    <div class="container">
-                                <div class="row" v-for="category in categories">
-                                    <div class="col-12">
-                                        <h3 class="text-center">@{{ category.name }}</h3>
-                                    </div>
-                                    <div class="col-md-3" v-for="user in category.users">
-                                        <div class="card" :id="'user'+user.id" @click="selectUser(user)">
-                                            <div class="card-body">
-                                                @{{ user.name }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <nav aria-label="Page navigation example">
-                                            <ul class="pagination">
-                                                <li v-for="page in pages" class="page-item"><a class="page-link"  @click="fetch(page)">@{{ page }}</a></li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </div>
-                            </div>---->
-                        </div>
-                     </div>
-                
-
-                  </div>
-                   <!-----Paso 3----->
-                  <div id="step3" class="step-content-body out">
                     <div class="card__shadow">
                         <h5 class="card-title mb-5">Agregar productos</h5>
                    
@@ -165,6 +131,41 @@
 
 
 
+                     </div>
+                   
+                
+
+                  </div>
+                   <!-----Paso 3----->
+                  <div id="step3" class="step-content-body out">
+                    <div class="card__shadow">
+                        <h5 class="card-title mb-5">Selecciona empresas para que vean tu publicación.</h5>
+                        <div class="div__step">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#businessModal">Seleccionar empresa</button>
+                            <!-----    <div class="container">
+                                <div class="row" v-for="category in categories">
+                                    <div class="col-12">
+                                        <h3 class="text-center">@{{ category.name }}</h3>
+                                    </div>
+                                    <div class="col-md-3" v-for="user in category.users">
+                                        <div class="card" :id="'user'+user.id" @click="selectUser(user)">
+                                            <div class="card-body">
+                                                @{{ user.name }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                <li v-for="page in pages" class="page-item"><a class="page-link"  @click="fetch(page)">@{{ page }}</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>---->
+                        </div>
                      </div>
 
                   </div>
