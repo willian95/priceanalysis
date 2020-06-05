@@ -4,17 +4,14 @@
 
     <div id="dev-app">
         <div class="container">
+            <div class="top_title">
+                <h3 class="text-center">Unidades</h3>
+                <button class="btn btn-success mr-5" data-toggle="modal" data-target="#createUnit"> <img src="{{ asset('assets/img/iconos/bx-list-plus.svg') }}" alt="">Crear</button>
+              </div>
+
+          <div class="bg__tables">
             <div class="row">
-                <div class="col-12">
-                    <h2 class="text-center">Unidades</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <p class="text-center">
-                        <button class="btn btn-success" data-toggle="modal" data-target="#createUnit">Crear</button>
-                    </p>
-                </div>
+        
                 <div class="col-12">
                     <table class="table">
                         <thead>
@@ -29,8 +26,9 @@
                                 <th>@{{ index + 1 }}</th>
                                 <td>@{{ unit.name }}</td>
                                 <td>
-                                    <button class="btn btn-success" data-toggle="modal" data-target="#createUnit" @click="edit(unit)">editar</button>
-                                    <button class="btn btn-danger" @click="erase(unit.id)">eliminar</button>
+                                    <button class="btn btn-success fa fa-facebook" data-toggle="modal" data-target="#createUnit" @click="edit(unit)"> <img class="filter " src="{{ asset('assets/img/iconos/bx-edit.svg') }}" alt=""></button>
+                                  
+                                    <button class="btn btn-danger" @click="erase(unit.id)"><img class="filter " src="{{ asset('assets/img/iconos/bx-trash.svg') }}" alt=""></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -48,6 +46,7 @@
                     </nav>
                 </div>
             </div>
+          </div>
         </div>
 
         <!-- modal -->
