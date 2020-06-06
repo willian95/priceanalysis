@@ -78,7 +78,15 @@
                             this.password = ""
 
                             if(res.data.role_id == 2)
-                                window.location.href = "{{ url('/') }}"
+                            {
+                                if(localStorage.getItem("previousUrl"))
+                                {
+                                    window.location.href=localStorage.getItem("previousUrl")
+                                }else{
+                                    window.location.href = "{{ url('/') }}"
+                                }
+                                
+                            }
 
                             else if(res.data.role_id == 1)
                                 window.location.href = "{{ url('/admin/dashboard') }}"

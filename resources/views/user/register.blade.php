@@ -108,6 +108,7 @@
                             this.telephone  = ""
                             this.password = ""
                             this.passwordConfirmation  = ""
+                            this.rif= ""
                         }
 
                     })

@@ -42,7 +42,7 @@ class RegisterController extends Controller
 
     function sendEmail($email, $code){
         
-        $data = ["body" => "Para validar tu correo haz click en el siguiente enlace", "link" =>url('/')."validate/account/".$code];
+        $data = ["body" => "Para validar tu correo haz click en el siguiente enlace", "link" =>url('/')."/validate/account/".$code];
         $subject = "Validar tu correo";
         \Mail::send("emails.register", $data, function($message) use ($email, $subject) {// se envía el email
 
@@ -57,7 +57,7 @@ class RegisterController extends Controller
 
         try{
 
-            $user = User::where("code", $code)->first();
+            $user = User::where("register_code", $code)->first();
             $user->email_verified_at = Carbon::now();
             $user->update();
 
