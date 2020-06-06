@@ -61,6 +61,8 @@ class RegisterController extends Controller
             $user->email_verified_at = Carbon::now();
             $user->update();
 
+            Auth::loginUsingId($user->id, true);
+
             return redirect()->to("/");
 
         }catch(\Exception $e){
