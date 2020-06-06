@@ -41,7 +41,7 @@
                 @if(Auth::check() && Auth::user()->id)
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user"></i>
+                        <i class="fa fa-user-circle-o"></i>
                         {{ Auth::user()->name }}
                     </a>
                     <ul class="dropdown-menu">            

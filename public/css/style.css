@@ -898,3 +898,33 @@ tbody tr:nth-child(even) {
 
     /*.navbar-hover .collapse ul ul ul ul{position:absolute;top:0;left:-100%;min-width:250px;display:none;z-index:1}*/
 }
+.dropdown-item {
+    color: #007dc5;
+}
+.categorias{
+    position: relative;
+    margin-top: 12px;
+}
+.categorias p{
+    background: #007dc594;
+    padding: 5px;
+    font-size: 11px;
+    color: white;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 12px;
+}
+/*.categorias p::before{
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #ffffff;
+    top: 4px;
+    transform: rotate(50deg);
+    left: -15px;
+}*/
+.pagination{
+    margin-top: 20px;
+}
