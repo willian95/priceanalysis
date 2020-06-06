@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RegisterUserRequest;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 class RegisterController extends Controller
