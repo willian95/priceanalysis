@@ -143,11 +143,11 @@ class PostController extends Controller
 
             }
 
-            /*if($request->selectedUsers != null){
+            if($request->selectedUsers != null){
                 foreach($request->selectedUsers as $users){
                     $this->sendEmail($users["name"], $users["email"], $post->id);
                 }
-            }*/
+            }
 
             return response()->json(["success" => true, "msg" => "Publicación realizada"]);
 

@@ -57,7 +57,7 @@ class RegisterController extends Controller
 
         try{
 
-            $user = User::where("code", $code)->first();
+            $user = User::where("register_code", $code)->first();
             $user->email_verified_at = Carbon::now();
             $user->update();
 
