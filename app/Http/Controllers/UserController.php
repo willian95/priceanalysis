@@ -79,7 +79,8 @@ class UserController extends Controller
             $user->update();
             
             $countries = "";
-            if(isset($request->commercialCountries)){
+            if(isset($request->comercialCountries)){
+
                 foreach($request->comercialCountries as $country){
                     $countries .= $country["id"].",";
                 }
@@ -158,13 +159,25 @@ class UserController extends Controller
         try{
 
             $comercial = ComercialInfo::where("user_id", \Auth::user()->id)->first();
-            $countries = $comercial->countries_presence;
-            //dd($countries);
-            $countriesArray = explode(",", $countries);
+            if($comercial){
+                if($comercial->countries_presence){
+                    $countries = $comercial->countries_presence;
+                    //dd($countries);
+                    $countriesArray = explode(",", $countries);
+                    
+                    $countries = Country::whereIn("id", $countriesArray)->get();
+                    
+                    return response()->json(["success" => true, "countries" => $countries]);
+                
+                }else{
+    
+                    return response()->json(["success" => true, "countries" => []]);
+    
+                }
+            }else{
+                return response()->json(["success" => true, "countries" => []]);
+            }
             
-            $countries = Country::whereIn("id", $countriesArray)->get();
-            
-            return response()->json(["success" => true, "countries" => $countries]);
 
         }catch(\Exception $e){
             return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);

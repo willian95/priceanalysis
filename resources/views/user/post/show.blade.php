@@ -194,6 +194,10 @@
                 
                 this.productFetch()
                 localStorage.setItem("previousUrl", "{{ url()->current() }}")
+                let previousUrl = localStorage.getItem("previousUrl")
+                if("{{ url()->current() }}" == previous){
+                    localStorage.removeItem("previousUrl")
+                }
                 //this.fetchOffers(1)
 
             }

@@ -631,6 +631,8 @@
                     if(!exists)
                         this.comercialCountries.push(this.selectedComercialCountry)
 
+                    this.selectedComercialCountry = ""
+
                 },
                 deleteComercialCountry(id){
 
