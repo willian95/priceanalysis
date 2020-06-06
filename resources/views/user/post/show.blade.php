@@ -4,7 +4,14 @@
 
     <div id="dev-post-show">
         <div class="container">
+
             <div class="row">
+                <div class="offset-md-2 col-md-8">
+                    <h3 class="text-center">Razón social: @{{ businessName }}</h3>
+                </div>
+                <div class="offset-md-2 col-md-8">
+                    <h3 class="text-center">R.I.F: @{{ rif }}</h3>
+                </div>
                 <div class="offset-md-2 col-md-8">
                     <h3 class="text-center">@{{ title }}</h3>
                 </div>
@@ -95,6 +102,8 @@
             el: '#dev-post-show',
             data(){
                return{
+                    businessName:"{{ $post->user->company_name }}",
+                    rif:"{{ $post->user->rif }}",
                     title:'{{ $post->title }}',
                     postId:'{{ $post->id }}',
                     description:'{{ $post->description }}',
