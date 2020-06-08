@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RegisterUserRequest;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 class RegisterController extends Controller
@@ -60,6 +61,8 @@ class RegisterController extends Controller
             $user = User::where("register_code", $code)->first();
             $user->email_verified_at = Carbon::now();
             $user->update();
+
+            Auth::loginUsingId($user->id, true);
 
             return redirect()->to("/");
 

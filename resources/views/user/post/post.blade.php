@@ -522,6 +522,7 @@
                             this.products = [],
                             this.selectedUsers = ""
                             $(".card").css("background-color", "white")
+                            window.location.href="{{ url('/') }}"
 
                         }else{
                             alert(res.data.msg)

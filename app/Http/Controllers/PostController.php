@@ -145,7 +145,7 @@ class PostController extends Controller
 
             if($request->selectedUsers != null){
                 foreach($request->selectedUsers as $users){
-                    $this->sendEmail($users["name"], $users["email"], $post->id);
+                    $this->sendEmail($users["name"], $users["email"], $post->code);
                 }
             }
 
