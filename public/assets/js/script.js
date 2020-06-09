@@ -1,46 +1,78 @@
-$(function() {
-  var step = 0;
-  var stepItem = $('.step-progress .step-slider .step-slider-item');
 
-  // Step Next
-  $('.step-content .step-content-foot button[name="next"]').on('click', function() {
-    var instance = $(this);
-    if (stepItem.length - 1 < step) {
-      return;
-    }
-    if (step == (stepItem.length - 2)) {
-      instance.addClass('out');
-      instance.siblings('button[name="finish"]').removeClass('out');
-    }
-    $(stepItem[step]).addClass('active');
-    $('.step-content-body').addClass('out');
-    $('#' + stepItem[step + 1].dataset.id).removeClass('out');
-    step++;
+
+$(document).ready(function () {
+
+  var current_fs, next_fs, previous_fs; //fieldsets
+  var opacity;
+  var current = 1;
+  var steps = $("fieldset").length;
+
+  setProgressBar(current);
+
+  $(".next").click(function () {
+
+    current_fs = $(this).parent();
+    next_fs = $(this).parent().next();
+
+    //Add Class Active
+    $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+    //show the next fieldset
+    next_fs.show();
+    //hide the current fieldset with style
+    current_fs.animate({ opacity: 0 }, {
+      step: function (now) {
+        // for making fielset appear animation
+        opacity = 1 - now;
+
+        current_fs.css({
+          'display': 'none',
+          'position': 'relative'
+        });
+        next_fs.css({ 'opacity': opacity });
+      },
+      duration: 500
+    });
+    setProgressBar(++current);
   });
 
-  // Step Last
-  $('.step-content .step-content-foot button[name="finish"]').on('click', function() {
-    if (step == stepItem.length) {
-      return;
-    }
-    $(stepItem[stepItem.length - 1]).addClass('active');
-    $('.step-content-body').addClass('out');
-    $('#stepLast').removeClass('out');
+  $(".previous").click(function () {
+
+    current_fs = $(this).parent();
+    previous_fs = $(this).parent().prev();
+
+    //Remove class active
+    $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+    //show the previous fieldset
+    previous_fs.show();
+
+    //hide the current fieldset with style
+    current_fs.animate({ opacity: 0 }, {
+      step: function (now) {
+        // for making fielset appear animation
+        opacity = 1 - now;
+
+        current_fs.css({
+          'display': 'none',
+          'position': 'relative'
+        });
+        previous_fs.css({ 'opacity': opacity });
+      },
+      duration: 500
+    });
+    setProgressBar(--current);
   });
 
-  // Step Previous
-  $('.step-content .step-content-foot button[name="prev"]').on('click', function() {
-    var instance = $(this);
-    $(stepItem[step]).removeClass('active');
-    if (step == (stepItem.length - 1)) {
-      instance.siblings('button[name="next"]').removeClass('out');
-      instance.siblings('button[name="finish"]').addClass('out');
-    }
-    $('.step-content-body').addClass('out');
-    $('#' + stepItem[step].dataset.id).removeClass('out');
-    if (step <= 0) {
-      return;
-    }
-    step--;
-  });
+  function setProgressBar(curStep) {
+    var percent = parseFloat(100 / steps) * curStep;
+    percent = percent.toFixed();
+    $(".progress-bar")
+      .css("width", percent + "%")
+  }
+
+  $(".submit").click(function () {
+    return false;
+  })
+
 });
