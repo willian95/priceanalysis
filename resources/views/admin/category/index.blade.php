@@ -5,7 +5,7 @@
     <div id="dev-app">
         <div class="container">
             <div class="top_title">
-                <h3 class="text-center">Categorías</h3>
+                <h3 class="text-center">Categorías </i> </h3>
                 <button class="btn btn-success mr-5" data-toggle="modal" data-target="#createCategory">Crear  <img src="{{ asset('assets/img/iconos/bx-list-plus.svg') }}" alt=""></button>  
               </div>
 
@@ -35,8 +35,10 @@
                                     <th>@{{ index + 1 }}</th>
                                     <td>@{{ category.name }}</td>
                                     <td>
-                                        <button class="btn btn-success w-90 green" data-toggle="modal" data-target="#createCategory" @click="edit(category)"> <img class="filter " src="{{ asset('assets/img/iconos/bx-edit.svg') }}" alt=""></button>
-                                        <button class="btn btn-danger w-90" @click="erase(category.id)"><img class="filter " src="{{ asset('assets/img/iconos/bx-trash.svg') }}" alt=""></button>
+                                        <button class="btn btn-success w-90 fa fa-edit btn-transparent__green mr-4" data-toggle="modal" data-target="#createCategory" @click="edit(category)"> 
+                                            <i class="" >
+                                        </button>
+                                        <button class="btn btn-danger w-90 fa fa-trash " @click="erase(category.id)"></button>
                                     </td>
                                 </tr>
                             </tbody>

@@ -4,11 +4,12 @@
 
     <div id="dev-app">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="text-center">Solicitudes</h2>
-                </div>
-            </div>
+            <div class="top_title">
+                <h3 class="text-center">Solicitudes</h3>
+               
+              </div>
+         
+         <div class="bg__tables">
             <div class="row">
                 <div class="col-12">
                     <table class="table">
@@ -47,6 +48,7 @@
                     </nav>
                 </div>
             </div>
+         </div>
         </div>
 
     </div>

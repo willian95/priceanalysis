@@ -17,9 +17,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/my-posts') }}">Mis publicaciones</a>
                 </li>
-                <li class="nav-item">
+               <!--- <li class="nav-item">
                     <a class="nav-link" href="{{ url('/logout') }}">Cerrar sesión</a>
-                </li>
+                </li>--->
             @endif
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/businesses') }}">Empresas</a>
@@ -35,13 +35,25 @@
             </li>
         @endif
         </ul>
-        @if(Auth::check() && Auth::user()->id)
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">{{ Auth::user()->name }}</a>
-            </li>
-        </ul>
-        @endif
+    <div class="navbar-expand-md  navbar-hover ">
+        <div class="collapse navbar-collapse" id="navbarHover">
+            <ul class="navbar-nav">      
+                @if(Auth::check() && Auth::user()->id)
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   
+                        {{ Auth::user()->name }}
+                    </a>
+                    <ul class="dropdown-menu">            
+                    <li>
+                        <a class="dropdown-item" href="{{ url('/logout') }}">Cerrar sesión <i class="fa fa-sign-out"></i></a></li>
+                       
+                    </ul>
+                </li>
+                @endif
+            </ul>
+        </div>
+    </div>
     </div>
   </div>
 </nav>

@@ -4,11 +4,11 @@
 
     <div id="dev-app">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="text-center">Usuarios</h2>
-                </div>
-            </div>
+            <div class="top_title">
+                <h3 class="text-center">Usuarios</h3>
+               
+              </div>
+         <div class="bg__tables">
             <div class="row">
                 <div class="col-12">
                     <table class="table">
@@ -28,7 +28,7 @@
                                 <td>@{{ user.email }}</td>
                                 <td>@{{ user.rif }}</td>
                                 <td>
-                                    <button v-if="user.rif_verified_at == null" class="btn btn-success" @click="confirmRif(user.id)">Confirmar rif</button>
+                                    <button v-if="user.rif_verified_at == null" class="btn btn-success btn-transparent__green" @click="confirmRif(user.id)">Confirmar rif</button>
                                     <!--<button class="btn btn-success" @click="validateBusiness(user.id)">Validar Empresa</button>-->
                                 </td>
                             </tr>
@@ -47,6 +47,7 @@
                     </nav>
                 </div>
             </div>
+         </div>
         </div>
 
     </div>
