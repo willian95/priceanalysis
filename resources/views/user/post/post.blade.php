@@ -7,10 +7,10 @@
         <div class="container mt-50">
             <div class=" step-progress">
                 <div class="step-slider">
-                  <div data-id="step1" class="step-slider-item"></div>
-                  <div data-id="step2" class="step-slider-item"></div>
-                  <div data-id="step3" class="step-slider-item"></div>
-                   <!---- <div data-id="step4" class="step-slider-item"></div>---->
+                    <div data-id="step1" class="step-slider-item"></div>
+                    <div data-id="step2" class="step-slider-item"></div>
+                    <div data-id="step3" class="step-slider-item"></div>
+                    <!---- <div data-id="step4" class="step-slider-item"></div>---->
                 </div>
                <div class="content__step">
                 <div class="step-content">
@@ -142,201 +142,33 @@
                         <h5 class="card-title mb-5">Selecciona empresas para que vean tu publicación.</h5>
                         <div class="div__step">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#businessModal">Seleccionar empresa</button>
-                            <!-----    <div class="container">
-                                <div class="row" v-for="category in categories">
-                                    <div class="col-12">
-                                        <h3 class="text-center">@{{ category.name }}</h3>
-                                    </div>
-                                    <div class="col-md-3" v-for="user in category.users">
-                                        <div class="card" :id="'user'+user.id" @click="selectUser(user)">
-                                            <div class="card-body">
-                                                @{{ user.name }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <nav aria-label="Page navigation example">
-                                            <ul class="pagination">
-                                                <li v-for="page in pages" class="page-item"><a class="page-link"  @click="fetch(page)">@{{ page }}</a></li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </div>
-                            </div>---->
+                            
                         </div>
-                     </div>
+                    </div>
 
                   </div>
                    <!-----Paso 4-
-                  <div id="step4" class="step-content-body out">
-                        
-                    
-
-                  </div>
-                  <div id="stepLast" class="step-content-body out center">
-
-                    <div class="card__shadow">
-                        <div class="btn__center">
-                            <h5 class="card-title mb-5">Produto publicado correctamente</h5>
-                        </div>
-                    </div>
-
-                 
-                  </div>---->
-                  <div class="step-content-foot">
-                    <button type="button" class="active" name="prev">Anterior</button>
-                    <button type="button" class="active" name="next">Siguiente</button>
-                    <button class="btn btn-primary active out" name="finish" @click="checkSelectedUsers()">Publicar</button>
+                  ---->
+                    <div class="step-content-foot">
+                        <button type="button" class="active" name="prev">Anterior</button>
+                        <button type="button" class="active" name="next">Siguiente</button>
+                        <button class="btn btn-primary active out" name="finish" @click="checkSelectedUsers()">Publicar</button>
                   
-                  </div>
+                    </div>
                 </div>
                </div>
               </div>
-
-
-
-
-
-
-        <!---    <div class="row">
-                <div class="offset-md-2 col-md-8">
-                    <div class="car" style="width: 100%;">
-                        <div class="card-body">
-                           <div class="card__shadow">
-                            <h5 class="card-title mb-5">Publicar</h5>
-                            <div class="form-group">
-                             <div class="row">
-                                <div class="col-md-6">
-                                    <label for="title">Titulo</label>
-                                    <input type="text" class="form-control" id="title" v-model="title">
-                                   </div>
-    
-                                   <div class="col-md-6">
-                                
-                                        <label for="type">Tipo de publicación</label>
-                                        <select class="form-control" id="type" v-model="type">
-                                            <option value="public">Pública</option>
-                                            <option value="private">Privada</option>
-                                        </select>
-                                   
-                                   </div>
-                             </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Descripción</label>
-                                <textarea class="form-control" rows="2" id="description" v-model="description"></textarea>
-                            </div>                      
-                         
-                          
-        
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#businessModal">Seleccionar empresa</button>
-                           
-                           </div>
-                           
-                         <div class="card__shadow">
-                            <h5 class="card-title mb-5">Productos</h5>
-                            
-                            <div class="btn__center">
-                                <button class="btn btn-primary" @click="checkSelectedUsers()">Registro</button>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label for="name">Nombre</label>
-                                        <input type="text" class="form-control" id="name" v-model="name" placeholder="Harina de maíz" @keyup="search()">
-                                        <ul>
-                                            <li v-for="search in searches">
-                                                <a href="#" @click="selectProduct(search)">
-                                                    @{{ search.name }}
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-2" v-if="productId == 0">
-                                    <div class="form-group">
-                                        <label for="amount">Cantidad</label>
-                                        <input type="text" class="form-control" id="amount" v-model="amount" placeholder="30">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-2" v-if="productId == 0">
-                                    <div class="form-group">
-                                        <label for="unit">Unidad</label>
-                                        <input type="text" class="form-control" id="unit" v-model="unit" placeholder="Kilos">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-2" v-if="productId != 0">
-                                    <div class="form-group">
-                                        <label for="amount">Cantidad</label>
-                                        <input type="text" class="form-control" id="amount" v-model="amount" placeholder="15">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-2" v-if="productId != 0">
-                                    <div class="form-group">
-                                        <label for="unit">Unidad</label>
-                                        <select class="form-control" v-model="selectedUnit">
-                                            <option :value="unit" v-for="unit in units">@{{ unit.unit.name }}</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <label for="" style="visibility: hidden">hg</label>
-                                    <button class="btn btn-success" @click="add()">agregar</button>
-                                </div>
-
-                
-                            </div>
-
-                            <div class="row">
-                                <div class="col-12">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Nombre</th>
-                                                <th>Cantidad</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr v-for="(product, index) in products">
-                                                <td>@{{ index + 1 }}</td>
-                                                <td>@{{ product.displayName }}</td>
-                                                <td>@{{ product.amount }} @{{ product.unitName }}</td>
-                                                <td><button class="btn btn-danger" @click="remove(index)">X</button></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-
-
-                         </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>--->
 
         <!-- modal -->
             <div class="modal fade" id="businessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Empresas</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Empresas</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     <div class="modal-body">
 
                         <div class="container">
@@ -365,10 +197,7 @@
 
 
                     </div>
-                    <!--<div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>-->
+
                     </div>
                 </div>
             </div>
