@@ -449,11 +449,11 @@ fieldset {
     color: #fff;
 }
 
-.card {
+/*.card {
     z-index: 0;
     border: none;
     position: relative
-}
+}*/
 
 .fs-title {
     font-size: 25px;
