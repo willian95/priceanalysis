@@ -505,7 +505,7 @@ fieldset {
     content:"\f040";
 }
 
-#progressbar #personal:before {
+#progressbar #producto:before {
     font-family: FontAwesome;
     content: "\f196";
 }
@@ -514,12 +514,12 @@ fieldset {
     top: -50%;
     left: 30%;
 }
-#progressbar #payment:before {
+#progressbar #empresa:before {
     font-family: FontAwesome;
     content: "\f0f7";;
 }
 
-#progressbar #confirm:before {
+#progressbar #finalizar:before {
     font-family: FontAwesome;
     content: "\f00c";
 }
@@ -572,4 +572,43 @@ fieldset {
 .pblicar:hover{
     text-align: center;
     color: #007dc5;
+}
+
+.select_search{
+    background: transparent;
+    box-shadow: 0px 6px 13px #00000026;
+    max-height: 20vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border-radius: 5px;
+    transition: .6s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.select_search li{
+    color: #007dc5;
+    transition: .6s;
+}
+
+.select_search a{
+    font-size: 13px;
+    font-weight: 800;
+    color: #007dc5;
+    text-decoration: none;
+    transition: .6s;
+}
+.select_search a:hover,.select_search li:hover  {
+    transform: translate(10px, 0px);
+    color: #4CAF50;
+    transition: .6s;
+}
+
+.select_search  li:nth-child(1) {
+    margin-top: 20px;
+}
+.select_search  li:last-child {
+    margin-bottom: 20px;
 }

@@ -14,9 +14,9 @@
                                 <!-- progressbar -->
                                 <ul id="progressbar">
                                     <li class="active" id="account"><strong>Publicación</strong></li>
-                                    <li id="personal"><strong>Producto</strong></li>
-                                    <li id="payment"><strong>Empresa</strong></li>
-                                    <li id="confirm"><strong>Finalizar</strong></li>
+                                    <li id="producto"><strong>Producto</strong></li>
+                                    <li id="empresa"><strong>Empresa</strong></li>
+                                    <li id="finalizar"><strong>Finalizar</strong></li>
                                 </ul>
                              <!--   <div class="progress">
                                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
@@ -58,8 +58,8 @@
                                             <div class="col-md-5">
                                                 <div class="form-group">
                                                     <label for="name">Nombre</label>
-                                                    <input type="text" class="form-control" id="name" v-model="name" placeholder="Harina de maíz" @keyup="search()">
-                                                    <ul>
+                                                    <input autocomplete="off" type="text" class="form-control" id="name" v-model="name" placeholder="Harina de maíz" @keyup="search()">
+                                                    <ul class="select_search">
                                                         <li v-for="search in searches">
                                                             <a href="#" @click="selectProduct(search)">
                                                                 @{{ search.name }}
