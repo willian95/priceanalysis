@@ -24,7 +24,7 @@
                             <td>@{{ post.title }}</td>
                             <td>@{{ post.code }}</td>
                             <td>
-                                <span v-if="post.is_privte == 0">Pública</span>
+                                <span v-if="post.is_private == 0">Pública</span>
                                 <span v-else>Privada</span>
                             </td>
                             <td>

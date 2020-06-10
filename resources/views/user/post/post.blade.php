@@ -13,151 +13,143 @@
                     <!---- <div data-id="step4" class="step-slider-item"></div>---->
                 </div>
                <div class="content__step">
-                <div class="step-content">
+                    <div class="step-content">
                     <!-----Paso 1----->
-                  <div id="step1" class="step-content-body">
-                    <div class="card__shadow">
-                        <h5 class="card-title mb-5">Detalle de la publicación</h5>
-                        <div class="form-group">
-                         <div class="row">
-                            <div class="col-md-6">
-                                <label for="title">Titulo</label>
-                                <input type="text" class="form-control" id="title" v-model="title">
-                               </div>
+                        <div id="step1" class="step-content-body">
+                            <div class="card__shadow">
+                                <h5 class="card-title mb-5">Detalle de la publicación</h5>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="title">Titulo</label>
+                                            <input type="text" class="form-control" id="title" v-model="title">
+                                        </div>
 
-                               <div class="col-md-6">
+                                        <div class="col-md-6">
                             
-                                    <label for="type">Tipo de publicación</label>
-                                    <select class="form-control" id="type" v-model="type">
-                                        <option value="public">Pública</option>
-                                        <option value="private">Privada</option>
-                                    </select>
+                                            <label for="type">Tipo de publicación</label>
+                                            <select class="form-control" id="type" v-model="type">
+                                                <option value="public">Pública</option>
+                                                <option value="private">Privada</option>
+                                            </select>
                                
-                               </div>
-                         </div>
-                        </div>
+                                        </div>
+                                    </div>
+                                </div>
                         
-                        <div class="form-group">
-                            <label for="description">Descripción</label>
-                            <textarea class="form-control" rows="2" id="description" v-model="description"></textarea>
-                        </div>                      
+                                <div class="form-group">
+                                    <label for="description">Descripción</label>
+                                    <textarea class="form-control" rows="2" id="description" v-model="description"></textarea>
+                                </div>                      
                      
-                      
-    
+                            </div>
                        
-                       </div>
-                       
-                  </div>
-                   <!-----Paso 2----->
-                  <div id="step2" class="step-content-body out">
-                    <div class="card__shadow">
-                        <h5 class="card-title mb-5">Agregar productos</h5>
-                   
-                        <div class="row">
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label for="name">Nombre</label>
-                                    <input type="text" class="form-control" id="name" v-model="name" placeholder="Harina de maíz" @keyup="search()">
-                                    <ul>
-                                        <li v-for="search in searches">
-                                            <a href="#" @click="selectProduct(search)">
-                                                @{{ search.name }}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2" v-if="productId == 0">
-                                <div class="form-group">
-                                    <label for="amount">Cantidad</label>
-                                    <input type="text" class="form-control" id="amount" v-model="amount" placeholder="30">
-                                </div>
-                            </div>
-
-                            <div class="col-md-2" v-if="productId == 0">
-                                <div class="form-group">
-                                    <label for="unit">Unidad</label>
-                                    <input type="text" class="form-control" id="unit" v-model="unit" placeholder="Kilos">
-                                </div>
-                            </div>
-
-                            <div class="col-md-2" v-if="productId != 0">
-                                <div class="form-group">
-                                    <label for="amount">Cantidad</label>
-                                    <input type="text" class="form-control" id="amount" v-model="amount" placeholder="15">
-                                </div>
-                            </div>
-
-                            <div class="col-md-2" v-if="productId != 0">
-                                <div class="form-group">
-                                    <label for="unit">Unidad</label>
-                                    <select class="form-control" v-model="selectedUnit">
-                                        <option :value="unit" v-for="unit in units">@{{ unit.unit.name }}</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2">
-                                <label for="" style="visibility: hidden">hg</label>
-                                <button class="btn btn-success" @click="add()">agregar</button>
-                            </div>
-
-            
                         </div>
+                        <!-----Paso 2----->
+                        <div id="step2" class="step-content-body out">
+                            <div class="card__shadow">
+                                <h5 class="card-title mb-5">Agregar productos</h5>
+                        
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label for="name">Nombre</label>
+                                            <input type="text" class="form-control" id="name" v-model="name" placeholder="Harina de maíz" @keyup="search()">
+                                            <ul>
+                                                <li v-for="search in searches">
+                                                    <a href="#" @click="selectProduct(search)">
+                                                        @{{ search.name }}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
 
-                        <div class="row">
-                            <div class="col-12">
-                                <table class="table mt-4">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Nombre</th>
-                                            <th>Cantidad</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="(product, index) in products">
-                                            <td>@{{ index + 1 }}</td>
-                                            <td>@{{ product.displayName }}</td>
-                                            <td>@{{ product.amount }} @{{ product.unitName }}</td>
-                                            <td><button class="btn btn-danger" @click="remove(index)">X</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                    <div class="col-md-2" v-if="productId == 0">
+                                        <div class="form-group">
+                                            <label for="amount">Cantidad</label>
+                                            <input type="text" class="form-control" id="amount" v-model="amount" placeholder="30">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2" v-if="productId == 0">
+                                        <div class="form-group">
+                                            <label for="unit">Unidad</label>
+                                            <input type="text" class="form-control" id="unit" v-model="unit" placeholder="Kilos">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2" v-if="productId != 0">
+                                        <div class="form-group">
+                                            <label for="amount">Cantidad</label>
+                                            <input type="text" class="form-control" id="amount" v-model="amount" placeholder="15">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2" v-if="productId != 0">
+                                        <div class="form-group">
+                                            <label for="unit">Unidad</label>
+                                            <select class="form-control" v-model="selectedUnit">
+                                                <option :value="unit" v-for="unit in units">@{{ unit.unit.name }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label for="" style="visibility: hidden">hg</label>
+                                        <button class="btn btn-success" @click="add()">agregar</button>
+                                    </div>
+
+                    
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <table class="table mt-4">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Nombre</th>
+                                                    <th>Cantidad</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="(product, index) in products">
+                                                    <td>@{{ index + 1 }}</td>
+                                                    <td>@{{ product.displayName }}</td>
+                                                    <td>@{{ product.amount }} @{{ product.unitName }}</td>
+                                                    <td><button class="btn btn-danger" @click="remove(index)">X</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
+                        <!-----Paso 3----->
+                        <div id="step3" class="step-content-body out">
+                            <div class="card__shadow">
+                                <h5 class="card-title mb-5">Selecciona empresas para que vean tu publicación.</h5>
+                                <div class="div__step">
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#businessModal">Seleccionar empresa</button>
+                                    
+                                </div>
+                            </div>
 
-
-
-                     </div>
-                   
-                
-
-                  </div>
-                   <!-----Paso 3----->
-                  <div id="step3" class="step-content-body out">
-                    <div class="card__shadow">
-                        <h5 class="card-title mb-5">Selecciona empresas para que vean tu publicación.</h5>
-                        <div class="div__step">
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#businessModal">Seleccionar empresa</button>
-                            
+                        </div>
+                        <!-----Paso 4-
+                        ---->
+                        <div class="step-content-foot">
+                            <button type="button" class="active" name="prev">Anterior</button>
+                            <button type="button" class="active" name="next">Siguiente</button>
+                            <button class="btn btn-primary active out" name="finish" @click="checkSelectedUsers()">Publicar</button>
+                    
                         </div>
                     </div>
-
-                  </div>
-                   <!-----Paso 4-
-                  ---->
-                    <div class="step-content-foot">
-                        <button type="button" class="active" name="prev">Anterior</button>
-                        <button type="button" class="active" name="next">Siguiente</button>
-                        <button class="btn btn-primary active out" name="finish" @click="checkSelectedUsers()">Publicar</button>
-                  
-                    </div>
-                </div>
                </div>
-              </div>
+            </div>
 
         <!-- modal -->
             <div class="modal fade" id="businessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -204,6 +196,7 @@
         
 
         <!-- modal -->
+        </div>
 
     </div>
 
@@ -397,7 +390,7 @@
                         if(exists){
                             $("#user"+user.id).css("background-color", "white")
                         }else{
-                            this.selectedUsers.push({user})
+                            this.selectedUsers.push(user)
                             $("#user"+user.id).css("background-color", "gray")
                         }
                         
