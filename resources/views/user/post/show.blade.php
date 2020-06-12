@@ -6,37 +6,51 @@
         <div class="container">
 
             <div class="row">
-                <div class="offset-md-2 col-md-8">
-                    <h3 class="text-center">Razón social: @{{ businessName }}</h3>
+             
+                <div class="offset-md-2 col-md-8 mt-5">
+                    <h3 class="text-center font ">@{{ title }}</h3>
                 </div>
-                <div class="offset-md-2 col-md-8">
-                    <h3 class="text-center">R.I.F: @{{ rif }}</h3>
-                </div>
-                <div class="offset-md-2 col-md-8">
-                    <h3 class="text-center">@{{ title }}</h3>
-                </div>
-                <div class="offset-md-3 col-md-6">
+                <div class="offset-md-3 col-md-6 text-center ">
                     <p>
                         @{{ description }}
                     </p>
                 </div>
+           
             </div>
-            <div class="row">
-                <div class="offset-md-2 col-md-8">
-                    <h5 class="text-center">agregar oferta</h5>
-                </div>
-                <div class="offset-md-2 col-md-8">
-                    <div class="form-group" v-for="product in products">
-                        <label>@{{ product.product }} - @{{ product.amount }} @{{ product.unit_name }}</label>
-                        <input class="offer form-control" :id="'offer'+product.id" type="text" placeholder="precio">
+            <div class="row ">
+               
+                <div class="offset-md-2 col-md-8 card__shadow-general ">
+                    <div class="col-md-8 mt-4">
+                        <h5 class=" card-title">Agregar oferta</h5>
                     </div>
-                    @if(\Auth::check())
-                    <p class="text-center">
-                        <button class="btn btn-success" @click="storeOffer()">Ofertar</button>
-                    </p>
-                    @endif
+                    <div class="form-group mt-4" v-for="product in products">
+                        <label>@{{ product.product }} - @{{ product.amount }} @{{ product.unit_name }}</label>
+                     <div class="d-flex">
+                        <input class="offer form-control col-5  mr-4 " :id="'offer'+product.id" type="text" placeholder="precio">                                
+                        @if(\Auth::check())
+                        <p class="text-center">
+                            <button class="btn btn-success " @click="storeOffer()">Ofertar <i class="fa fa-plus ml-2"></i></button>
+                        </p>
+                        @endif
+                     </div>                                   
+                    </div> 
+                </div>
+
+                <div class=" offset-md-2 col-md-8 card__shadow-general--grid">
+                    <div class="offset-md-2 col-md-8 card__shadow-general">
+                        <h3 class="text-center">Razón social: @{{ businessName }}</h3>
+                    </div>
+                    <div class="offset-md-2 col-md-8 card__shadow-general">
+                        <h3 class="text-center">R.I.F: @{{ rif }}</h3>
+                    </div>
                 </div>
             </div>
+
+  
+
+
+
+
             <!--<div class="row">
                 <div class="offset-md-2 col-md-8">
                     <h5 class="text-center">Ofertas</h5>
