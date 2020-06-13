@@ -18,6 +18,9 @@
                     <a class="nav-link" href="{{ url('/admin/unit/index') }}"><img class="filter"  src="{{ asset('assets/img/iconos/bx-square.svg') }}" alt="">Unidades</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/admin/brand/index') }}"><img class="filter"  src="{{ asset('assets/img/iconos/bx-box.svg') }}" alt="">Marcas</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ url('/admin/product/index') }}"><img class="filter"  src="{{ asset('assets/img/iconos/bx-box.svg') }}" alt="">Productos</a>
                 </li>
                 <li class="nav-item">

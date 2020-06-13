@@ -43,6 +43,8 @@ Route::post('/register', "RegisterController@register");
 Route::get('/post/index', "PostController@index");
 Route::post('/post/store', "PostController@store");
 
+Route::get('/brand/fetch/all', "BrandController@fetchAll");
+
 Route::get("/profile", "ProfileController@index");
 
 Route::get("/my-posts", "PostController@myPosts");
@@ -99,3 +101,9 @@ Route::get("/admin/verify-user/fetch/{page}", "VerifyUserController@fetch");
 Route::get("/admin/verify-user/show/{id}", "VerifyUserController@show");
 Route::get("/admin/verify-info/countries-info/fetch/{id}", "VerifyUserController@countryFetch");
 Route::post("/admin/verify-info/verify/{id}", "VerifyUserController@verify");
+
+Route::get('/admin/brand/index', "BrandController@index");
+Route::get('/admin/brand/fetch/{page}', "BrandController@fetch");
+Route::post('/admin/brand/store', "BrandController@store");
+Route::post('/admin/brand/update', "BrandController@update");
+Route::post('/admin/brand/delete', "BrandController@delete");

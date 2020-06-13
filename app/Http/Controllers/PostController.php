@@ -71,6 +71,7 @@ class PostController extends Controller
             $post->title = $request->title;
             $post->description = $request->description;
             $post->user_id = \Auth::user()->id;
+            $post->request_shipping = $request->shippingCheck;
             
             if($request->type == "private")
                 $post->is_private = true;

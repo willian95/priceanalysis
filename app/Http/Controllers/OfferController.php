@@ -54,6 +54,7 @@ class OfferController extends Controller
             $offer = new Offer;
             $offer->user_id = \Auth::user()->id;
             $offer->post_id = $request->postId;
+            $offer->shipping_cost = $request->shippingCost;
             $offer->save();
 
             $total = 0;

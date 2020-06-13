@@ -20,6 +20,13 @@
                         @{{ description }}
                     </p>
                 </div>
+
+                <div class="offset-md-3 col-md-6">
+                    <div class="form-group" v-if="requestShipping">
+                        <label>Flete</label>
+                        <input class="form-control" type="text" placeholder="precio" v-model="shippingCost">
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="offset-md-2 col-md-8">
@@ -107,6 +114,8 @@
                     title:'{{ $post->title }}',
                     postId:'{{ $post->id }}',
                     description:'{{ $post->description }}',
+                    requestShipping: '{{ $post->request_shipping }}',
+                    shippingCost:0,
                     products:[],
                     productOffer:[],
                     offers:[],
@@ -142,12 +151,13 @@
                        
                     })
 
-                    axios.post("{{ url('/offer/post/') }}"+"/"+this.postId, {offerProducts: this.productOffer, postId: this.postId})
+                    axios.post("{{ url('/offer/post/') }}"+"/"+this.postId, {offerProducts: this.productOffer, postId: this.postId, shippingCost: this.shippingCost})
                     .then(res => {
 
                         if(res.data.success == true){
 
                             alert(res.data.msg)
+                            this.shippingCost = 0
                             this.productOffer = []
                             var element = $('.offer').map((_,el) => el).get()
                             element.forEach((data, index) => {

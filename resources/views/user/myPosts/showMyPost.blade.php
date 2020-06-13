@@ -35,7 +35,9 @@
                 <div class="offset-md-2 col-md-8" v-for="offer in offers" v-bind:class="{'bestPrice': offer.id == bestPriceId,  'worstPrice': offer.id == worstPriceId}">
 
                     <h3 class="text-center">@{{ offer.user.name }}</h3>
-                    <h4>Total: @{{ offer.sum }}</h4>
+                    <h4>Productos: @{{ offer.sum }}</h4>
+                    <h4>Flete: @{{ offer.shipping_cost }}</h4>
+                    <h4>Total: @{{ offer.sum + offer.shipping_cost }}</h4>
 
                     <table class="table">
                         <thead>

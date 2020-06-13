@@ -12,4 +12,9 @@ class Product extends Model
     public function productUnits(){
         return $this->hasMany(ProductUnit::class);
     }
+
+    public function brand(){
+        return $this->belongsTo(Brand::class);
+    }
+
 }
