@@ -20,30 +20,39 @@
             <div class="row ">
                
                 <div class="offset-md-2 col-md-8 card__shadow-general ">
-                    <div class="col-md-8 mt-4">
+                    <div class="col-md-12 mt-4 flex_line">
                         <h5 class=" card-title">Agregar oferta</h5>
+
+                        <div class="flex_line-text">
+                            <p class="text-center mb-0"><strong>Razón social:</strong> @{{ businessName }}</p>
+                            <p class="text-center"><strong>R.I.F: </strong>@{{ rif }}</p>
+                        </div>
                     </div>
                     <div class="form-group mt-4" v-for="product in products">
-                        <label>@{{ product.product }} - @{{ product.amount }} @{{ product.unit_name }}</label>
-                     <div class="d-flex">
-                        <input class="offer form-control col-5  mr-4 " :id="'offer'+product.id" type="text" placeholder="precio">                                
+                    <div class="offset-4">
+                        <label>@{{ product.product }} - @{{ product.amount }} @{{ product.unit_name }}</label>              
+                        <input class="offer form-control col-7  mr-4 " :id="'offer'+product.id" type="text" placeholder="precio">                                
                         @if(\Auth::check())
-                        <p class="text-center">
+                        <p class="ml-5 mt-4">
                             <button class="btn btn-success " @click="storeOffer()">Ofertar <i class="fa fa-plus ml-2"></i></button>
                         </p>
                         @endif
-                     </div>                                   
+                    </div>
+                                                
                     </div> 
                 </div>
-
-                <div class=" offset-md-2 col-md-8 card__shadow-general--grid">
-                    <div class="offset-md-2 col-md-8 card__shadow-general">
+               <!--  <div>
+                    <p class="text-center">Razón social: @{{ businessName }}</p>
+                    <p class="text-center">R.I.F: @{{ rif }}</p>
+                </div>
+               <div class=" offset-md-2 col-md-8 ">
+                    <div class="offset-md-2 col-md-8 ">
                         <h3 class="text-center">Razón social: @{{ businessName }}</h3>
                     </div>
-                    <div class="offset-md-2 col-md-8 card__shadow-general">
+                    <div class="offset-md-2 col-md-8 ">
                         <h3 class="text-center">R.I.F: @{{ rif }}</h3>
                     </div>
-                </div>
+                </div>-->
             </div>
 
   

@@ -32,9 +32,9 @@
                 <div class="offset-md-2 col-md-8">
                     <h5 class="text-center">Ofertas</h5>
                 </div>
-                <div class="offset-md-2 col-md-8" v-for="offer in offers" v-bind:class="{'bestPrice': offer.id == bestPriceId,  'worstPrice': offer.id == worstPriceId}">
+                <div class="offset-md-2 col-md-12  col-lg-8 card__shadow-general__best" v-for="offer in offers" v-bind:class="{'bestPrice': offer.id == bestPriceId,  'worstPrice': offer.id == worstPriceId}">
 
-                    <h3 class="text-center">@{{ offer.user.name }}</h3>
+                    <h3 class="text-center">  @{{ offer.user.name }}</h3>
                     <h4>Total: @{{ offer.sum }}</h4>
 
                     <table class="table">

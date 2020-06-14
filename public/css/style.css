@@ -1,11 +1,24 @@
 .bestPrice {
-    background-color: #00cf78;
+    background-color: transparent;
 }
-
 .worstPrice {
     background-color: #dc3545;
 }
-
+.bestPrice::before{
+    position: absolute;
+    content: "Mejor oferta";
+    background: #00cf78;
+    color: #fff;
+    padding: 5px 20px;
+    border-radius: 30px;
+    display: inline-block;
+    font-size: 12px;
+    -webkit-transition: .1s all ease;
+    -o-transition: .1s all ease;
+    transition: .1s all ease;
+    right: 20px;
+    top: 20px;
+}
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -628,5 +641,22 @@ fieldset {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-
-
+.flex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.flex_line{
+    display: flex;
+    justify-content: space-between;
+}
+.flex_line-text{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.card__shadow-general__best{
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #00000036;
+    margin-bottom: 30px;
+}
