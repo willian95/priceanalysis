@@ -23,7 +23,8 @@ class OfferController extends Controller
             $midPriceId = 0;
 
             $index = 0;
-            $statistics = Offer::where("post_id", $id)->with('products', "products.postProduct", "user")->orderBy('sum', 'asc')->get();
+            $statistics = Offer::where("post_id", $id)->with('products', "products.postProduct", "user")->selectRaw("sum + shipping_cost as sum_cost, id")->orderBy('sum_cost', 'asc')->get();
+            //dd($statistics);
             foreach($statistics as $statistic){
 
                 if($index == 0){
