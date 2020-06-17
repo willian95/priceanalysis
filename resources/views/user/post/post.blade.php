@@ -33,6 +33,13 @@
                                                 </div>
                                     
                                             <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="title">Titulo</label>
+                                                <input type="text" class="form-control" id="title" v-model="title">
+                                            </div>
+        
+                                            <div class="col-md-4">
                                             
                                                     <label for="type">Tipo de publicación</label>
                                                     <select class="form-control" id="type" v-model="type">
@@ -40,6 +47,15 @@
                                                         <option value="private">Privada</option>
                                                     </select>
                                             
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" v-model="shippingCheck" value="true"
+                                                        id="shippingCheck">
+                                                    <label class="form-check-label" for="shippingCheck">
+                                                        ¿Solicitar flete?
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                         </div>
@@ -63,7 +79,7 @@
                                                     <ul class="select_search">
                                                         <li v-for="search in searches">
                                                             <a href="#" @click="selectProduct(search)">
-                                                                @{{ search.name }}
+                                                                @{{ search.name }} @{{ search.brand.name }}
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -417,7 +433,8 @@
                     selectedUnit:"",
                     unit:"",
                     units:[],
-                    type:"public"
+                    type:"public",
+                    shippingCheck:false
                }
             },
             methods:{
@@ -524,7 +541,7 @@
                 },
                 store(){
 
-                    axios.post("{{ url('/post/store') }}", {title: this.title, description: this.description, products: this.products, selectedUsers: this.selectedUsers, type: this.type})
+                    axios.post("{{ url('/post/store') }}", {title: this.title, description: this.description, products: this.products, selectedUsers: this.selectedUsers, type: this.type, shippingCheck: this.shippingCheck})
                     .then(res => {
 
                         if(res.data.success == true){
@@ -534,6 +551,7 @@
                             this.description = ""
                             this.products = [],
                             this.selectedUsers = ""
+                            this.shippingCheck = false
                             $(".card").css("background-color", "white")
                             window.location.href="{{ url('/') }}"
 

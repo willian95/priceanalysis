@@ -23,7 +23,7 @@ class ProductController extends Controller
             $take = 20;
             $skip = ($page-1) * $take;
 
-            $products = Product::skip($skip)->take($take)->orderBy('name', 'asc')->get();
+            $products = Product::with("brand")->skip($skip)->take($take)->orderBy('name', 'asc')->get();
             $productsCount = Product::count();
 
             return response()->json(["success" => true, "products" => $products, "productsCount" => $productsCount]);
@@ -47,6 +47,7 @@ class ProductController extends Controller
 
             $product = new Product;
             $product->name = $name;
+            $product->brand_id = $request->brandId;
             $product->save();
 
             foreach($request->units as $unit){
@@ -107,7 +108,7 @@ class ProductController extends Controller
 
         try{
 
-            $products = Product::where('name', "like", '%'.$request->search.'%')->take(5)->get();
+            $products = Product::where('name', "like", '%'.$request->search.'%')->with("brand")->get();
             return response()->json(["success" => true, "products" => $products]);
 
         }catch(\Exception $e){

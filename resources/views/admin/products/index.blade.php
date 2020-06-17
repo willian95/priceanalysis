@@ -17,6 +17,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Producto</th>
+                                <th scope="col">Marca</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
@@ -24,6 +25,7 @@
                             <tr v-for="(product, index) in products">
                                 <th>@{{ index + 1 }}</th>
                                 <td>@{{ product.name }}</td>
+                                <td>@{{ product.brand.name }}</td>
                                 <td>
                                     <button class="btn btn-success fa fa-edit btn-transparent__green" data-toggle="modal" data-target="#createProduct" @click="edit(product)"></button>
                                     <button class="btn btn-danger" @click="erase(product.id)"><img class="filter " src="{{ asset('assets/img/iconos/bx-trash.svg') }}" alt=""></button>
@@ -63,6 +65,22 @@
                             <label for="name">Nombre</label>
                             <input type="text" class="form-control" id="name" v-model="name">
                         </div>
+                        <div class="form-group">
+                            <label for="brand">Marca</label>
+                            <select class="form-control" id="brand" v-model="selectedBrand">
+                                <option :value="brand.id" v-for="brand in brands">@{{ brand.name }}</option>
+                            </select>
+                            <button class="btn btn-success" @click="openBrandForm()" v-if="showBrand == false">+</button>
+                        </div>
+
+                        <div class="form-group" v-if="showBrand == true">
+                            <h3 class="text-center">Marca</h3>
+                            <label for="brandCreate">Nombre</label>
+                            <input type="text" class="form-control" id="brandCreate" v-model="brandName">
+                            <button class="btn btn-secondary" @click="hideBrandForm()">Cerrar</button>
+                            <button class="btn btn-success" @click="storeBrand()">Crear</button>
+                        </div>
+
                         <h3 class="text-center">Unidades</h3>
                         <div class="card unit-card" v-for="unit in units" @click="selectUnit(unit)" :id="'unit'+unit.id">
                             <div class="card-body">
@@ -97,8 +115,12 @@
                     productId:"",
                     action:"create",
                     products:[],
+                    selectedBrand:"",
+                    brands:[],
                     units:[],
                     selectedUnits:"",
+                    brandName:"",
+                    showBrand:false,
                     pages:0
                 }
             },
@@ -107,11 +129,12 @@
                 create(){
                     this.action = "create"
                     this.name = ""
+                    this.selectedBrand = "" 
                     this.productId = ""
                 },
                 store(){
 
-                    axios.post("{{ url('/admin/product/store') }}", {name: this.name, units: this.selectedUnits})
+                    axios.post("{{ url('/admin/product/store') }}", {name: this.name, units: this.selectedUnits, brandId: this.selectedBrand})
                     .then(res => {
 
                         if(res.data.success == true){
@@ -165,6 +188,7 @@
                     this.action = "edit"
                     this.name = product.name
                     this.productId = product.id
+                    this.selectedBrand = product.brand_id
                 },
                 fetch(page = 1){
 
@@ -244,12 +268,65 @@
                         }
                         
                     }
+                },
+                openBrandForm(){
+
+                    this.showBrand = true
+
+                },
+                hideBrandForm(){
+
+                    this.showBrand = false
+                    this.brandName = ""
+
+                },
+                storeBrand(){
+
+                    axios.post("{{ url('/admin/brand/store') }}", {name: this.brandName})
+                    .then(res => {
+
+                        if(res.data.success == true){
+
+                            alert(res.data.msg)
+                            this.brandName = ""
+                            this.selectedBrand = ""
+                            this.fetchBrands()
+                            this.hideBrandForm()
+                        }else{
+
+                            alert(res.data.msg)
+
+                        }
+
+                    })
+                    .catch(err => {
+                        $.each(err.response.data.errors, function(key, value){
+                            alert(value)
+                        });
+                    })
+
+                },
+                fetchBrands(){
+
+                    axios.get("{{ url('/brand/fetch/all') }}").then(res => {
+
+                        if(res.data.success == true){
+                            this.brands = res.data.brands
+                        }else{
+
+                            alert(res.data.msg)
+
+                        }
+
+                    })
+
                 }
                 
 
             },
             mounted(){
                 this.fetch()
+                this.fetchBrands()
                 this.fetchUnits()
             }
 
