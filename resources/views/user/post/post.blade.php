@@ -25,14 +25,6 @@
                                     <div class="card__shadow">
                                         <h5 class="card-title mb-5">Detalle de la publicación</h5>
                                         <div class="form-group">
-                                        <div class="row box">
-                                        
-                                                <div class="col-md-6 inputBox">
-                                                    <input required="" type="text" class="form-control" id="title" v-model="title">
-                                                    <label for="title">Titulo</label>
-                                                </div>
-                                    
-                                            <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label for="title">Titulo</label>
