@@ -6,9 +6,9 @@
         <div class="container">
             <div class="row">
                 <div class="offset-md-2 col-md-8">
-                    <h3 class="text-center">@{{ title }}</h3>
+                    <h3 class="text-center mt-5 font">@{{ title }}</h3>
                 </div>
-                <div class="offset-md-3 col-md-6">
+                <div class="offset-md-3 col-md-6 text-center">
                     <p>
                         @{{ description }}
                     </p>
@@ -30,7 +30,7 @@
             </>-->
             <div class="row">
                 <div class="offset-md-2 col-md-8">
-                    <h5 class="text-center">Ofertas</h5>
+                    <h5 class="card-title mb-4 mt-3">Ofertas</h5>
                 </div>
                 <div class="offset-md-2 col-md-8" v-for="offer in offers" v-bind:class="{'bestPrice': offer.id == bestPriceId,  'worstPrice': offer.id == worstPriceId}">
 

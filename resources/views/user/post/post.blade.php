@@ -7,7 +7,7 @@
         <div class="container mt-50">
             <div class="container-fluid">
                 <div class="row justify-content-center">
-                    <div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-9 text-center p-0  mb-2">
+                    <div class=" col-sm-9 col-md-12 col-lg-6 col-xl-9 text-center p-0  mb-2">
                         <div class="card-step px-0 pt-4 pb-0 mb-3">
                        
                             <div id="msform">
@@ -52,7 +52,7 @@
                                         </div>
                                         </div>
                                         
-                                        <div class="form-group">
+                                        <div class="form-group ">
                                             <label for="description">Descripción</label>
                                             <textarea class="form-control" rows="2" id="description" v-model="description"></textarea>
                                         </div>                      
@@ -65,7 +65,7 @@
                                 
                                         <div class="row">
                                             <div class="col-md-5">
-                                                <div class="form-group">
+                                                <div class="form-group inputBox">
                                                     <label for="name">Nombre</label>
                                                     <input autocomplete="off" type="text" class="form-control" id="name" v-model="name" placeholder="Harina de maíz" @keyup="search()">
                                                     <ul class="select_search">
@@ -79,28 +79,28 @@
                                             </div>
         
                                             <div class="col-md-2" v-if="productId == 0">
-                                                <div class="form-group">
+                                                <div class="form-group inputBox">
                                                     <label for="amount">Cantidad</label>
                                                     <input type="text" class="form-control" id="amount" v-model="amount" placeholder="30">
                                                 </div>
                                             </div>
         
                                             <div class="col-md-2" v-if="productId == 0">
-                                                <div class="form-group">
+                                                <div class="form-group inputBox">
                                                     <label for="unit">Unidad</label>
                                                     <input type="text" class="form-control" id="unit" v-model="unit" placeholder="Kilos">
                                                 </div>
                                             </div>
         
                                             <div class="col-md-2" v-if="productId != 0">
-                                                <div class="form-group">
+                                                <div class="form-group inputBox">
                                                     <label for="amount">Cantidad</label>
                                                     <input type="text" class="form-control" id="amount" v-model="amount" placeholder="15">
                                                 </div>
                                             </div>
         
                                             <div class="col-md-2" v-if="productId != 0">
-                                                <div class="form-group">
+                                                <div class="form-group inputBox">
                                                     <label for="unit">Unidad</label>
                                                     <select class="form-control" v-model="selectedUnit">
                                                         <option :value="unit" v-for="unit in units">@{{ unit.unit.name }}</option>
@@ -223,7 +223,7 @@
                         <div class="card-body">
                            <div class="card__shadow">
                             <h5 class="card-title mb-5">Publicar</h5>
-                            <div class="form-group">
+                            <div class="form-group inputBox">
                              <div class="row">
                                 <div class="col-md-6">
                                     <label for="title">Titulo</label>
@@ -241,7 +241,7 @@
                                    </div>
                              </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group inputBox">
                                 <label for="description">Descripción</label>
                                 <textarea class="form-control" rows="2" id="description" v-model="description"></textarea>
                             </div>                      
@@ -260,7 +260,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-5">
-                                    <div class="form-group">
+                                    <div class="form-group inputBox">
                                         <label for="name">Nombre</label>
                                         <input type="text" class="form-control" id="name" v-model="name" placeholder="Harina de maíz" @keyup="search()">
                                         <ul>
@@ -273,21 +273,21 @@
                                     </div>
 
                                     <div class="col-md-2" v-if="productId == 0">
-                                        <div class="form-group">
+                                        <div class="form-group inputBox">
                                             <label for="unit">Unidad</label>
                                             <input type="text" class="form-control" id="unit" v-model="unit" placeholder="Kilos">
                                         </div>
                                     </div>
 
                                     <div class="col-md-2" v-if="productId != 0">
-                                        <div class="form-group">
+                                        <div class="form-group inputBox">
                                             <label for="amount">Cantidad</label>
                                             <input type="text" class="form-control" id="amount" v-model="amount" placeholder="15">
                                         </div>
                                     </div>
 
                                     <div class="col-md-2" v-if="productId != 0">
-                                        <div class="form-group">
+                                        <div class="form-group inputBox">
                                             <label for="unit">Unidad</label>
                                             <select class="form-control" v-model="selectedUnit">
                                                 <option :value="unit" v-for="unit in units">@{{ unit.unit.name }}</option>
