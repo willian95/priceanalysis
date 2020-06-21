@@ -6,8 +6,20 @@
         <div class="container">
 
             <div class="row">
+
+                <div class=" offset-md-2 col-md-8 card__shadow-general--grid" style="margin-top: 20px;">
+                    <div class="offset-md-2 col-md-8 card__shadow-general">
+                        <h3 class="text-center">Razón social: @{{ businessName }}</h3>
+                        <p>
+                            Dirección de entrega: @{{ address }}
+                        </p>
+                    </div>
+                    <div class="offset-md-2 col-md-8 card__shadow-general">
+                        <h3 class="text-center">R.I.F: @{{ rif }}</h3>
+                    </div>
+                </div>
              
-                <div class="offset-md-2 col-md-8 mt-5">
+                <div class="offset-md-2 col-md-8">
                     <h3 class="text-center font ">@{{ title }}</h3>
                 </div>
                 <div class="offset-md-3 col-md-6 text-center ">
@@ -15,29 +27,27 @@
                         @{{ description }}
                     </p>
                 </div>
-                <div class="offset-md-3 col-md-6 text-center ">
-                    <p>
-                        Dirección de entrega: @{{ address }}
-                    </p>
-                </div>
 
-                <div class="offset-md-3 col-md-6">
-                    <div class="form-group" v-if="requestShipping">
-                        <label>Flete</label>
-                        <input class="form-control" type="text" placeholder="precio" v-model="shippingCost">
-                    </div>
-                </div>
+                
             </div>
             <div class="row ">
                
                 <div class="offset-md-2 col-md-8 card__shadow-general ">
-                    <div class="col-md-8 mt-4">
+                    <div class="col-12 mt-4">
                         <h5 class=" card-title">Agregar oferta</h5>
+                        <small>* Los precios son representados en dolares</small>
                     </div>
-                    <div class="form-group mt-4" v-for="product in products">
+                    <div class="col-12">
+                        <div class="form-group" v-if="requestShipping">
+                            <label>Flete</label>
+                            <input class="form-control" type="text" placeholder="precio" v-model="shippingCost">
+                        </div>
+                        
+                    </div>
+                    <div class="form-group mt-4 col-12" v-for="product in products">
                         <label>@{{ product.product }} - @{{ product.amount }} @{{ product.unit_name }}</label>
                      <div class="d-flex">
-                        <input class="offer form-control col-5  mr-4 " :id="'offer'+product.id" type="text" placeholder="precio">                                
+                        <input class="offer form-control col-12  mr-4 " :id="'offer'+product.id" type="text" placeholder="precio">                                
                         @if(\Auth::check())
                         <p class="text-center">
                             <button class="btn btn-success " @click="storeOffer()">Ofertar <i class="fa fa-plus ml-2"></i></button>
@@ -47,14 +57,6 @@
                     </div> 
                 </div>
 
-                <div class=" offset-md-2 col-md-8 card__shadow-general--grid">
-                    <div class="offset-md-2 col-md-8 card__shadow-general">
-                        <h3 class="text-center">Razón social: @{{ businessName }}</h3>
-                    </div>
-                    <div class="offset-md-2 col-md-8 card__shadow-general">
-                        <h3 class="text-center">R.I.F: @{{ rif }}</h3>
-                    </div>
-                </div>
             </div>
 
   
