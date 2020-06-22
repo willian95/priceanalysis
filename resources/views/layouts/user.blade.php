@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" >
     <link rel="stylesheet" href="{{ asset('css/media.css') }}" >
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;700;800&display=swap" rel="stylesheet">
-    <title>PriceAnalysis</title>
+    <title>Commerceprice</title>
 </head>
 <body>
     
