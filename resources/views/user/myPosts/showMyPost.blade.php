@@ -29,32 +29,37 @@
                 </div>
             </>-->
             <div class="row">
-                <div class="offset-md-2 col-md-8">
+                <div class="offset-md-2 col-md-8 ">
                     <h5 class="card-title mb-4 mt-3">Ofertas</h5>
                 </div>
-                <div class="offset-md-2 col-md-8" v-for="offer in offers" v-bind:class="{'bestPrice': offer.id == bestPriceId,  'worstPrice': offer.id == worstPriceId}">
+                <div class="offset-md-2 col-md-8 card__shadow-general" v-for="offer in offers" v-bind:class="{'bestPrice': offer.id == bestPriceId,  'worstPrice': offer.id == worstPriceId}">
 
-                    <h3 class="text-center">@{{ offer.user.name }}</h3>
-                    <h4>Productos: @{{ offer.sum }}</h4>
-                    <h4>Flete: @{{ offer.shipping_cost }}</h4>
-                    <h4>Total: @{{ offer.sum + offer.shipping_cost }}</h4>
+                    <h3 class="mt-3 ml-3" >@{{ offer.user.name }}</h3>
+                    <div class="line-pag  items_offert justify-content-around">
+                        <p> <i class="fa fa-cart-plus"></i> Productos: @{{ offer.sum }}</p>
+                        <p> <i class="fa fa-bus"></i> Flete: @{{ offer.shipping_cost }}</p>
+                        <p> <i class="fa fa-dollar"></i> Total: @{{ offer.sum + offer.shipping_cost }}</p>
+                    </div>
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Producto</th>
-                                <th>Precio</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(product, index) in offer.products">
-                                <td>@{{ index + 1 }}</td>
-                                <td>@{{ product.post_product.product }} - @{{ product.post_product.amount }} @{{ product.post_product.unit_name }} </td>
-                                <td>@{{ product.price }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+               <div class="text-center" style="padding-left: 34px;
+               padding-right: 64px;">
+                <table class="table ">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(product, index) in offer.products">
+                            <td>@{{ index + 1 }}</td>
+                            <td>@{{ product.post_product.product }} - @{{ product.post_product.amount }} @{{ product.post_product.unit_name }} </td>
+                            <td>@{{ product.price }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+               </div>
 
                     <!--<div class="form-group" v-for="offer in offers">
                         
