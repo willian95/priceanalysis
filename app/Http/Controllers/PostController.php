@@ -48,7 +48,7 @@ class PostController extends Controller
 
             $skip = ($page-1) * 20;
 
-            $posts = Post::skip($skip)->take(10)->where("is_private", false)->get();
+            $posts = Post::skip($skip)->take(20)->where("is_private", false)->get();
             $postsCount = Post::where("is_private", false)->count();
 
             return response()->json(["success" => true, "posts" => $posts, "postsCount" => $postsCount]);
