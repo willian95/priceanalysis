@@ -17,11 +17,11 @@
     -webkit-transition: .1s all ease;
     -o-transition: .1s all ease;
     transition: .1s all ease;
-    right: 235px;
+    right: 30px;
     top: 25px;
 
 }
-.worstPrice ::before{
+.worstPrice::before{
     position: absolute;
     content: "worst price ";
     background: #dc3545;
@@ -33,7 +33,7 @@
     -webkit-transition: .1s all ease;
     -o-transition: .1s all ease;
     transition: .1s all ease;
-    right: 235px;
+    right: 30px;
     top: 25px;
 
 }
@@ -1044,4 +1044,13 @@ fieldset {
 .flex-price{
     display: flex;
     justify-content: space-between;
+}
+.line-pag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.items_offert p{
+   margin: 0;
 }

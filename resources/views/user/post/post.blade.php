@@ -40,7 +40,7 @@
                                                     </select>
                                             
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-4 line-pag ">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" v-model="shippingCheck" value="true"
                                                         id="shippingCheck">
