@@ -110,7 +110,7 @@
         
                                             <div class="col-md-2">
                                                 <label for="" style="visibility: hidden">hg</label>
-                                                <button class="btn btn-success" @click="add()">agregar</button>
+                                                <button class="btn btn-success" @click="add()" :disabled="productId == 0">agregar</button>
                                             </div>
         
                             
