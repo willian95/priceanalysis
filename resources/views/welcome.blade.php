@@ -3,21 +3,40 @@
 @section('content')
 
     <div class="container" id="dev-landing">
-        <div class="row" v-for="post in posts" style="margin-top: 8px;">
-            <div class="offset-md-3 col-md-6">
-                <a :href="'{{ url('/post/show/') }}'+'/'+post.code">
-                    <div class="card">
-                        <div class="card-body">
-                            <p>@{{ post.user.name }}</p>
-                            <h5>@{{ post.title }}</h5>
+        <div class="grid__publicacion mt-5">
+            <div class="grid__publicacion--item" v-for="post in posts" style="margin-top: 8px;">
+                <div class="container">
+                    <a :href="'{{ url('/post/show/') }}'+'/'+post.code">
+                        <div class="card">
+                            <div class="card-body--grid">
+                                <div class="card-body--item">
+                                    <img class="img_p" src="https://cdn.pixabay.com/photo/2016/11/14/17/39/person-1824144_960_720.png" alt="">
+                          
 
-                            <p>@{{ post.created_at.toString().substring(0, 10) }}</p>
+                             
+                                </div>
+                                <div class="card-body--item">
+                                    <div class="top_title">
+                                        <p class="titulo mr-auto">@{{ post.user.name }}</p>
+                                        <p class="fecha_">@{{ post.created_at.toString().substring(0, 10) }}</p>
+                                    </div>
+                                 
 
+                                    <p>@{{ post.title }}</p>
+                                </div>
+                            
+                            
+    
+    
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         </div>
+       
+
+
         <div class="row">
             <div class="col-12">
                 <nav aria-label="Page navigation example">
