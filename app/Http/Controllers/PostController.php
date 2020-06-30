@@ -48,10 +48,50 @@ class PostController extends Controller
 
             $skip = ($page-1) * 20;
 
-            $posts = Post::skip($skip)->take(20)->where("is_private", false)->orderBy("id", "desc")->get();
-            $postsCount = Post::where("is_private", false)->count();
+            $posts = Post::with("user")->skip($skip)->take(20)->where("is_private", false)->orderBy("id", "desc")->get();
+            $postsCount = Post::with("user")->where("is_private", false)->count();
 
             return response()->json(["success" => true, "posts" => $posts, "postsCount" => $postsCount]);
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "Error en el servidor"]);
+
+        }
+
+    }
+
+    function adminIndex(){
+        return view("admin.posts.index");
+    }
+
+    function adminFetch($page = 1){
+
+        try{
+
+            $skip = ($page-1) * 20;
+
+            $posts = Post::with("user")->skip($skip)->take(20)->orderBy("id", "desc")->get();
+            $postsCount = Post::with("user")->count();
+
+            return response()->json(["success" => true, "posts" => $posts, "postsCount" => $postsCount]);
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "Error en el servidor"]);
+
+        }
+
+    }
+
+    function adminDelete(Request $request){
+
+        try{
+
+            $post = Post::where("id", $request->id)->first();
+            $post->delete();
+
+            return response()->json(["success" => true, "msg" => "Publicación eliminada"]);
 
         }catch(\Exception $e){
 

@@ -51,6 +51,12 @@ Route::get("/my-posts", "PostController@myPosts");
 Route::get('/my-posts/fetch/{page}', "PostController@myPostsFetch");
 Route::get("/my-posts/show/{id}", "PostController@showMyPost");
 
+Route::get("/my-offers/index", "OfferController@index");
+Route::get("/my-offers/fetch/{page}", "OfferController@fetchMyOffers");
+Route::get("/my-offers/show/{id}", "OfferController@show");
+Route::get("/my-offers/show/{id}/page/{page}", "OfferController@showMyOffers");
+Route::get("/my-offers/fetch/post/{id}/page/{page}", "OfferController@myOffersFetch");
+
 Route::get("/country/fetch", "CountryController@fetch");
 
 Route::post("/user/general-data/update", "UserController@updateGeneralData");
@@ -107,3 +113,7 @@ Route::get('/admin/brand/fetch/{page}', "BrandController@fetch");
 Route::post('/admin/brand/store', "BrandController@store");
 Route::post('/admin/brand/update', "BrandController@update");
 Route::post('/admin/brand/delete', "BrandController@delete");
+
+Route::get("/admin/post/index", "PostController@adminIndex");
+Route::get("/admin/post/fetch/{page}", "PostController@adminFetch");
+Route::post("/admin/post/delete", "PostController@adminDelete");

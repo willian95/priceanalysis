@@ -19,10 +19,8 @@
                 <div class="offset-md-2 col-md-8 ">
                     <h5 class="card-title mb-4 mt-3">Ofertas</h5>
                 </div>
-                <div class="offset-md-2 col-md-8 card__shadow-general" v-for="offer in offers" v-bind:class="{'bestPrice': offer.id == bestPriceId,  'worstPrice': offer.id == worstPriceId}">
+                <div class="offset-md-2 col-md-8 card__shadow-general" v-for="offer in offers">
 
-                    <h3 class="mt-3 ml-3" >@{{ offer.user.name }} </h3>
-                    <p><span v-if="offer.user.phone_number">tel: @{{ offer.user.phone_number }}</span> <span vif="offer.user.email">email: @{{ offer.user.email }}</span></p>
                     <div class="line-pag  items_offert justify-content-around">
                         <p> <i class="fa fa-cart-plus"></i> Productos: @{{ offer.sum }}</p>
                         <p> <i class="fa fa-bus"></i> Flete: @{{ offer.shipping_cost }}</p>
@@ -103,53 +101,15 @@
                     })
 
                 },
-                storeOffer(){
-
-                    var element = $('.offer').map((_,el) => el).get()
-                    element.forEach((data, index) => {
-                        
-                        this.productOffer.push({postProductId: data.id.substring(5, data.id.length), price: $("#"+data.id).val()})
-                       
-                    })
-
-                    axios.post("{{ url('/offer/post/') }}"+"/"+this.postId, {offerProducts: this.productOffer, postId: this.postId})
-                    .then(res => {
-
-                        if(res.data.success == true){
-
-                            alert(res.data.msg)
-                            this.productOffer = []
-                            var element = $('.offer').map((_,el) => el).get()
-                            element.forEach((data, index) => {
-                                
-                                $("#"+data.id).val("")
-                            
-                            })
-
-                            this.fetchOffers()
-
-                        }else{
-
-                            alert(res.data.msg)
-
-                        }
-
-                    })
-
-                },
                 fetchOffers(page = 1){
 
-                    axios.get("/offer/fetch/post/"+this.postId+"/page"+"/"+page)
+                    axios.get("/my-offers/fetch/post/"+this.postId+"/page"+"/"+page)
                     .then(res => {
 
                         if(res.data.success == true){
 
                             this.offers = res.data.offers
                             this.pages = Math.ceil(res.data.offersCount/20)
-
-                            this.bestPriceId = res.data.bestPriceId
-                            this.midPriceId = res.data.midPriceId
-                            this.worstPriceId = res.data.worstPriceId
 
                         }else{
                             alert(res.data.msg)
