@@ -1023,9 +1023,14 @@ fieldset {
     justify-content: space-between;
 }
 .flex_line-text{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    display: grid;
+    /* flex-direction: column; */
+    /* align-items: flex-start; */
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.flex_line-text .fa{
+    color: #007dc5;
+    margin-right: 8px;
 }
 .card__shadow-general__best{
     border-radius: 10px;
@@ -1053,4 +1058,13 @@ fieldset {
 
 .items_offert p{
    margin: 0;
+}
+
+.show__grid{
+    display: grid;
+    grid-template-columns: 10% 60% 30%;
+}
+.show__grid-item{
+
+
 }

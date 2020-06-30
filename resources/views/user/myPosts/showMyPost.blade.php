@@ -35,7 +35,7 @@
                 <div class="offset-md-2 col-md-8 card__shadow-general" v-for="offer in offers" v-bind:class="{'bestPrice': offer.id == bestPriceId,  'worstPrice': offer.id == worstPriceId}">
 
                     <h3 class="mt-3 ml-3" >@{{ offer.user.name }}</h3>
-                    <div class="line-pag  items_offert justify-content-around">
+                    <div class="line-pag  items_offert justify-content-around mt-4 mb-4">
                         <p> <i class="fa fa-cart-plus"></i> Productos: @{{ offer.sum }}</p>
                         <p> <i class="fa fa-bus"></i> Flete: @{{ offer.shipping_cost }}</p>
                         <p> <i class="fa fa-dollar"></i> Total: @{{ offer.sum + offer.shipping_cost }}</p>
