@@ -17,6 +17,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/my-posts') }}">Mis publicaciones</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/my-offers/index') }}">Mis ofertas</a>
+                </li>
+                @if(Auth::user()->role_id == 1)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/admin/dashboard') }}">Administrador</a>
+                    </li>
+                @endif
                <!--- <li class="nav-item">
                     <a class="nav-link" href="{{ url('/logout') }}">Cerrar sesión</a>
                 </li>--->

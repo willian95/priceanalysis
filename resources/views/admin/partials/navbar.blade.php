@@ -27,6 +27,9 @@
                     <a class="nav-link" href="{{ url('/admin/user/index') }}"><img class="filter"  src="{{ asset('assets/img/iconos/bx-group.svg') }}" alt=""> Usuarios</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/admin/post/index') }}"><img class="filter"  src="{{ asset('assets/img/iconos/bx-group.svg') }}" alt=""> Publicaciones</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ url('/admin/verify-user/index') }}"><img class="filter"  src="{{ asset('assets/img/iconos/bx-list-plus.svg') }}" alt="">Solicitudes de verificación</a>
                 </li>
                 <li class="nav-item">

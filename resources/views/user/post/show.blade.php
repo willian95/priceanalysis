@@ -62,6 +62,17 @@
                 
 
                  
+                        <div class="offset-4">
+                            <label>@{{ product.product }} - @{{ product.amount }} @{{ product.unit_name }}</label>              
+                            <input class="offer form-control col-7  mr-4 " :id="'offer'+product.id" type="text" placeholder="precio">                                
+                        </div>
+                                                
+                    </div> 
+                    @if(\Auth::check())
+                        <p class="ml-5 mt-4">
+                            <button class="btn btn-success " @click="storeOffer()">Ofertar <i class="fa fa-plus ml-2"></i></button>
+                        </p>
+                    @endif
                 </div>
                <!--  <div>
                     <p class="text-center">Razón social: @{{ businessName }}</p>

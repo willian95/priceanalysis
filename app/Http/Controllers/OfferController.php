@@ -3,11 +3,74 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
 use App\Offer;
 use App\OfferProduct;
 
 class OfferController extends Controller
 {
+
+    function index(){
+        return view("user.myOffers.posts");
+    }
+
+    function fetchMyOffers($page = 1){
+
+        try{
+
+            $skip = ($page-1) * 20;
+
+            $offers = Offer::with("post")->whereHas("post")->where("user_id", \Auth::user()->id)->skip($skip)->groupBy("offers.post_id")->take(20)->orderBy('id', 'desc')->get();
+            $offersCount = Offer::with("post")->whereHas("post")->where("user_id", \Auth::user()->id)->groupBy("offers.post_id")->count();
+
+            return response()->json(["success" => true, "posts" => $offers, "postsCount" => $offersCount]);
+
+        }catch(\Exception $e){
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
+        }
+
+    }
+
+    function show($id){
+
+        $post = Post::where("id", $id)->first();
+        return view("user.myOffers.showMyOffers", ["post" => $post]);
+
+    }
+
+    function showMyOffers($id, $page = 1){
+
+        try{
+
+            $skip = ($page-1) * 20;
+
+            $offers = Offer::where("user_id", \Auth::user()->id)->where("post", $id)->skip($skip)->groupBy("offers.post_id")->take(20)->orderBy('id', 'desc')->get();
+            $offersCount = Offer::where("user_id", \Auth::user()->id)->where("post", $id)->groupBy("offers.post_id")->count();
+
+            return response()->json(["success" => true, "offers" => $offers, "offersCount" => $offersCount]);
+
+        }catch(\Exception $e){
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
+        }
+
+    }
+
+    function myOffersFetch($id, $page = 1){
+
+        try{
+
+            $skip = ($page-1) * 20;
+
+            $offers = Offer::where("post_id", $id)->with('products', "products.postProduct", "user")->where("user_id", \Auth::user()->id)->skip($skip)->take(20)->orderBy('sum', 'asc')->get();
+            $offersCount = Offer::where("post_id", $id)->with('products', "products.postProduct", "user")->where("user_id", \Auth::user()->id)->count();
+
+            return response()->json(["success" => true, "offers" => $offers, "offersCount" => $offersCount]);
+        
+        }catch(\Exception $e){
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
+        }
+
+    }
 
     function fetch($id, $page = 1){
 
@@ -15,8 +78,8 @@ class OfferController extends Controller
 
             $skip = ($page-1) * 20;
 
-            $offers = Offer::where("post_id", $id)->with('products', "products.postProduct", "user")->skip($skip)->take(10)->orderBy('sum', 'asc')->get();
-            $offersCount = Offer::where("post_id", $id)->with('products')->count();
+            $offers = Offer::where("post_id", $id)->with('products', "products.postProduct", "user")->skip($skip)->take(20)->orderBy('sum', 'asc')->get();
+            $offersCount = Offer::where("post_id", $id)->with('products', "products.postProduct", "user")->count();
 
             $bestPriceId = 0;
             $worstPriceId = 0;

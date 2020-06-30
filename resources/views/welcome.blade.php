@@ -3,12 +3,16 @@
 @section('content')
 
     <div class="container" id="dev-landing">
-        <div class="row" v-for="post in posts">
-            <div class="offset-md-2 col-md-8">
+        <div class="row" v-for="post in posts" style="margin-top: 8px;">
+            <div class="offset-md-3 col-md-6">
                 <a :href="'{{ url('/post/show/') }}'+'/'+post.code">
                     <div class="card">
                         <div class="card-body">
-                            @{{ post.title }}
+                            <p>@{{ post.user.name }}</p>
+                            <h5>@{{ post.title }}</h5>
+
+                            <p>@{{ post.created_at.toString().substring(0, 10) }}</p>
+
                         </div>
                     </div>
                 </a>

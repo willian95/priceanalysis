@@ -110,7 +110,7 @@
         
                                             <div class="col-md-2">
                                                 <label for="" style="visibility: hidden">hg</label>
-                                                <button class="btn btn-success" @click="add()">agregar</button>
+                                                <button class="btn btn-success" @click="add()" :disabled="productId == 0">agregar</button>
                                             </div>
         
                             
@@ -143,7 +143,7 @@
         
                                     </div>
                                     
-                                    <button type="button" name="next" class="next action-button" value="Next">Siguiente</button>
+                                    <button type="button" name="next" class="next action-button" value="Next" :disabled="products.length == 0">Siguiente</button>
                                      <button type="button" name="previous" class="previous action-button-previous" value="Previous">Atrás</button>
                                 </fieldset>
                                 <fieldset>
@@ -412,6 +412,7 @@
             el: '#dev-post',
             data(){
                return{
+                    step:1,
                     title:"",
                     description:"",
                     products:[],
