@@ -17,12 +17,15 @@
                                 </div>
                                 <div class="card-body--item">
                                     <div class="top_title">
-                                        <p class="titulo mr-auto">@{{ post.user.name }}</p>
+                                        <p class="titulo ">@{{ post.user.name }}</p>
                                         <p class="fecha_">@{{ post.created_at.toString().substring(0, 10) }}</p>
-                                    </div>
-                                 
-
+                                    </div>                               
                                     <p>@{{ post.title }}</p>
+
+                                    <div>
+                                 
+                                    </div>
+                                 <!--   <a href="" class="btn-general">Ver publicacion</a>-->
                                 </div>
                             
                             
