@@ -25,7 +25,7 @@
                             <tr v-for="(product, index) in products">
                                 <th>@{{ index + 1 }}</th>
                                 <td>@{{ product.name }}</td>
-                                <td>@{{ product.brand.name }}</td>
+                                <td v-if="product.brand">@{{ product.brand.name }}</td>
                                 <td>
                                     <button class="btn btn-success fa fa-edit btn-transparent__green" data-toggle="modal" data-target="#createProduct" @click="edit(product)"></button>
                                     <button class="btn btn-danger" @click="erase(product.id)"><img class="filter " src="{{ asset('assets/img/iconos/bx-trash.svg') }}" alt=""></button>
