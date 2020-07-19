@@ -68,12 +68,13 @@
                         </div>-->
                                                 
                     </div> 
-                    @if(\Auth::check())
-                        <p class="ml-5 mt-4">
-                            <button class="btn btn-success " @click="storeOffer()">Ofertar <i class="fa fa-plus ml-2"></i></button>
-                        </p>
-                    @endif
+                    
                 </div>
+                @if(\Auth::check())
+                    <p class="ml-5 mt-4">
+                        <button class="btn btn-success " @click="storeOffer()">Ofertar <i class="fa fa-plus ml-2"></i></button>
+                    </p>
+                @endif
                <!--  <div>
                     <p class="text-center">Razón social: @{{ businessName }}</p>
                     <p class="text-center">R.I.F: @{{ rif }}</p>
