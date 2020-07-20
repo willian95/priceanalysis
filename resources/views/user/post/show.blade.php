@@ -39,7 +39,7 @@
                         <small>* Los precios son representados en dolares</small>
                        
                     </div>
-                    <div class=" col-7 mr-4">
+                    <div class=" col-12 mr-4">
                         <div class="form-group" v-if="requestShipping">
                             <label>Flete</label>
                             <input class="form-control  mr-4" type="text" placeholder="precio" v-model="shippingCost">
@@ -53,15 +53,6 @@
                             
                         </div>
                                                 
-                    <!--</div>--> 
-
-                
-
-                 
-                        <!--<div class="offset-4">
-                            <label>@{{ product.product }} - @{{ product.amount }} @{{ product.unit_name }}</label>              
-                            <input class="offer form-control col-7  mr-4 " :id="'offer'+product.id" type="text" placeholder="precio">                                
-                        </div>-->
                                                 
                     </div> 
 
@@ -73,18 +64,7 @@
                     
                 </div>
                 
-               <!--  <div>
-                    <p class="text-center">Razón social: @{{ businessName }}</p>
-                    <p class="text-center">R.I.F: @{{ rif }}</p>
-                </div>
-               <div class=" offset-md-2 col-md-8 ">
-                    <div class="offset-md-2 col-md-8 ">
-                        <h3 class="text-center">Razón social: @{{ businessName }}</h3>
-                    </div>
-                    <div class="offset-md-2 col-md-8 ">
-                        <h3 class="text-center">R.I.F: @{{ rif }}</h3>
-                    </div>
-                </div>-->
+               
 
             
 
