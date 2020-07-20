@@ -26,9 +26,9 @@
                     
                         <p><span v-if="offer.user.phone_number">tel: @{{ offer.user.phone_number }}</span> <span vif="offer.user.email">email: @{{ offer.user.email }}</span></p>
                         <div class="line-pag  items_offert justify-content-around">
-                            <p> <i class="fa fa-cart-plus"></i> Productos: @{{ offer.sum }}</p>
-                            <p style="margin-left: 10px;"> <i class="fa fa-bus"></i> Flete: @{{ offer.shipping_cost }}</p>
-                            <p style="margin-left: 10px;"> <i class="fa fa-dollar"></i> Total: @{{ offer.sum + offer.shipping_cost }}</p>
+                            <p> <i class="fa fa-cart-plus"></i> Productos: $ @{{ offer.sum }}</p>
+                            <p style="margin-left: 10px;"> <i class="fa fa-bus"></i> Flete: $ @{{ offer.shipping_cost }}</p>
+                            <p style="margin-left: 10px;"> <i class="fa fa-dollar"></i> Total: $ @{{ offer.sum + offer.shipping_cost }}</p>
                         </div>
                     </div>
 
