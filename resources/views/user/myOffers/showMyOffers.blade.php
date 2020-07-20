@@ -27,25 +27,24 @@
                         <p> <i class="fa fa-dollar"></i> Total: @{{ offer.sum + offer.shipping_cost }}</p>
                     </div>
 
-               <div class="text-center" style="padding-left: 34px;
-               padding-right: 64px;">
-                <table class="table ">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Producto</th>
-                            <th>Precio</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(product, index) in offer.products">
-                            <td>@{{ index + 1 }}</td>
-                            <td>@{{ product.post_product.product }} - @{{ product.post_product.amount }} @{{ product.post_product.unit_name }} </td>
-                            <td>@{{ product.price }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-               </div>
+                    <div class="text-center" style="padding-left: 34px;padding-right: 64px;">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Producto</th>
+                                    <th>Precio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(product, index) in offer.products">
+                                    <td>@{{ index + 1 }}</td>
+                                    <td>@{{ product.post_product.product }} - @{{ product.post_product.amount }} @{{ product.post_product.unit_name }} </td>
+                                    <td>@{{ product.price }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                     
                 </div>
