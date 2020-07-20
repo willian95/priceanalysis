@@ -115,6 +115,12 @@ class OfferController extends Controller
 
         try{
 
+            foreach($request->offerProducts as $offerProductArr){
+                if($offerProductArr["price"] == ""){
+                    return response()->json(["success" => false, "msg" => "Al menos uno de sus productos no tiene precio"]);
+                }
+            }
+
             $offer = new Offer;
             $offer->user_id = \Auth::user()->id;
             $offer->post_id = $request->postId;
