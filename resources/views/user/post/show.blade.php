@@ -39,14 +39,14 @@
                         <small>* Los precios son representados en dolares</small>
                        
                     </div>
-                    <div class=" col-12 mr-4">
+                    <div class=" col-6 offset-3 mr-4">
                         <div class="form-group" v-if="requestShipping">
                             <label>Flete</label>
                             <input class="form-control  mr-4" type="text" placeholder="precio" v-model="shippingCost">
                         </div>
                         
                     </div>
-                    <div class="form-group mt-4 col-12" v-for="product in products">
+                    <div class="form-group mt-4 col-6 offset-3" v-for="product in products">
                         <div class="">
                             <label>@{{ product.product }} - @{{ product.amount }} @{{ product.unit_name }}</label>              
                             <input class="offer form-control col-7  mr-4 " :id="'offer'+product.id" type="text" placeholder="precio">                                
