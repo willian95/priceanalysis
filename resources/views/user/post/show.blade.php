@@ -46,7 +46,7 @@
                         </div>
                         
                     </div>
-                    <div class="form-group mt-4" v-for="product in products">
+                    <div class="form-group mt-4 col-12" v-for="product in products">
                         <div class="">
                             <label>@{{ product.product }} - @{{ product.amount }} @{{ product.unit_name }}</label>              
                             <input class="offer form-control col-7  mr-4 " :id="'offer'+product.id" type="text" placeholder="precio">                                
