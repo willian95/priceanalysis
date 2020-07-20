@@ -23,7 +23,7 @@
 }
 .worstPrice::before{
     position: absolute;
-    content: "worst price ";
+    content: "peor oferta ";
     background: #dc3545;
     color: #fff;
     padding: 5px 20px;

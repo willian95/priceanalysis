@@ -52,8 +52,7 @@
                             <input class="offer form-control col-7  mr-4 " :id="'offer'+product.id" type="text" placeholder="precio">                                
                             
                         </div>
-                                                
-                                                
+                                                              
                     </div> 
 
                     @if(\Auth::check())
