@@ -24,7 +24,7 @@
                     <h3 class="mt-3 ml-3" >@{{ offer.user.name }}</h3>
                     <div class="line-pag  items_offert justify-content-around mt-4 mb-4">
                     
-                        <p><span v-if="offer.user.phone_number">tel: @{{ offer.user.phone_number }}</span> <span vif="offer.user.email">email: @{{ offer.user.email }}</span></p>
+                        <p><span v-if="offer.user.phone_number"><strong>tel:</strong> @{{ offer.user.phone_number }}</span> <span v-if="offer.user.email"><strong>email:</strong> @{{ offer.user.email }}</span></p>
                         <div class="line-pag  items_offert justify-content-around">
                             <p> <i class="fa fa-cart-plus"></i> Productos: $ @{{ offer.sum }}</p>
                             <p style="margin-left: 10px;"> <i class="fa fa-bus"></i> Flete: $ @{{ offer.shipping_cost }}</p>
