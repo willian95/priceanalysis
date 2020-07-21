@@ -14,7 +14,7 @@
               <!---  <img class="logo" src="{{ asset('assets/img/logo-cap.png') }}" alt="">--->
             </a>
         </div>
-        <img class="img-form" src="{{ asset('assets/img/login.JPG') }}" alt="">
+        <img class="img-form" src="{{ asset('assets/img/login.jpg') }}" alt="">
       
     </div>
     <div class="grid__form__item">
