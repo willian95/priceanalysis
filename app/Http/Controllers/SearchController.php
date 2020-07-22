@@ -12,7 +12,7 @@ class SearchController extends Controller
         try{
 
             $post = Post::where("code", $request->searchString)->first();
-
+            
             if($post){
 
                 return response()->json(["success" => true, "code" => $post->code]);
