@@ -73,7 +73,7 @@
 
                         if(res.data.success == true){
                             
-                            alert(res.data.msg)
+                            alertify.success(res.data.msg)
                             this.email = ""
                             this.password = ""
 
@@ -92,12 +92,14 @@
                                 window.location.href = "{{ url('/admin/dashboard') }}"
 
                         }else{
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
                         }
 
                     })
                     .catch(err => {
-
+                        $.each(err.response.data.errors, function(key, value) {
+                            alertify.error(value)
+                        })
                     })
 
                 }

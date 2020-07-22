@@ -216,7 +216,7 @@
 
                         }else{
 
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
 
                         }
 
@@ -234,7 +234,7 @@
 
                         }else{
 
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
 
                         }
 
@@ -260,12 +260,12 @@
 
                         if(res.data.success == true){
 
-                            alert(res.data.msg)
+                            alertify.success(res.data.msg)
                             window.location.href="{{ url('/admin/verify-user/index') }}"
 
                         }else{
 
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
 
                         }
 

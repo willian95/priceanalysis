@@ -5,20 +5,17 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto" style="padding-left: 40px;">
+            <form class="form-inline">
+                <input style="width: 300px;" class="form-control mr-sm-2" type="search" placeholder="Ingresa código de publicación" aria-label="Search">
+                <button @click="search()" style="color: #fff" class="btn btn-outline-success my-2 my-sm-0" type="button"><i class="fa fa-search"></i></button>
+            </form>
+        </ul>
         <ul class="navbar-nav ml-auto">
         
             @if(Auth::check() && Auth::user()->id)
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/post/index') }}">Publicar</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/profile') }}">Mis datos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/my-posts') }}">Mis publicaciones</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/my-offers/index') }}">Mis ofertas</a>
                 </li>
                 @if(Auth::user()->role_id == 1)
                     <li class="nav-item">
@@ -53,9 +50,19 @@
                         {{ Auth::user()->name }}
                     </a>
                     <ul class="dropdown-menu">            
-                    <li>
-                        <a class="dropdown-item" href="{{ url('/logout') }}">Cerrar sesión <i class="fa fa-sign-out"></i></a></li>
-                       
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/profile') }}">Mis datos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/my-posts') }}">Mis publicaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/my-offers/index') }}">Mis ofertas</a>
+                        </li>  
+                        <li>
+                            <a class="nav-link" href="{{ url('/logout') }}">Cerrar sesión</a>
+                        </li> 
                     </ul>
                 </li>
                 @endif

@@ -167,7 +167,7 @@
                         if(res.data.success == true){
                             this.products = res.data.products
                         }else{
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
                         }
 
                     })
@@ -187,7 +187,7 @@
 
                         if(res.data.success == true){
 
-                            alert(res.data.msg)
+                            alertify.success(res.data.msg)
                             this.shippingCost = 0
                             this.productOffer = []
                             var element = $('.offer').map((_,el) => el).get()
@@ -201,7 +201,7 @@
 
                         }else{
 
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
 
                         }
 
@@ -223,7 +223,7 @@
                             this.worstPriceId = res.data.worstPriceId
 
                         }else{
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
                         }
 
                     })

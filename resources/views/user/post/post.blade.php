@@ -320,7 +320,7 @@
                         this.amount = ""
                         this.selectedUnit = ""
                     }else{
-                        alert("Este producto ya existe")
+                        alertify.error("Este producto ya existe")
                     }
                         
 
@@ -342,7 +342,7 @@
                                 this.units = res.data.units;
 
                             }else{
-                                alert(res.data.msg)
+                                alertify.error(res.data.msg)
                             }
 
                         })
@@ -359,13 +359,13 @@
                             if(res.data.success == true){
                                 this.searches = res.data.products
                             }else{
-                                alert(res.data.msg)
+                                alertify.error(res.data.msg)
                             }
 
                         })
                         .catch(err => {
                             $.each(err.response.data.errors, function(key, value){
-                                alert(value)
+                                alertify.error(value[0])
                             });
                         })
                     }else{
@@ -403,7 +403,7 @@
 
                         if(res.data.success == true){
 
-                            alert(res.data.msg)
+                            alertify.success(res.data.msg)
                             this.title = ""
                             this.description = ""
                             this.products = [],
@@ -413,13 +413,13 @@
                             window.location.href="{{ url('/') }}"
 
                         }else{
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
                         }
 
                     })
                     .catch(err => {
                         $.each(err.response.data.errors, function(key, value) {
-                            alert(value)
+                            alertify.error(value[0])
                         })
                     })
 

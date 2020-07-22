@@ -94,7 +94,7 @@
                         if(res.data.success == true){
                             this.products = res.data.products
                         }else{
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
                         }
 
                     })
@@ -111,7 +111,7 @@
                             this.pages = Math.ceil(res.data.offersCount/20)
 
                         }else{
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
                         }
 
                     })

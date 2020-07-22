@@ -21,6 +21,8 @@ Route::get('/post/fetch/{page}', "PostController@fetch");
 Route::get('/post/show/{code}', "PostController@show");
 Route::get('/post/product/{id}', "PostController@products");
 
+Route::post("/search", "SearchController@search");
+
 Route::get("/category/fetchAll", "CategoryController@fetchAll");
 
 Route::get('/businesses', "BusinessController@index");

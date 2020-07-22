@@ -140,21 +140,21 @@
 
                         if(res.data.success == true){
 
-                            alert(res.data.msg)
+                            alertify.success(res.data.msg)
                             this.name = ""
                             this.selectedUnits = ""
                             $(".unit-card").css("background-color", "white")
                             this.fetch()
                         }else{
 
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
 
                         }
 
                     })
                     .catch(err => {
                         $.each(err.response.data.errors, function(key, value){
-                            alert(value)
+                            alertify.error(value[0])
                         });
                     })
 
@@ -166,21 +166,21 @@
 
                         if(res.data.success == true){
 
-                            alert(res.data.msg)
+                            alertify.success(res.data.msg)
                             this.name = ""
                             this.productId = ""
                             this.fetch()
                             
                         }else{
 
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
 
                         }
 
                     })
                     .catch(err => {
                         $.each(err.response.data.errors, function(key, value){
-                            alert(value)
+                            alertify.error(value[0])
                         });
                     })
 
@@ -202,7 +202,7 @@
                     })
                     .catch(err => {
                         $.each(err.response.data.errors, function(key, value){
-                            alert(value)
+                            alertify.error(value)
                         });
                     })
 
@@ -214,18 +214,18 @@
                         axios.post("{{ url('/admin/product/delete/') }}", {id: id}).then(res => {
 
                             if(res.data.success == true){
-                                alert(res.data.msg)
+                                alertify.success(res.data.msg)
                                 this.fetch()
                             }else{
 
-                                alert(res.data.msg)
+                                alertify.error(res.data.msg)
 
                             }
 
                         })
                         .catch(err => {
                             $.each(err.response.data.errors, function(key, value){
-                                alert(value)
+                                alertify.error(value[0])
                             });
                         })
 
@@ -241,7 +241,7 @@
                     })
                     .catch(err => {
                         $.each(err.response.data.errors, function(key, value){
-                            alert(value)
+                            alertify.error(value[0])
                         });
                     })
                 },
@@ -288,21 +288,21 @@
 
                         if(res.data.success == true){
 
-                            alert(res.data.msg)
+                            alertify.success(res.data.msg)
                             this.brandName = ""
                             this.selectedBrand = ""
                             this.fetchBrands()
                             this.hideBrandForm()
                         }else{
 
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
 
                         }
 
                     })
                     .catch(err => {
                         $.each(err.response.data.errors, function(key, value){
-                            alert(value)
+                            alertify.error(value[0])
                         });
                     })
 
@@ -315,7 +315,7 @@
                             this.brands = res.data.brands
                         }else{
 
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
 
                         }
 

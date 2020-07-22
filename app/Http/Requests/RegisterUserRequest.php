@@ -32,4 +32,19 @@ class RegisterUserRequest extends FormRequest
             "businessName" => "required"
         ];
     }
+
+    public function messages()
+    {
+        return [
+            "name.required" => "Nombre es requerido",
+            "email.required" => "Email es requerido",
+            "email.email" => "El correo ingresado no es válido",
+            "email.unique" => "El correo ya ha sido utilizado",
+            "telephone.required" => "Teléfono es requerido",
+            "password.required" => "Contraseña es requerida",
+            "password.confirm" => "Contraseñas no coinciden",
+            "rif.required" => "R.I.F es requerido",
+            "businessName.required" => "Nombre comercial es requerido"
+        ];
+    }
 }
