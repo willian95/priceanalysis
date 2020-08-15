@@ -10,7 +10,11 @@
               </div>
         <div class="bg__tables ">
             <div class="row">
-               
+                <div class="col-12">
+                    <form class="form-inline">
+                        <input style="width: 300px;" v-model="searchString" class="form-control mr-sm-2" type="search" placeholder="Nombre del producto" aria-label="Search" @keyup="search()">
+                    </form>
+                </div>
                 <div class="col-12">
                     <table class="table">
                         <thead>
@@ -23,7 +27,9 @@
                         </thead>
                         <tbody>
                             <tr v-for="(product, index) in products">
-                                <th>@{{ index + 1 }}</th>
+                                <th v-if="page > 1">@{{ (index + 1) + (20 * (page - 1)) }}</th>
+                                <th v-if="page == 1 ">@{{ (index + 1)  }}</th>
+                                
                                 <td>@{{ product.name }}</td>
                                 <td v-if="product.brand">@{{ product.brand.name }}</td>
                                 <td v-else></td>
@@ -40,8 +46,23 @@
                 <div class="col-12">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" v-for="index in pages" :key="index" @click="fetch(index)" >@{{ index }}</a>
+                            <li class="line-pag">
+                                <a class="page-link" v-if="page > 1" @click="fetch(1)">Primero</a>
+                            </li>
+                            <li class="line-pag line-pag_r" >
+                                <a class="page-link" v-if="page > 1" @click="fetch(page - 1)"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li class="page-item" v-for="index in pages">
+                                <a class="page-link" style="background-color: #007dc5; color: #fff !important;"   v-if="page == index && index >= page - 3 &&  index < page + 3"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                                <a class="page-link"  v-if="page != index && index >= page - 3 &&  index < page + 3"  :key="index" @click="fetch(index)" >@{{ index }}</a> 
+                            </li>
+                            <li class="line-pag">
+                                <a class="page-link" v-if="page < pages" @click="fetch(page + 1)"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li class="line-pag">
+                                <a class="page-link" v-if="page < pages" @click="fetch(pages)">último</a>
                             </li>
                         </ul>
                     </nav>
@@ -122,6 +143,8 @@
                     selectedUnits:"",
                     brandName:"",
                     showBrand:false,
+                    searchString:"",
+                    page:1,
                     pages:0
                 }
             },
@@ -192,8 +215,8 @@
                     this.selectedBrand = product.brand_id
                 },
                 fetch(page = 1){
-
-                    axios.get("{{ url('/admin/product/fetch/') }}"+"/"+page)
+                    this.page = page
+                    axios.get("{{ url('/admin/product/fetch/') }}"+"/"+this.page)
                     .then(res => {
 
                         this.products = res.data.products
@@ -320,6 +343,21 @@
                         }
 
                     })
+
+                },
+                search(){
+
+                    if(this.searchString != ""){
+                        axios.post("{{ url('/admin/product/search') }}", {"search": this.searchString})
+                        .then(res => {
+
+                            this.products = res.data.products
+                            this.pages = 1
+
+                        })
+                    }else{
+                        this.fetch()
+                    }
 
                 }
                 

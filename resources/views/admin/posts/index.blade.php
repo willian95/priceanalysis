@@ -32,7 +32,8 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(post, index) in posts">
-                                    <th>@{{ index + 1 }}</th>
+                                    <th v-if="page > 1">@{{ (index + 1) + (20 * (page - 1)) }}</th>
+                                    <th v-if="page == 1 ">@{{ (index + 1)  }}</th>
                                     <td>@{{ post.title }}</td>
                                     <td>@{{ post.title }}</td>
                                     <td>
@@ -50,8 +51,23 @@
                     <div class="col-12">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" v-for="index in pages" :key="index" @click="fetch(index)" >@{{ index }}</a>
+                                <li class="line-pag">
+                                    <a class="page-link" v-if="page > 1" @click="fetch(1)">Primero</a>
+                                </li>
+                                <li class="line-pag line-pag_r" >
+                                    <a class="page-link" v-if="page > 1" @click="fetch(page - 1)"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item" v-for="index in pages">
+                                    <a class="page-link" style="background-color: #007dc5; color: #fff !important;"   v-if="page == index && index >= page - 3 &&  index < page + 3"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                                    <a class="page-link"  v-if="page != index && index >= page - 3 &&  index < page + 3"  :key="index" @click="fetch(index)" >@{{ index }}</a> 
+                                </li>
+                                <li class="line-pag">
+                                    <a class="page-link" v-if="page < pages" @click="fetch(page + 1)"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li class="line-pag">
+                                    <a class="page-link" v-if="page < pages" @click="fetch(pages)">último</a>
                                 </li>
                             </ul>
                         </nav>
@@ -81,8 +97,8 @@
             methods:{
 
                 fetch(page = 1){
-
-                    axios.get("{{ url('/admin/post/fetch/') }}"+"/"+page)
+                    this.page = page
+                    axios.get("{{ url('/admin/post/fetch/') }}"+"/"+this.page)
                     .then(res => {
 
                         this.posts = res.data.posts

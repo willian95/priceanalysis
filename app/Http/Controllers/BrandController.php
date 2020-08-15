@@ -83,6 +83,19 @@ class BrandController extends Controller
 
     }
 
+    function adminSearch(Request $request){
+
+        try{
+
+            $brands = Brand::where('name', "like", '%'.$request->search.'%')->orderBy("name", "asc")->take(20)->get();
+            return response()->json(["success" => true, "brands" => $brands]);
+
+        }catch(\Exception $e){
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
+        }
+
+    }
+
     function fetchAll(){
 
         try{

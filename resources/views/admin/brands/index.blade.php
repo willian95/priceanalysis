@@ -21,6 +21,15 @@
                             <button class="btn btn-success" data-toggle="modal" data-target="#createCategory">Crear</button>
                         </p>
                     </div>--->
+
+                    <div class="col-12">
+                        <div class="col-12">
+                            <form class="form-inline">
+                                <input style="width: 300px;" v-model="searchString" class="form-control mr-sm-2" type="search" placeholder="Nombre de la marca" aria-label="Search" @keyup="search()">
+                            </form>
+                        </div>
+                    </div>
+
                     <div class="col-12">
                         <table class="table">
                             <thead>
@@ -32,7 +41,8 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(brand, index) in brands">
-                                    <th>@{{ index + 1 }}</th>
+                                    <th v-if="page > 1">@{{ (index + 1) + (20 * (page - 1)) }}</th>
+                                    <th v-if="page == 1 ">@{{ (index + 1)  }}</th>
                                     <td>@{{ brand.name }}</td>
                                     <td>
                                         <button class="btn btn-success w-90 fa fa-edit btn-transparent__green mr-4" data-toggle="modal" data-target="#createBrand" @click="edit(brand)"> 
@@ -49,8 +59,23 @@
                     <div class="col-12">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" v-for="index in pages" :key="index" @click="fetch(index)" >@{{ index }}</a>
+                                <li class="line-pag">
+                                    <a class="page-link" v-if="page > 1" @click="fetch(1)">Primero</a>
+                                </li>
+                                <li class="line-pag line-pag_r" >
+                                    <a class="page-link" v-if="page > 1" @click="fetch(page - 1)"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item" v-for="index in pages">
+                                    <a class="page-link" style="background-color: #007dc5; color: #fff !important;"   v-if="page == index && index >= page - 3 &&  index < page + 3"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                                    <a class="page-link"  v-if="page != index && index >= page - 3 &&  index < page + 3"  :key="index" @click="fetch(index)" >@{{ index }}</a> 
+                                </li>
+                                <li class="line-pag">
+                                    <a class="page-link" v-if="page < pages" @click="fetch(page + 1)"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li class="line-pag">
+                                    <a class="page-link" v-if="page < pages" @click="fetch(pages)">último</a>
                                 </li>
                             </ul>
                         </nav>
@@ -104,6 +129,8 @@
                     brandId:"",
                     action:"create",
                     brands:[],
+                    searchString:"",
+                    page:1,
                     pages:0
                 }
             },
@@ -171,8 +198,8 @@
                     this.brandId = brand.id
                 },
                 fetch(page = 1){
-
-                    axios.get("{{ url('/admin/brand/fetch/') }}"+"/"+page)
+                    this.page = page
+                    axios.get("{{ url('/admin/brand/fetch/') }}"+"/"+this.page)
                     .then(res => {
 
                         this.brands = res.data.brands
@@ -184,6 +211,21 @@
                             alertify.error(value[0])
                         });
                     })
+
+                },
+                search(){
+
+                    if(this.searchString != ""){
+                        axios.post("{{ url('/admin/brand/search') }}", {"search": this.searchString})
+                        .then(res => {
+
+                            this.brands = res.data.brands
+                            this.pages = 1
+
+                        })
+                    }else{
+                        this.fetch()
+                    }
 
                 },
                 erase(id){

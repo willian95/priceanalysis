@@ -32,7 +32,8 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(category, index) in categories">
-                                    <th>@{{ index + 1 }}</th>
+                                    <th v-if="page > 1">@{{ (index + 1) + (20 * (page - 1)) }}</th>
+                                    <th v-if="page == 1 ">@{{ (index + 1)  }}</th>
                                     <td>@{{ category.name }}</td>
                                     <td>
                                         <button class="btn btn-success w-90 fa fa-edit btn-transparent__green mr-4" data-toggle="modal" data-target="#createCategory" @click="edit(category)"> 
@@ -49,8 +50,23 @@
                     <div class="col-12">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" v-for="index in pages" :key="index" @click="fetch(index)" >@{{ index }}</a>
+                                <li class="line-pag">
+                                    <a class="page-link" v-if="page > 1" @click="fetch(1)">Primero</a>
+                                </li>
+                                <li class="line-pag line-pag_r" >
+                                    <a class="page-link" v-if="page > 1" @click="fetch(page - 1)"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item" v-for="index in pages">
+                                    <a class="page-link" style="background-color: #007dc5; color: #fff !important;"   v-if="page == index && index >= page - 3 &&  index < page + 3"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                                    <a class="page-link"  v-if="page != index && index >= page - 3 &&  index < page + 3"  :key="index" @click="fetch(index)" >@{{ index }}</a> 
+                                </li>
+                                <li class="line-pag">
+                                    <a class="page-link" v-if="page < pages" @click="fetch(page + 1)"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li class="line-pag">
+                                    <a class="page-link" v-if="page < pages" @click="fetch(pages)">último</a>
                                 </li>
                             </ul>
                         </nav>
@@ -104,6 +120,7 @@
                     categoryId:"",
                     action:"create",
                     categories:[],
+                    page:1,
                     pages:0
                 }
             },
@@ -170,8 +187,8 @@
                     this.categoryId = category.id
                 },
                 fetch(page = 1){
-
-                    axios.get("{{ url('/admin/category/fetch/') }}"+"/"+page)
+                    this.page = page
+                    axios.get("{{ url('/admin/category/fetch/') }}"+"/"+this.page)
                     .then(res => {
 
                         this.categories = res.data.categories

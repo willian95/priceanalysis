@@ -108,7 +108,20 @@ class ProductController extends Controller
 
         try{
 
-            $products = Product::where('name', "like", '%'.$request->search.'%')->with("brand")->get();
+            $products = Product::where('name', "like", '%'.$request->search.'%')->with("brand")->orderBy("name", "asc")->get();
+            return response()->json(["success" => true, "products" => $products]);
+
+        }catch(\Exception $e){
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
+        }
+
+    }
+
+    function adminSearch(Request $request){
+
+        try{
+
+            $products = Product::where('name', "like", '%'.$request->search.'%')->with("brand")->orderBy("name", "asc")->take(20)->get();
             return response()->json(["success" => true, "products" => $products]);
 
         }catch(\Exception $e){

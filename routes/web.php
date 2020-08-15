@@ -39,6 +39,13 @@ Route::get('/logout', function(){
     return redirect()->to("/");
 });
 
+/*Route::get("xml", function(){
+
+    $xml=simplexml_load_file("inventario.xml");
+    dd($xml);
+
+});*/
+
 Route::get('/register', "RegisterController@index"); 
 Route::post('/register', "RegisterController@register");
 
@@ -84,6 +91,7 @@ Route::get("/admin/product/fetch/{page}", "ProductController@fetch");
 Route::post('/admin/product/store', "ProductController@store");
 Route::post('/admin/product/update', "ProductController@update");
 Route::post('/admin/product/delete', "ProductController@delete");
+Route::post('/admin/product/search', "ProductController@adminSearch");
 Route::post('/product/search', "ProductController@search");
 
 Route::get("/admin/unit/index", "UnitController@index");
@@ -115,6 +123,7 @@ Route::get('/admin/brand/fetch/{page}', "BrandController@fetch");
 Route::post('/admin/brand/store', "BrandController@store");
 Route::post('/admin/brand/update', "BrandController@update");
 Route::post('/admin/brand/delete', "BrandController@delete");
+Route::post('/admin/brand/search', "BrandController@adminSearch");
 
 Route::get("/admin/post/index", "PostController@adminIndex");
 Route::get("/admin/post/fetch/{page}", "PostController@adminFetch");
