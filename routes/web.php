@@ -39,12 +39,24 @@ Route::get('/logout', function(){
     return redirect()->to("/");
 });
 
-/*Route::get("xml", function(){
+Route::get("xml", function(){
+
+    ini_set('max_execution_time', 0);
 
     $xml=simplexml_load_file("inventario.xml");
-    dd($xml);
+    foreach($xml->Registro->Masubgrupos as $subgrupos){
+        //dd($subgrupos);
+        foreach($subgrupos->Maproductos as $productos){
 
-});*/
+            $product = new App\Product;
+            $product->name = $productos->Descripcion_del_Producto;
+            $product->brand_id = App\Brand::where("name", "TEST")->first()->id;
+            $product->save();
+
+        }
+    }
+
+});
 
 Route::get('/register', "RegisterController@index"); 
 Route::post('/register', "RegisterController@register");
