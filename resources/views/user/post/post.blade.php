@@ -59,7 +59,8 @@
                                     </div>
                                     
                                     <!--<button type="button" @click="checkDescriptionAndTitle()" class="next"  v-if="description == '' || title == ''">Siguiente-1</button>-->
-                                    <button type="button" name="next" class="next action-button" value="Next">Siguiente</button>
+                                    <button v-if="description != '' || title != ''" type="button" name="next" class="next action-button" value="Next">Siguiente</button>
+                                    <p v-else>Debes agregar un titulo y una descripción para continuar</p>
                                 </fieldset>
                                 <fieldset>
                                     <div class="card__shadow">
