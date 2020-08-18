@@ -58,8 +58,8 @@
                                         </div>                      
                                     </div>
                                     
-                                    <button type="button" @click="checkDescriptionAndTitle()"  v-if="description == '' || title == ''">Siguiente-1</button>
-                                    <button v-else type="button" name="next" class="next action-button" value="Next">Siguiente-2</button>
+                                    <!--<button type="button" @click="checkDescriptionAndTitle()" class="next"  v-if="description == '' || title == ''">Siguiente-1</button>-->
+                                    <button type="button" name="next" class="next action-button" value="Next">Siguiente</button>
                                 </fieldset>
                                 <fieldset>
                                     <div class="card__shadow">
