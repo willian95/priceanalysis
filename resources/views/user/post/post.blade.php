@@ -57,7 +57,7 @@
                                             <textarea class="form-control" rows="2" id="description" v-model="description"></textarea>
                                         </div>                      
                                     </div>
-                                     <button type="button" name="next" class="next action-button" value="Next" :disabled="description == '' || title == ''">Siguiente</button>
+                                     <button type="button" @click="checkDescriptionAndTitle()" name="next" class="next action-button" value="Next" :disabled="description == '' || title == ''">Siguiente</button>
                                 </fieldset>
                                 <fieldset>
                                     <div class="card__shadow">
@@ -295,7 +295,19 @@
                }
             },
             methods:{
-                
+
+                checkDescriptionAndTitle(){
+
+                    if(this.description == ""){
+                        alertify.error("Descripción es requerida")
+                    }
+
+                    if(this.title == ""){
+                        alertify.error("Titulo es requerido")
+                    }
+                    
+
+                },
                 add(){
 
                     var exists = false
