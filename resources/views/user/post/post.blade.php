@@ -57,7 +57,7 @@
                                             <textarea class="form-control" rows="2" id="description" v-model="description"></textarea>
                                         </div>                      
                                     </div>
-                                     <button type="button" name="next" class="next action-button" value="Next">Siguiente</button>
+                                     <button type="button" name="next" class="next action-button" value="Next" :disabled="description == '' || title == ''">Siguiente</button>
                                 </fieldset>
                                 <fieldset>
                                     <div class="card__shadow">
