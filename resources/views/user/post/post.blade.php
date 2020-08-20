@@ -70,7 +70,7 @@
                                             <div class="col-md-5">
                                                 <div class="form-group inputBox">
                                                     <label for="name">Nombre</label>
-                                                    <input autocomplete="off" type="text" class="form-control" id="name" v-model="name" placeholder="ej: Harina de maíz" @keyup="search()">
+                                                    <input autocomplete="off" type="text" class="form-control" id="name" v-model="name" placeholder="ej: Harina de maíz" @keypress="search()">
                                                     <ul class="select_search">
                                                         <li v-for="search in searches">
                                                             <a href="#" @click="selectProduct(search)">
