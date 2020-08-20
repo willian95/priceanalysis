@@ -7,10 +7,10 @@
     <div class="grid__form__item">
        
         <div class="overlay">
-            <h3 class="mb-5">Iniciar Sesión</h3>
+            <h3 class="mb-5">Menos tiempo, Más dinero</h3>
             <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo minus ratione tenetur officiis explicabo corporis eius rem tempore, quos dicta, repudiandae commodi, eveniet hic illum sed doloremque amet velit asperiores.</p>-->
             <a class="logo__1" href="{{ url('/') }}">
-                Menos tiempo más dinero
+                CommercePrice
               <!---  <img class="logo" src="{{ asset('assets/img/logo-cap.png') }}" alt="">--->
             </a>
         </div>
