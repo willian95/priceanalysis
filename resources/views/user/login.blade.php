@@ -8,9 +8,9 @@
        
         <div class="overlay">
             <h3 class="mb-5">Iniciar Sesión</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo minus ratione tenetur officiis explicabo corporis eius rem tempore, quos dicta, repudiandae commodi, eveniet hic illum sed doloremque amet velit asperiores.</p>
+            <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo minus ratione tenetur officiis explicabo corporis eius rem tempore, quos dicta, repudiandae commodi, eveniet hic illum sed doloremque amet velit asperiores.</p>-->
             <a class="logo__1" href="{{ url('/') }}">
-                LOREM IPSUM
+                Menos tiempo más dinero
               <!---  <img class="logo" src="{{ asset('assets/img/logo-cap.png') }}" alt="">--->
             </a>
         </div>
