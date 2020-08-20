@@ -313,29 +313,47 @@
                 },
                 add(){
 
-                    var exists = false
-                    this.products.forEach((data, index) => {
+                    if(this.amount != '' && this.amount > 0 && this.productId > 0 && this.selectedUnit != ""){
 
-                        if(this.productId > 0 && data.product_id == this.productId){
-                            exists = true
-                        }
+                        var exists = false
+                        this.products.forEach((data, index) => {
 
-                    })
+                            if(this.productId > 0 && data.product_id == this.productId){
+                                exists = true
+                            }
 
-                    if(!exists){
-                        
-                        if(this.productId > 0){
-                            this.products.push({product_id: this.productId, amount: this.amount,unit_id: this.selectedUnit.unit.id, displayName: this.name, unitName: this.selectedUnit.unit.name})
+                        })
+
+                        if(!exists){
+                            
+                            if(this.productId > 0){
+                                this.products.push({product_id: this.productId, amount: this.amount,unit_id: this.selectedUnit.unit.id, displayName: this.name, unitName: this.selectedUnit.unit.name})
+                            }else{
+                                this.products.push({product_id: this.productId, amount: this.amount, displayName: this.name, unitName: this.unit})
+                            }
+
+                            this.name = ""
+                            this.productId = 0
+                            this.amount = ""
+                            this.selectedUnit = ""
                         }else{
-                            this.products.push({product_id: this.productId, amount: this.amount, displayName: this.name, unitName: this.unit})
+                            alertify.error("Este producto ya existe")
                         }
 
-                        this.name = ""
-                        this.productId = 0
-                        this.amount = ""
-                        this.selectedUnit = ""
                     }else{
-                        alertify.error("Este producto ya existe")
+
+                        if(this.productId == 0 || this.productId == "" || this.productId == null){
+                            alertify.error("Debe seleccionar un producto")
+                        }
+
+                        if(this.amount == 0 || this.amount == "" || this.amount == null){
+                            alertify.error("Debe seleccionar una cantidad")
+                        }
+
+                        if(this.selectedUnit == 0 || this.selectedUnit == "" || this.selectedUnit == null){
+                            alertify.error("Debe seleccionar una unidad")
+                        }
+
                     }
                         
 
