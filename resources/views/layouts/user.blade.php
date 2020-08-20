@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/media.css') }}" >
     <link rel="stylesheet" href="{{ asset('js/alertify/css/alertify.css') }}" >
     <link rel="stylesheet" href="{{ asset('js/alertify/css/themes/bootstrap.css') }}" >
-    <link rel="icon" type="image/png" href="{{ url('assets/img/logo-original.png') }}">
+    <link rel="icon" type="image/png" href="{{ url('img/logo-original.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;700;800&display=swap" rel="stylesheet">
     <title>Commerceprice</title>
 </head>
