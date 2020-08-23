@@ -443,7 +443,7 @@
                             this.selectedUsers = ""
                             this.shippingCheck = false
                             $(".card").css("background-color", "white")
-                            window.location.href="{{ url('/') }}"
+                            window.location.href="{{ url('/home') }}"
 
                         }else{
                             alertify.error(res.data.msg)

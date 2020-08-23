@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="{{ asset('css/media.css') }}" >
     <link rel="stylesheet" href="{{ asset('js/alertify/css/alertify.css') }}" >
     <link rel="stylesheet" href="{{ asset('js/alertify/css/themes/bootstrap.css') }}" >
+    <link rel="stylesheet" href="{{ asset('owl-carousel/assets/owl.carousel.css') }}" >
+    <link rel="stylesheet" href="{{ asset('owl-carousel/assets/owl.theme.default.css') }}" >
     <link rel="icon" type="image/png" href="{{ url('img/logo-original.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;700;800&display=swap" rel="stylesheet">
     <title>Commerceprice</title>
@@ -22,6 +24,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="{{ asset('/js/alertify/alertify.min.js') }}"></script>
+    <script src="{{ asset('owl-carousel/owl.carousel.js') }}"></script>
     <script src="{{ asset('/js/app.js') }}"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
     
@@ -61,7 +64,27 @@
 
 
     </script>
-
+    
+    <script>    
+        $(document).ready(function(){
+            $('#owl-carousel').owlCarousel({
+                loop:true,
+                margin:10,
+                nav:true,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    600:{
+                        items:3
+                    },
+                    1000:{
+                        items:5
+                    }
+                }
+            })
+        })
+    </script>
     @stack('scripts')
 
 </body>

@@ -5,10 +5,57 @@
     <div id="dev-login">
 <div class="grid__form">
     <div class="grid__form__item">
-       
+
+            <!--<div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div id="owl-carousel" class="owl-carousel owl-theme">
+                            <div class="item"><h4>1</h4></div>
+                            <div class="item"><h4>2</h4></div>
+                            <div class="item"><h4>3</h4></div>
+                            <div class="item"><h4>4</h4></div>
+                            <div class="item"><h4>5</h4></div>
+                            <div class="item"><h4>6</h4></div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
         <div class="overlay">
             <h3 class="mb-5">Menos tiempo, Más dinero</h3>
             <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo minus ratione tenetur officiis explicabo corporis eius rem tempore, quos dicta, repudiandae commodi, eveniet hic illum sed doloremque amet velit asperiores.</p>-->
+
+            <div class="container">
+                
+                <div class="row">
+                    @foreach(App\Post::with("user")->has("user")->orderBy('id', 'desc')->take(3)->get() as $post)
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body--grid">
+                                <div class="card-body--item">
+                                    <img class="img_p" src="https://cdn.pixabay.com/photo/2016/11/14/17/39/person-1824144_960_720.png" alt="">
+                            
+
+                                
+                                </div>
+                                <div class="card-body--item">
+                                    <div class="top_title">
+                                        <p class="titulo text-dark">{{ $post->user->name }}</p>
+                                        <p class="fecha_">{{ $post->created_at->format('Y-m-d') }}</p>
+                                    </div>                               
+                                    <p class="text-dark">{{ $post->title }}</p>
+                                    <!--   <a href="" class="btn-general">Ver publicacion</a>-->
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+
+                    @endforeach
+                </div>
+                
+            </div>
+
             <a class="logo__1" href="{{ url('/') }}">
                 CommercePrice
               <!---  <img class="logo" src="{{ asset('assets/img/logo-cap.png') }}" alt="">--->
@@ -83,7 +130,7 @@
                                 {
                                     window.location.href=localStorage.getItem("previousUrl")
                                 }else{
-                                    window.location.href = "{{ url('/') }}"
+                                    window.location.href = "{{ url('/home') }}"
                                 }
                                 
                             }

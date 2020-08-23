@@ -5,12 +5,14 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
+        @if(\Auth::check() && \Auth::user()->id)
         <ul class="navbar-nav mr-auto" style="padding-left: 40px;">
             <form class="form-inline">
                 <input style="width: 300px;" v-model="searchString" class="form-control mr-sm-2" type="search" placeholder="Ingresa código de publicación" aria-label="Search">
                 <button @click="search()" style="color: #fff" class="btn btn-outline-success my-2 my-sm-0" type="button"><i class="fa fa-search"></i></button>
             </form>
         </ul>
+        @endif
         <ul class="navbar-nav ml-auto">
         
             @if(Auth::check() && Auth::user()->id)

@@ -13,25 +13,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('welcome');
-});
+})->middleware("auth");
 
-Route::get('/post/fetch/{page}', "PostController@fetch");
-Route::get('/post/show/{code}', "PostController@show");
-Route::get('/post/product/{id}', "PostController@products");
+Route::get('/post/fetch/{page}', "PostController@fetch")->middleware("auth");
+Route::get('/post/show/{code}', "PostController@show")->middleware("auth");
+Route::get('/post/product/{id}', "PostController@products")->middleware("auth");
 
-Route::post("/search", "SearchController@search");
+Route::post("/search", "SearchController@search")->middleware("auth");
 
-Route::get("/category/fetchAll", "CategoryController@fetchAll");
+Route::get("/category/fetchAll", "CategoryController@fetchAll")->middleware("auth");
 
 Route::get('/businesses', "BusinessController@index");
 Route::get('/businesses/fetch/{page}', "BusinessController@fetch");
 
-Route::post("/offer/post/{id}", "OfferController@store");
-Route::get("/offer/fetch/post/{id}/page/{page}", "OfferController@fetch");
+Route::post("/offer/post/{id}", "OfferController@store")->middleware("auth");
+Route::get("/offer/fetch/post/{id}/page/{page}", "OfferController@fetch")->middleware("auth");
 
-Route::get('/login', "LoginController@index"); 
+Route::get('/', "LoginController@index"); 
 Route::post('/login', "LoginController@login");
 
 Route::get('/logout', function(){
@@ -39,7 +39,7 @@ Route::get('/logout', function(){
     return redirect()->to("/");
 });
 
-Route::get("xml", function(){
+/*Route::get("xml", function(){
 
     ini_set('max_execution_time', 0);
 
@@ -56,39 +56,39 @@ Route::get("xml", function(){
         }
     }
 
-});
+});*/
 
 Route::get('/register', "RegisterController@index"); 
 Route::post('/register', "RegisterController@register");
 
-Route::get('/post/index', "PostController@index");
-Route::post('/post/store', "PostController@store");
+Route::get('/post/index', "PostController@index")->middleware("auth");
+Route::post('/post/store', "PostController@store")->middleware("auth");
 
-Route::get('/brand/fetch/all', "BrandController@fetchAll");
+Route::get('/brand/fetch/all', "BrandController@fetchAll")->middleware("auth");
 
-Route::get("/profile", "ProfileController@index");
+Route::get("/profile", "ProfileController@index")->middleware("auth");
 
-Route::get("/my-posts", "PostController@myPosts");
-Route::get('/my-posts/fetch/{page}', "PostController@myPostsFetch");
-Route::get("/my-posts/show/{id}", "PostController@showMyPost");
+Route::get("/my-posts", "PostController@myPosts")->middleware("auth");
+Route::get('/my-posts/fetch/{page}', "PostController@myPostsFetch")->middleware("auth");
+Route::get("/my-posts/show/{id}", "PostController@showMyPost")->middleware("auth");
 
-Route::get("/my-offers/index", "OfferController@index");
-Route::get("/my-offers/fetch/{page}", "OfferController@fetchMyOffers");
-Route::get("/my-offers/show/{id}", "OfferController@show");
-Route::get("/my-offers/show/{id}/page/{page}", "OfferController@showMyOffers");
-Route::get("/my-offers/fetch/post/{id}/page/{page}", "OfferController@myOffersFetch");
+Route::get("/my-offers/index", "OfferController@index")->middleware("auth");
+Route::get("/my-offers/fetch/{page}", "OfferController@fetchMyOffers")->middleware("auth");
+Route::get("/my-offers/show/{id}", "OfferController@show")->middleware("auth");
+Route::get("/my-offers/show/{id}/page/{page}", "OfferController@showMyOffers")->middleware("auth");
+Route::get("/my-offers/fetch/post/{id}/page/{page}", "OfferController@myOffersFetch")->middleware("auth");
 
-Route::get("/country/fetch", "CountryController@fetch");
+Route::get("/country/fetch", "CountryController@fetch")->middleware("auth");
 
-Route::post("/user/general-data/update", "UserController@updateGeneralData");
-Route::post("/user/comercial-activity/update", "UserController@updateCommercialActivity");
-Route::post("/user/contact-info/update", "UserController@updateContactInfo");
-Route::post("/user/other-info/update", "UserController@updateOtherInfo");
-Route::get("/user/countries-info/fetch", "UserController@fetchComercialCountries");
+Route::post("/user/general-data/update", "UserController@updateGeneralData")->middleware("auth");
+Route::post("/user/comercial-activity/update", "UserController@updateCommercialActivity")->middleware("auth");
+Route::post("/user/contact-info/update", "UserController@updateContactInfo")->middleware("auth");
+Route::post("/user/other-info/update", "UserController@updateOtherInfo")->middleware("auth");
+Route::get("/user/countries-info/fetch", "UserController@fetchComercialCountries")->middleware("auth");
 
-Route::post("user/verify-me", "UserController@updateVerifyMyUser");
+Route::post("user/verify-me", "UserController@updateVerifyMyUser")->middleware("auth");
 
-Route::get("validate/account/{code}", "RegisterController@validateAccount");
+Route::get("validate/account/{code}", "RegisterController@validateAccount")->middleware("auth");
 
 Route::get('/admin/dashboard', "DashboardController@index");
 
