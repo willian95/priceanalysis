@@ -41,7 +41,7 @@ Route::get('/logout', function(){
 
 /*Route::get("xml", function(){
 
-    ini_set('max_execution_time', 0);
+    ini_set('max_execution_time', 0)
 
     $xml=simplexml_load_file("inventario.xml");
     foreach($xml->Registro->Masubgrupos as $subgrupos){
