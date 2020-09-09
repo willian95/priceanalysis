@@ -5,7 +5,7 @@
     <div class="container" id="dev-landing">
         <div class="row bg">
             <div class="col-12">
-                <h5 class="card-title mb-5">Publicaciones</h5>
+                <h5 class="card-title mb-5">Mis Ofertas</h5>
             </div>
             <div class="col-12">
                 <table class="table">
