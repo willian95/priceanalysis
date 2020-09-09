@@ -102,7 +102,7 @@
                 },
                 fetchOffers(page = 1){
 
-                    axios.get("/my-offers/fetch/post/"+this.postId+"/page"+"/"+page)
+                    axios.get("{{url('/my-offers/fetch/post/')}}"+"/"+this.postId+"/page"+"/"+page)
                     .then(res => {
 
                         if(res.data.success == true){
