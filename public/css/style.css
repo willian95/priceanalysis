@@ -6,7 +6,7 @@
 
 }
 .bestPrice::before{
-    position: absolute;
+    position: relative;
     content: "Mejor oferta";
     background: #00cf78;
     color: #fff;
@@ -17,12 +17,9 @@
     -webkit-transition: .1s all ease;
     -o-transition: .1s all ease;
     transition: .1s all ease;
-    right: 30px;
-    top: 25px;
-
 }
 .worstPrice::before{
-    position: absolute;
+    position: relative;
     content: "peor oferta ";
     background: #dc3545;
     color: #fff;
@@ -33,8 +30,6 @@
     -webkit-transition: .1s all ease;
     -o-transition: .1s all ease;
     transition: .1s all ease;
-    right: 30px;
-    top: 25px;
 
 }
 ::-webkit-scrollbar {
