@@ -184,7 +184,7 @@
                 },
                 update(){
 
-                    axios.post("{{ url('admin/product/update') }}", {id: this.productId, name: this.name, brand_id: this.selectBrand})
+                    axios.post("{{ url('admin/product/update') }}", {id: this.productId, name: this.name, brand_id: this.selectedBrand})
                     .then(res => {
 
                         if(res.data.success == true){
@@ -192,7 +192,7 @@
                             alertify.success(res.data.msg)
                             this.name = ""
                             this.productId = ""
-                            this.selectBrand = ""
+                            this.selectedBrand = ""
                             this.fetch()
                             
                         }else{
