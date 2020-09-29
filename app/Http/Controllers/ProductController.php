@@ -75,6 +75,7 @@ class ProductController extends Controller
 
             $product = Product::find($request->id);
             $product->name = $request->name;
+            $product->brand_id = $request->brand_id;
             $product->save();
 
             return response()->json(["success" => true, "msg" => "Producto actualizado"]);
