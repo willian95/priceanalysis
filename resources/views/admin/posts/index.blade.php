@@ -37,7 +37,7 @@
                                     <td>@{{ post.title }}</td>
                                     <td>@{{ post.title }}</td>
                                     <td>
-                                        <a :href="'{{ url('/') }}'+'/post/product/'+post.code" class="btn btn-success w-90 fa fa-edit btn-transparent__green mr-4" target="_blank"> 
+                                        <a :href="'{{ url('/') }}'+'/post/show/'+post.code" class="btn btn-success w-90 fa fa-edit btn-transparent__green mr-4" target="_blank"> 
                                             ver
                                         </a>
                                         <button class="btn btn-danger w-90 fa fa-trash " @click="erase(post.id)">eliminar</button>
