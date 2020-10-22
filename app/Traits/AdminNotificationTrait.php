@@ -16,7 +16,7 @@ trait AdminNotificationTrait
             \Mail::send("emails.notification", $data, function($message) use ($emailAddress, $subject) {// se envía el email
 
                 $message->to($emailAddress)->subject($subject);
-                $message->from("rodriguezwillian95@gmail.com","PriceAnalysis");
+                $message->from("williandev95@gmail.com","PriceAnalysis");
     
             });
 
