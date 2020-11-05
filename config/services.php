@@ -30,6 +30,12 @@ return [
         'redirect' => 'https://commerceprice.net/google/auth/redirect',
     ],
 
+    'facebook' => [
+        'client_id' => env("FACEBOOK_CLIENT_ID"),
+        'client_secret' => env("FACEBOOK_SECRET"),
+        'redirect' => 'https://commerceprice.net/facebook/auth/redirect',
+    ],
+
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),

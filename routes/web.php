@@ -44,6 +44,9 @@ Route::get('/logout', function(){
 Route::get("/google/auth/login", "SocialAuthController@redirectGoogle");
 Route::get("/google/auth/redirect", "SocialAuthController@googleCallback");
 
+Route::get("/facebook/auth/login", "SocialAuthController@redirectFacebook");
+Route::get("/facebook/auth/redirect", "SocialAuthController@facebookCallback");
+
 /*Route::get("test-get", function(){
 
     $products = App\Product::where("brand_id", 513)->get();

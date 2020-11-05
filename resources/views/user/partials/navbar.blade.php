@@ -38,7 +38,7 @@
             </li>
             <li class="nav-item">
                 
-                <a class="nav-link btn-general" href="{{ url('/login') }}">Login</a>
+                <a class="nav-link btn-general" href="{{ url('/') }}">Login</a>
             </li>
         @endif
         </ul>

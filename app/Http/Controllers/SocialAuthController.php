@@ -15,6 +15,11 @@ class SocialAuthController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
+    public function redirectFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
     public function googleCallback(){
 
         try {
@@ -34,6 +39,39 @@ class SocialAuthController extends Controller
                     'name' => $user->name,
                     'email' => $user->email,
                     'google_id'=> $user->id,
+                    'password' => bcrypt('123456dummy')
+                ]);
+    
+                Auth::login($newUser);
+     
+                return redirect('/home');
+            }
+    
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
+
+    }
+
+    public function facebookCallback(){
+
+        try {
+    
+            $user = Socialite::driver('facebook')->user();
+     
+            $finduser = User::where('email', $user->email)->first();
+     
+            if($finduser){
+     
+                Auth::login($finduser);
+    
+                return redirect('/home');
+     
+            }else{
+                $newUser = User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'facebook_id'=> $user->id,
                     'password' => bcrypt('123456dummy')
                 ]);
     
