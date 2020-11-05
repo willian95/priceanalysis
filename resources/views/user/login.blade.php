@@ -86,7 +86,15 @@
                              
                             <button class="btn-general" @click="login()">Entrar</button>
                             <p>  ó  <a  href="{{ url('/register') }}">Registrarme</a></p>
+
                          </div>
+
+                            <div class="content__btn">
+                                <a class="btn-login  mr-2" href="{{ url('facebook/redirect') }}"> <i class="fa fa-facebook"></i> Facebook</a>
+                                <a class="btn-login btn-login2"href="{{ url('google/auth/login') }}"> <i class="fa fa-google"></i>Google</a>
+                            
+                            </div>
+
                         </div>
                     </div>
                 </div>
