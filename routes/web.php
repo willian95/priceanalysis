@@ -17,6 +17,8 @@ Route::get('/home', function () {
     return view('welcome');
 })->middleware("auth");
 
+Route::get("/import", "ExcelController@index");
+
 Route::get('/post/fetch/{page}', "PostController@fetch")->middleware("auth");
 Route::get('/post/show/{code}', "PostController@show")->middleware("auth");
 Route::get('/post/product/{id}', "PostController@products")->middleware("auth");
@@ -38,6 +40,24 @@ Route::get('/logout', function(){
     \Auth::logout();
     return redirect()->to("/");
 });
+
+Route::get("/google/auth/login", "SocialAuthController@redirectGoogle");
+Route::post("/google/auth/login", "SocialAuthController@googleCallback");
+
+/*Route::get("test-get", function(){
+
+    $products = App\Product::where("brand_id", 513)->get();
+
+    echo "<table>";
+        echo "<thead><tr><th>ID</th><th>Nombre</th></tr></thead>";
+    foreach($products as $product){
+
+        echo "<tr><td>".$product->id."</td><td>".$product->name."</td></tr>";
+
+    }
+    echo "</table>";
+
+});*/
 
 /*Route::get("xml", function(){
 
