@@ -42,7 +42,7 @@ Route::get('/logout', function(){
 });
 
 Route::get("/google/auth/login", "SocialAuthController@redirectGoogle");
-Route::post("/google/auth/login", "SocialAuthController@googleCallback");
+Route::get("/google/auth/redirect", "SocialAuthController@googleCallback");
 
 /*Route::get("test-get", function(){
 
