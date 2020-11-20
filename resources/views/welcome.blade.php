@@ -10,8 +10,9 @@
                         <div class="card">
                             <div class="card-body--grid">
                                 <div class="card-body--item">
-                                    <img class="img_p" src="https://cdn.pixabay.com/photo/2016/11/14/17/39/person-1824144_960_720.png" alt="">
-                          
+                                    <img v-if="post.user.image == null" class="img_p" src="https://cdn.pixabay.com/photo/2016/11/14/17/39/person-1824144_960_720.png" alt="">
+
+                                    <img v-else class="img_p" :src="post.user.image" alt="">                          
 
                              
                                 </div>

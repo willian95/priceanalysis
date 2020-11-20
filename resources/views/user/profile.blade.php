@@ -61,6 +61,14 @@
                                     <label for="deliveryAddress">Dirección de Entrega</label>
                                 </div>
                             </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group  inputBox">
+                                    <input type="file"  id="profileImage" type="image/*" @change="onImageChange">
+                                    <label for="profileImage">Imagen de perfil</label>
+                                    <img :src="picture" alt="" style="width: 60%;">
+                                </div>
+                            </div>
             
                             <div class="col-md-12">
                                 <p class="text-center">
@@ -505,7 +513,9 @@
                     exportCheck:"{{ $user->comercialInfo ? $user->comercialInfo->export ? 1 : '' : '' }}",
                     nationalMadeCheck:"{{ $user->comercialInfo ? $user->comercialInfo->national_made ? 1 : '' : '' }}",
                     relatedActivitiesCheck:"{{ $user->comercialInfo ? $user->comercialInfo->related_activities ? 1 : '' : '' }}",
-                    isVerifyUser: "{{ $user->verify_user }}"
+                    isVerifyUser: "{{ $user->verify_user }}",
+                    picture:"",
+                    imagePreview:"{{ $user->image }}",
 
                }
             },
@@ -549,7 +559,7 @@
                 },
                 updateGeneralData(){
 
-                    axios.post("{{ url('/user/general-data/update') }}", {rif: this.rif, countryId: this.countryId, fiscalAddress:this.fiscalAddress, deliveryAddress: this.deliveryAddress})
+                    axios.post("{{ url('/user/general-data/update') }}", {rif: this.rif, countryId: this.countryId, fiscalAddress:this.fiscalAddress, deliveryAddress: this.deliveryAddress, image: this.picture})
                     .then(res => {
 
                         if(res.data.success == true){
@@ -657,6 +667,23 @@
 
                     })
 
+                },
+                onImageChange(e){
+                    this.picture = e.target.files[0];
+
+                    this.imagePreview = URL.createObjectURL(this.picture);
+                    let files = e.target.files || e.dataTransfer.files;
+                    if (!files.length)
+                        return;
+                    this.createImage(files[0]);
+                },
+                createImage(file) {
+                    let reader = new FileReader();
+                    let vm = this;
+                    reader.onload = (e) => {
+                        vm.picture = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
                 },
                 verifyUser(verify){
 

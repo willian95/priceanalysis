@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\User;
 use App\ComercialInfo;
 use App\Country;
+use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
@@ -51,6 +52,23 @@ class UserController extends Controller
 
     function updateGeneralData(Request $request){
 
+        if($request->get("image") != null){
+            
+            try{
+            
+                $imageData = $request->get('image');
+                $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+                Image::make($request->get('image'))->save(public_path('uploads/img/').$fileName, 50);
+    
+            }catch(\Exception $e){
+    
+                return response()->json(["success" => false, "msg" => "Hubo un error al cargar la imagen", "err" => $e->getMessage(), "ln" => $e->getLine()]);
+    
+            }
+
+        }
+
+
         try{
 
             $user = User::find(\Auth::user()->id);
@@ -58,6 +76,11 @@ class UserController extends Controller
             $user->country_id= $request->countryId;
             $user->fiscal_address = $request->fiscalAddress;
             $user->delivery_address = $request->deliveryAddress;
+
+            if($request->get("image") != null){
+                $user->image = url('/').'/uploads/img/'.$fileName;
+            }
+
             $user->update();
 
             return response()->json(["success" => true, "msg" => "Información actualizada"]);

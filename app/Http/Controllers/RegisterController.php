@@ -27,6 +27,7 @@ class RegisterController extends Controller
             $user->telephone = $request->telephone;
             $user->password = bcrypt($request->password);
             $user->register_code = Str::random(40);
+            $user->image = "https://cdn.pixabay.com/photo/2016/11/14/17/39/person-1824144_960_720.png";
             $user->save();
 
             $this->sendEmail($user->email, $user->register_code);

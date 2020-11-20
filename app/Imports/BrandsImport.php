@@ -19,7 +19,7 @@ class BrandsImport implements ToCollection
     {
         foreach ($rows as $row) 
         {
-            if($row[2] != "" && $row[0] != ""){
+            /*if($row[2] != "" && $row[0] != ""){
 
                 $brand = Brand::firstOrCreate(
                     ["name" => $row[2]]
@@ -31,10 +31,21 @@ class BrandsImport implements ToCollection
                 $product->update();
                 
 
+            }*/
+
+            if($row[0] == "" && $row[2] != ""){
+
+                $brand = Brand::firstOrCreate(
+                    ["name" => $row[2]]
+                );
+    
+                $product = new Product;
+                $product->brand_id = $brand->id;
+                $product->name = $row[1];
+                $product->save();
+
             }
             
-            
-
         }
     }
 }

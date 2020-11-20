@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg ">
-  <div class="container">
-    <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ asset('/img/logo-original.png') }}" style="width: 110px;" alt=""></a>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ asset('/img/logo-original.png') }}" style="width: 150px;" alt=""></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
