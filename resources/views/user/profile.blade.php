@@ -4,6 +4,10 @@
 
     <div id="dev-profile">
 
+        <div class="loader-cover" v-if="loading == true">
+            <div class="loader"></div>
+        </div>
+
       
 
         <div class="container mt-50 ">
@@ -66,7 +70,7 @@
                                 <div class="form-group  inputBox">
                                     <input type="file"  id="profileImage" type="image/*" @change="onImageChange">
                                     <label for="profileImage">Imagen de perfil</label>
-                                    <img :src="picture" alt="" style="width: 60%;">
+                                    <img :src="imagePreview" alt="" style="width: 60%;">
                                 </div>
                             </div>
             
@@ -515,6 +519,7 @@
                     relatedActivitiesCheck:"{{ $user->comercialInfo ? $user->comercialInfo->related_activities ? 1 : '' : '' }}",
                     isVerifyUser: "{{ $user->verify_user }}",
                     picture:"",
+                    loading:false,
                     imagePreview:"{{ $user->image }}",
 
                }
@@ -558,10 +563,10 @@
 
                 },
                 updateGeneralData(){
-
+                    this.loading = true
                     axios.post("{{ url('/user/general-data/update') }}", {rif: this.rif, countryId: this.countryId, fiscalAddress:this.fiscalAddress, deliveryAddress: this.deliveryAddress, image: this.picture})
                     .then(res => {
-
+                        this.loading = false
                         if(res.data.success == true){
 
                             alertify.success(res.data.msg)
@@ -576,10 +581,10 @@
 
                 },
                 updateComercialActivity(){
-
+                    this.loading = true
                     axios.post("{{ url('/user/comercial-activity/update') }}", {categoryId: this.categoryId, products: this.products, startDate:this.startDate, employeeAmount: this.employeeAmount, maleEmployeeAmount: this.maleEmployeeAmount, femaleEmployeeAmount: this.femaleEmployeeAmount,femaleLeadershipAmount: this.femaleLeadershipAmount, comercialCountries: this.comercialCountries})
                     .then(res => {
-
+                        this.loading = false
                         if(res.data.success == true){
 
                             alertify.success(res.data.msg)
@@ -594,10 +599,10 @@
 
                 },
                 updateContactInfo(){
-
+                    this.loading = true
                     axios.post("{{ url('/user/contact-info/update') }}", {contactPerson: this.contactName, phoneNumber: this.contactPhone})
                     .then(res => {
-
+                        this.loading = false
                         if(res.data.success == true){
 
                             alertify.success(res.data.msg)
@@ -610,10 +615,10 @@
                 
                 },
                 updateOtherInfo(){
-
+                    this.loading = true
                     axios.post("{{ url('/user/other-info/update') }}", {mainClients: this.mainClients, export: this.exportCheck, import: this.importCheck, relatedActivities: this.relatedActivitiesCheck, nationalMade: this.nationalMadeCheck})
                     .then(res => {
-
+                        this.loading = false
                         if(res.data.success == true){
 
                             alertify.success(res.data.msg)
@@ -688,10 +693,10 @@
                 verifyUser(verify){
 
                     this.isVerifyUser = verify
-
+                    this.loading = true
                     axios.post("{{ url('user/verify-me') }}", {verify: verify})
                     .then(res => {
-
+                        this.loading = false
                         if(res.data.success == true){
 
                             alertify.success(res.data.msg)
