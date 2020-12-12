@@ -163,3 +163,16 @@ Route::post('/admin/brand/search', "BrandController@adminSearch");
 Route::get("/admin/post/index", "PostController@adminIndex");
 Route::get("/admin/post/fetch/{page}", "PostController@adminFetch");
 Route::post("/admin/post/delete", "PostController@adminDelete");
+
+Route::get("/test-email", function(){
+
+    $data = ["body" => "Para validar tu correo haz click en el siguiente enlace", "link" =>url('/')."/validate/account/123123123"];
+    $subject = "Validar tu correo";
+    \Mail::send("emails.register", $data, function($message) use ($email, $subject) {// se envía el email
+
+        $message->to($email)->subject($subject);
+        $message->from(env("MAIL_FROM_ADDRESS"),env("APP_NAME"));
+
+    });
+
+});
