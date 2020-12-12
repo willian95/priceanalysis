@@ -169,10 +169,13 @@ Route::get("/test-email", function(){
     $email = "rodriguezwillian95@gmail.com";
     $data = ["body" => "Para validar tu correo haz click en el siguiente enlace", "link" =>url('/')."/validate/account/123123123"];
     $subject = "Validar tu correo";
+
+    dump(env("MAIL_FROM_ADDRESS"), env("MAIL_FROM_NAME"));
+
     \Mail::send("emails.register", $data, function($message) use ($email, $subject) {// se envía el email
 
         $message->to($email)->subject($subject);
-        $message->from(env("MAIL_FROM_ADDRESS"),env("APP_NAME"));
+        $message->from(env("MAIL_FROM_ADDRESS"),env("MAIL_FROM_NAME"));
 
     });
 
