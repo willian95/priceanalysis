@@ -40,7 +40,7 @@ Route::get('/logout', function(){
     \Auth::logout();
     return redirect()->to("/");
 });
-
+//
 Route::get("/google/auth/login", "SocialAuthController@redirectGoogle");
 Route::get("/google/auth/redirect", "SocialAuthController@googleCallback");
 
