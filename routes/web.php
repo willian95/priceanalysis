@@ -112,7 +112,7 @@ Route::get("/user/countries-info/fetch", "UserController@fetchComercialCountries
 
 Route::post("user/verify-me", "UserController@updateVerifyMyUser")->middleware("auth");
 
-Route::get("validate/account/{code}", "RegisterController@validateAccount")->middleware("auth");
+Route::get("validate/account/{code}", "RegisterController@validateAccount");
 
 Route::get('/admin/dashboard', "DashboardController@index");
 
