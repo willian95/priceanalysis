@@ -33,7 +33,7 @@ Route::get('/businesses/fetch/{page}', "BusinessController@fetch");
 Route::post("/offer/post/{id}", "OfferController@store")->middleware("auth");
 Route::get("/offer/fetch/post/{id}/page/{page}", "OfferController@fetch")->middleware("auth");
 
-Route::get('/', "LoginController@index"); 
+Route::get('/', "LoginController@index")->name("login")->middleware("guest"); 
 Route::post('/login', "LoginController@login");
 
 Route::get('/logout', function(){

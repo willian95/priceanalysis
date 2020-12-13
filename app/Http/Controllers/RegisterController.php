@@ -65,7 +65,7 @@ class RegisterController extends Controller
 
             Auth::loginUsingId($user->id, true);
 
-            return redirect()->to("/");
+            return redirect()->to("/home");
 
         }catch(\Exception $e){
             return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
