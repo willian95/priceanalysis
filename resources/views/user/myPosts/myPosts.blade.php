@@ -28,7 +28,8 @@
                                 <span v-else>Privada</span>
                             </td>
                             <td>
-                                <a class="btn btn-success" :href="'{{ url('/my-posts/show/') }}'+'/'+post.id">Ver</a>
+                                <a class="btn btn-success" :href="'{{ url('/my-posts/show/') }}'+'/'+post.id"><i class="fa fa-eye"></i></a>
+                                <a class="btn btn-success" :href="'{{ url('/my-posts/edit/') }}'+'/'+post.id"><i class="fa fa-edit"></i></a>
                             </td>
                         </tr>
                     </tbody>

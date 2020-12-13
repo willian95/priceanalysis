@@ -49,7 +49,7 @@ class RegisterController extends Controller
         \Mail::send("emails.register", $data, function($message) use ($email, $subject) {// se envía el email
 
             $message->to($email)->subject($subject);
-            $message->from("williandev95@gmail.com","PriceAnalysis");
+            $message->from(env("MAIL_FROM_ADDRESS"),env("MAIL_FROM_NAME"));
 
         });
 

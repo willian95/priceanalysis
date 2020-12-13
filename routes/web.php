@@ -94,6 +94,7 @@ Route::get("/profile", "ProfileController@index")->middleware("auth");
 Route::get("/my-posts", "PostController@myPosts")->middleware("auth");
 Route::get('/my-posts/fetch/{page}', "PostController@myPostsFetch")->middleware("auth");
 Route::get("/my-posts/show/{id}", "PostController@showMyPost")->middleware("auth");
+Route::get("/my-posts/edit/{id}", "PostController@edit");
 
 Route::get("/my-offers/index", "OfferController@index")->middleware("auth");
 Route::get("/my-offers/fetch/{page}", "OfferController@fetchMyOffers")->middleware("auth");

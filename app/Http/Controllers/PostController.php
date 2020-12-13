@@ -42,6 +42,22 @@ class PostController extends Controller
 
     }
 
+    function edit($id){
+
+        $post = Post::where("id", $id)->where("user_id", \Auth::user()->id)->first();
+
+        if($post){
+
+            return view("user.post.edit", ["post" => $post]);
+
+        }else{
+
+            abort(403);
+
+        }
+
+    }
+
     function fetch($page = 1){
 
         try{
@@ -204,7 +220,7 @@ class PostController extends Controller
         \Mail::send("emails.notification", $data, function($message) use ($email, $subject) {// se envía el email
 
             $message->to($email)->subject($subject);
-            $message->from("williandev95@gmail.com","PriceAnalysis");
+            $message->from(env("MAIL_FROM_ADDRESS"),env("MAIL_FROM_NAME"));
 
         });
 
