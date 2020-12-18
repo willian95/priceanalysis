@@ -30,6 +30,7 @@
                             <td>
                                 <a class="btn btn-success" :href="'{{ url('/my-posts/show/') }}'+'/'+post.id"><i class="fa fa-eye"></i></a>
                                 <a class="btn btn-success" :href="'{{ url('/my-posts/edit/') }}'+'/'+post.id"><i class="fa fa-edit"></i></a>
+                                <button class="btn btn-secondary" @click="confirm(post.id)"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -78,6 +79,24 @@
 
                     })
                 
+                },
+                confirm(id){
+
+                    if(confirm("¿Estás seguro?")){
+
+                        axios.post("{{ url('/post/delete') }}", {postId: id}).then(res => {
+
+                            if(res.data.success == true){
+                                alertify.success(res.data.msg)
+                                this.fetch()
+                            }else{
+                                alertify.error(re.data.msg)
+                            }
+
+                        })
+
+                    }
+
                 }
 
             },

@@ -179,7 +179,7 @@
                                             </div>---->
                                         </div>
                                     </div>
-                                    <button name="next" class="next action-button"    @click="checkSelectedUsers()">Publicar</button>
+                                    <button name="next" class="next action-button"    @click="checkSelectedUsers()">Actualizar</button>
                                   
                                      <button type="button" name="previous" class="previous action-button-previous" value="Previous">Atrás</button>
                                 </fieldset>
@@ -279,6 +279,7 @@
             el: '#dev-post',
             data(){
                return{
+                    postId:"{{ $post->id }}",
                     step:1,
                     title:"{{ $post->title }}",
                     description:"{{ $post->description }}",
@@ -431,7 +432,7 @@
                 },
                 store(){
 
-                    axios.post("{{ url('/post/store') }}", {title: this.title, description: this.description, products: this.products, selectedUsers: this.selectedUsers, type: this.type, shippingCheck: this.shippingCheck})
+                    axios.post("{{ url('/post/update') }}", {title: this.title, description: this.description, products: this.products, selectedUsers: this.selectedUsers, type: this.type, shippingCheck: this.shippingCheck, postId: this.postId})
                     .then(res => {
 
                         if(res.data.success == true){
@@ -503,6 +504,14 @@
             },
             created(){
                 this.fetch()
+
+                let products = JSON.parse('{!! $products !!}')
+
+                products.forEach((data) => {
+
+                    this.products.push({product_id: data.product_id, amount: data.amount, unit_id: data.unit_id, displayName: data.product.name, unitName: data.unit_name})
+
+                })
 
             }
         }); 

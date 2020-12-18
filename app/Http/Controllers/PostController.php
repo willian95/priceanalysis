@@ -45,10 +45,13 @@ class PostController extends Controller
     function edit($id){
 
         $post = Post::where("id", $id)->where("user_id", \Auth::user()->id)->first();
+        
 
         if($post){
 
-            return view("user.post.edit", ["post" => $post]);
+            $products = PostProduct::where("post_id", $id)->with("product")->get();
+
+            return view("user.post.edit", ["post" => $post, "products" => $products]);
 
         }else{
 
@@ -210,6 +213,99 @@ class PostController extends Controller
 
         }catch(\Exception $e){
             return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
+        }
+
+    }
+
+    function update(PostStoreRequest $request){
+
+        //dd($request->all());
+
+        try{
+
+            $post = Post::where("id", $request->postId)->first();
+            $post->title = $request->title;
+            $post->description = $request->description;
+            $post->user_id = \Auth::user()->id;
+            $post->request_shipping = $request->shippingCheck;
+            
+            if($request->type == "private")
+                $post->is_private = true;
+            
+            $post->code = uniqid();
+            $post->save();
+            
+            foreach(PostProduct::where("post_id", $request->postId)->get() as $postProduct){
+
+                $exists = false;
+                foreach($request->products as $product){
+
+                    if($product["product_id"] == $postProduct->id){
+                        $exists = true;
+                    }
+
+                }
+
+                if($exists == false){
+                    PostProduct::where("id", $postProduct->id)->delete();
+                }
+
+            }
+
+            foreach($request->products as $product){
+
+                $postProduct = PostProduct::where("post_id", $request->postId)->where("product_id", $product["product_id"])->first();
+
+                if($postProduct){
+                    $unit = Unit::find($product["unit_id"]);
+                    $postProduct->unit_id = $product["unit_id"];
+                    $postProduct->unit_name = $unit->name;
+                    $postProduct->amount = $product["amount"];
+                    $postProduct->update();
+                }else{
+
+                    $postProduct = new PostProduct;
+                    $postProduct->product_id = $product["product_id"];
+                    $postProduct->unit_id = $product["unit_id"];
+                    
+                    $unit = Unit::find($product["unit_id"]);
+                    $productModel = Product::find($product["product_id"]);
+                    $postProduct->product = $productModel->name;
+                    $postProduct->unit_name = $unit->name;
+                    $postProduct->amount = $product["amount"];
+                    $postProduct->post_id = $post->id;
+                    $postProduct->save();
+
+                }
+
+
+            }
+
+            if($request->selectedUsers != null){
+                foreach($request->selectedUsers as $users){
+                    $this->sendEmail($users["name"], $users["email"], $post->code);
+                }
+            }
+
+            return response()->json(["success" => true, "msg" => "Publicación realizada"]);
+
+        }catch(\Exception $e){
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
+        }
+
+    }
+
+    function delete(Request $request){
+
+        try{
+
+            $post = Post::where("id", $request->postId)->first();
+            $post->delete();
+
+            return response()->json(["success" => true, "msg" => "Publicación eliminada"]);
+
+        }catch(\Exception $e){
+            return response()->json(["success" =>false, "msg" => "Hubo un problema", "err" => $e->getMessage(), "ln" => $e->getLine()]);
         }
 
     }

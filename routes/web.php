@@ -81,11 +81,13 @@ Route::get("/facebook/auth/redirect", "SocialAuthController@facebookCallback");
 
 });*/
 
-Route::get('/register', "RegisterController@index"); 
+Route::get('/register', "RegisterController@index")->middleware("auth"); 
 Route::post('/register', "RegisterController@register");
 
 Route::get('/post/index', "PostController@index")->middleware("auth");
 Route::post('/post/store', "PostController@store")->middleware("auth");
+Route::post('/post/update', "PostController@update")->middleware("auth");
+Route::post('/post/delete', "PostController@delete")->middleware("auth");
 
 Route::get('/brand/fetch/all', "BrandController@fetchAll")->middleware("auth");
 
