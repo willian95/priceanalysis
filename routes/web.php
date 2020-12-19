@@ -81,7 +81,7 @@ Route::get("/facebook/auth/redirect", "SocialAuthController@facebookCallback");
 
 });*/
 
-Route::get('/register', "RegisterController@index")->middleware("auth"); 
+Route::get('/register', "RegisterController@index"); 
 Route::post('/register', "RegisterController@register");
 
 Route::get('/post/index', "PostController@index")->middleware("auth");
