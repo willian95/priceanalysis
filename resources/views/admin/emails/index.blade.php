@@ -6,7 +6,7 @@
         <div class="container">
             <div class="top_title">
                 <h3 class="text-center">Emails</h3>
-                <button class="btn btn-success mr-5" data-toggle="modal" data-target="#createEmail">Crear<img src="{{ asset('assets/img/iconos/bx-list-plus.svg') }}" alt=""></button>
+                <button class="btn btn-success mr-5" @click="create()" data-toggle="modal" data-target="#createEmail">Crear<img src="{{ asset('assets/img/iconos/bx-list-plus.svg') }}" alt=""></button>
               </div>
      
           <div class="bg__tables">

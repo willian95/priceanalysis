@@ -6,7 +6,7 @@
         <div class="container">
             <div class="top_title">
                 <h3 class="text-center">Unidades</h3>
-                <button class="btn btn-success mr-5" data-toggle="modal" data-target="#createUnit"> <img src="{{ asset('assets/img/iconos/bx-list-plus.svg') }}" alt="">Crear</button>
+                <button class="btn btn-success mr-5" @click="create()" data-toggle="modal" data-target="#createUnit"> <img src="{{ asset('assets/img/iconos/bx-list-plus.svg') }}" alt="">Crear</button>
               </div>
 
           <div class="bg__tables">
