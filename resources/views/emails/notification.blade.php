@@ -1,5 +1,7 @@
 <p>{{ $body }}</p>
 
-@if($link != "")
-    <a href="{{ $link }}">Ver publicación</a>
+@if(isset($link))
+    @if($link != "")
+        <a href="{{ $link }}">Ver publicación</a>
+    @endif
 @endif
