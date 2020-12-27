@@ -29,6 +29,7 @@
                             </td>
                             <td>
                                 <a class="btn btn-success" :href="'{{ url('/my-offers/show/') }}'+'/'+post.post.id">Ver</a>
+                                <a class="btn btn-success" :href="'{{ url('/my-offers/edit/') }}'+'/'+post.post.id">Editar</a>
                             </td>
                         </tr>
                     </tbody>

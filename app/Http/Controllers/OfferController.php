@@ -20,8 +20,13 @@ class OfferController extends Controller
 
             $skip = ($page-1) * 20;
 
-            $offers = Offer::with("post")->whereHas("post")->where("user_id", \Auth::user()->id)->skip($skip)->groupBy("offers.post_id")->take(20)->orderBy('id', 'desc')->get();
-            $offersCount = Offer::with("post")->whereHas("post")->where("user_id", \Auth::user()->id)->groupBy("offers.post_id")->count();
+            $offers = Offer::with(['post' => function ($q) {
+                $q->withTrashed();
+            }])->where("user_id", \Auth::user()->id)->skip($skip)->groupBy("offers.post_id")->take(20)->orderBy('id', 'desc')->get();
+            
+            $offersCount = Offer::with(['post' => function ($q) {
+                $q->withTrashed();
+            }])->where("user_id", \Auth::user()->id)->groupBy("offers.post_id")->count();
 
             return response()->json(["success" => true, "posts" => $offers, "postsCount" => $offersCount]);
 
@@ -61,8 +66,13 @@ class OfferController extends Controller
 
             $skip = ($page-1) * 20;
 
-            $offers = Offer::where("post_id", $id)->with('products', "products.postProduct", "user")->where("user_id", \Auth::user()->id)->skip($skip)->take(20)->orderBy('sum', 'asc')->get();
-            $offersCount = Offer::where("post_id", $id)->with('products', "products.postProduct", "user")->where("user_id", \Auth::user()->id)->count();
+            $offers = Offer::where("post_id", $id)->with(['products' => function ($q) {
+                $q->withTrashed();
+            }])->with("products.postProduct", "user")->where("user_id", \Auth::user()->id)->skip($skip)->take(20)->orderBy('sum', 'asc')->get();
+
+            $offersCount = Offer::where("post_id", $id)->with(['products' => function ($q) {
+                $q->withTrashed();
+            }])->with("products.postProduct", "user")->where("user_id", \Auth::user()->id)->count();
 
             return response()->json(["success" => true, "offers" => $offers, "offersCount" => $offersCount]);
         
@@ -78,15 +88,22 @@ class OfferController extends Controller
 
             $skip = ($page-1) * 20;
 
-            $offers = Offer::where("post_id", $id)->with('products', "products.postProduct", "user")->skip($skip)->take(20)->orderBy('sum', 'asc')->get();
-            $offersCount = Offer::where("post_id", $id)->with('products', "products.postProduct", "user")->count();
+            $offers = Offer::where("post_id", $id)->with(['products' => function ($q) {
+                $q->withTrashed();
+            }])->with("products.postProduct", "user")->skip($skip)->take(20)->orderBy('sum', 'asc')->get();
+
+            $offersCount = Offer::where("post_id", $id)->with(['products' => function ($q) {
+                $q->withTrashed();
+            }])->with("products.postProduct", "user")->count();
 
             $bestPriceId = 0;
             $worstPriceId = 0;
             $midPriceId = 0;
 
             $index = 0;
-            $statistics = Offer::where("post_id", $id)->with('products', "products.postProduct", "user")->selectRaw("sum + shipping_cost as sum_cost, id")->orderBy('sum_cost', 'asc')->get();
+            $statistics = Offer::where("post_id", $id)->with(['products' => function ($q) {
+                $q->withTrashed();
+            }])->with("products.postProduct", "user")->selectRaw("sum + shipping_cost as sum_cost, id")->orderBy('sum_cost', 'asc')->get();
             //dd($statistics);
             foreach($statistics as $statistic){
 
@@ -101,8 +118,6 @@ class OfferController extends Controller
                 $index++;
             }
 
-            
-
             return response()->json(["success" => true, "offers" => $offers, "offersCount" => $offersCount, "bestPriceId" => $bestPriceId, "midPriceId" => $midPriceId, "worstPriceId" => $worstPriceId]);
 
         }catch(\Exception $e){
@@ -115,10 +130,15 @@ class OfferController extends Controller
 
         try{
 
+            $productNoPrice = 0;
             foreach($request->offerProducts as $offerProductArr){
                 if($offerProductArr["price"] == ""){
-                    return response()->json(["success" => false, "msg" => "Al menos uno de sus productos no tiene precio"]);
+                    $productNoPrice++;
                 }
+            }
+
+            if($productNoPrice == count($request->offerProducts)){
+                return response()->json(["success" => false, "msg" => "Al menos uno de sus productos no tiene precio"]);
             }
 
             $offer = new Offer;
@@ -133,7 +153,7 @@ class OfferController extends Controller
                 $offerProduct = new offerProduct;
                 $offerProduct->offer_id = $offer->id;
                 $offerProduct->post_product_id = $offerProductArr["postProductId"];
-                $offerProduct->price = $offerProductArr["price"];
+                $offerProduct->price = $offerProductArr["price"] ? $offerProductArr["price"] : 0;
                 $offerProduct->save();
 
                 $total = floatval($total) + floatval($offerProductArr["price"]);
@@ -151,6 +171,76 @@ class OfferController extends Controller
             return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
 
         }
+
+    }
+
+    function update(Request $request){
+
+        try{
+
+            $productNoPrice = 0;
+            foreach($request->offerProducts as $offerProductArr){
+                if($offerProductArr["price"] == ""){
+                    $productNoPrice++;
+                }
+            }
+
+            if($productNoPrice == count($request->offerProducts)){
+                return response()->json(["success" => false, "msg" => "Al menos uno de sus productos no tiene precio"]);
+            }
+
+            $offer = Offer::where("id", $request->offerId)->first();
+            $offer->shipping_cost = $request->shippingCost;
+            $offer->update();
+
+            $total = 0;
+            foreach($request->offerProducts as $offerProductArr){
+                
+                if(offerProduct::where("offer_id", $offer->id)->where("post_product_id", $offerProductArr["postProductId"])->count() > 0){
+
+                    $offerProduct = offerProduct::where("offer_id", $offer->id)->where("post_product_id", $offerProductArr["postProductId"])->first();
+                    $offerProduct->offer_id = $offer->id;
+                    $offerProduct->post_product_id = $offerProductArr["postProductId"];
+                    $offerProduct->price = $offerProductArr["price"] ? $offerProductArr["price"] : 0;
+                    $offerProduct->update();
+
+                    $total = floatval($total) + floatval($offerProductArr["price"]);
+
+                }else{
+
+                    $offerProduct = new offerProduct;
+                    $offerProduct->offer_id = $offer->id;
+                    $offerProduct->post_product_id = $offerProductArr["postProductId"];
+                    $offerProduct->price = $offerProductArr["price"] ? $offerProductArr["price"] : 0;
+                    $offerProduct->save();
+
+                    $total = floatval($total) + floatval($offerProductArr["price"]);
+
+                }
+                
+
+            }
+
+            $offer = Offer::find($offer->id);
+            $offer->sum = $total;
+            $offer->update();
+
+            return response()->json(["success" => true, "msg" => "Oferta actualizada"]);
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
+
+        }
+
+    }
+
+    function edit($id){
+
+        $post = Post::findOrFail($id);
+        $products = Offer::with('products')->where("post_id", $id)->get();
+  
+        return view("user.myOffers.edit", ["post" => $post, "products" => $products]);
 
     }
 

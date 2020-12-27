@@ -67,10 +67,13 @@
                                         <h5 class="card-title mb-5">Agregar productos</h5>
                                 
                                         <div class="row">
+                                            <div class="col-12">
+                                                <p style="cursor: pointer; font-weight: bold;" data-toggle="modal" data-target="#newProductModal">¿No encuentras el producto que buscas?</p>
+                                            </div>
                                             <div class="col-md-5">
                                                 <div class="form-group inputBox">
                                                     <label for="name">Nombre</label>
-                                                    <input autocomplete="off" type="text" class="form-control" id="name" v-model="name" placeholder="ej: Harina de maíz" @keypress="search()">
+                                                    <input autocomplete="off" type="text" class="form-control" id="name" v-model="name" placeholder="ej: Harina de maíz" @keyup="search()">
                                                     <ul class="select_search">
                                                         <li v-for="search in searches">
                                                             <a href="#" @click="selectProduct(search)">
@@ -265,6 +268,42 @@
         
 
         <!-- modal -->
+
+        <!-- modal -->
+            <div class="modal fade" id="newProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Nuevo producto</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <div class="modal-body">
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    
+                                    <textarea v-model="proposal" class="form-control" rows="3" placeholder="Describe el producto y en breve serás notificado de la creación del producto"></textarea>
+                                
+                                </div>
+                                <div class="col-md-12">
+                                    <p class="text-center mt-2">
+                                        <button class="btn btn-primary" @click="newProductSend()">Enviar</button>
+                                   </p>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        <!-- modal -->
         </div>
 
     </div>
@@ -290,6 +329,7 @@
                     name:"",
                     amount:"",
                     productId:0,
+                    proposal:"",
                     selectedUnit:"",
                     unit:"",
                     units:[],
@@ -299,6 +339,24 @@
             },
             methods:{
 
+                newProductSend(){
+
+                    axios.pot("{{ url('/product/send/proposal') }}", {"proposal": this.proposal}).then(res => {
+
+                        if(res.data.success == true){
+
+                            alertify.success(res.data.success)
+                            this.proposal = ""
+
+                        }else{
+
+                            alertify.error(res.data.success)
+
+                        }
+
+                    })
+
+                },
                 checkDescriptionAndTitle(){
 
                     if(this.description == ""){

@@ -37,7 +37,7 @@
                     
 
                     @if(\Auth::check())
-                        @if(App\Offer::where("user_id", \Auth::user()->id)->where("post_id", $post->id)->count() === 0 )
+                       
 
                         <div class="col-md-12 mt-4 flex_line">
                             <h5 class=" card-title">Agregar oferta</h5>
@@ -61,14 +61,9 @@
                         </div> 
 
                         <p class="ml-5 mt-4">
-                            <button class="btn btn-success " @click="storeOffer()">Ofertar <i class="fa fa-plus ml-2"></i></button>
+                            <button class="btn btn-success " @click="updateOffer()">Actualizar <i class="fa fa-plus ml-2"></i></button>
                         </p>
-                        @else
-                            <h3 class="text-center mt-2 mb-2">Ya has realizado una oferta para esta publicación</h3>
-                            <p class="ml-5 mt-4">
-                                <button class="btn btn-success">Editar <i class="fa fa-plus ml-2"></i></button>
-                            </p>
-                        @endif
+                        
                     @endif
                     
                 </div>
@@ -79,63 +74,6 @@
 
             </div>
 
-  
-
-
-
-
-            <!--<div class="row">
-                <div class="offset-md-2 col-md-8">
-                    <h5 class="text-center">Ofertas</h5>
-                </div>
-                <div class="offset-md-2 col-md-8">
-                    <div class="form-group" v-for="offer in offers">
-                        
-                        <div class="card" v-if="offer.id == bestPriceId" style="background-color: green;">
-                            <div class="card-body">
-                                <p>@{{ offer.user.name }}</p>
-                                <p><label>Total: @{{ offer.sum }}</label></p>
-                                <label style="margin-right: 5px;" v-for="product in offer.products">@{{ product.post_product.product }} - @{{ product.price }}</label>
-                            </div>
-                        </div>
-
-
-                        <div class="card" v-if="offer.id == midPriceId" style="background-color: yellow;">
-                            <div class="card-body">
-                                <p>@{{ offer.user.name }}</p>
-                                <p><label>Total: @{{ offer.sum }}</label></p>
-                                <label style="margin-right: 5px;" v-for="product in offer.products">@{{ product.post_product.product }} - @{{ product.price }}</label>
-                            </div>
-                        </div>
-
-                        <div class="card" v-if="offer.id == worstPriceId" style="background-color: red;">
-                            <div class="card-body">
-                                <p>@{{ offer.user.name }}</p>
-                                <p><label>Total: @{{ offer.sum }}</label></p>
-                                <label style="margin-right: 5px;" v-for="product in offer.products">@{{ product.post_product.product }} - @{{ product.price }}</label>
-                            </div>
-                        </div>
-
-                        <div class="card" v-if="offer.id != bestPriceId && offer.id != midPriceId && offer.id != worstPriceId">
-                            <div class="card-body">
-                                <p>@{{ offer.user.name }}</p>
-                                <p><label>Total: @{{ offer.sum }}</label></p>
-                                <label style="margin-right: 5px;" v-for="product in offer.products">@{{ product.post_product.product }} - @{{ product.price }}</label>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>-->
-            <div class="row">
-                <div class="col-12">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li v-for="page in pages" class="page-item"><a class="page-link"  @click="fetchOffers(page)">@{{ page }}</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -153,6 +91,7 @@
                     rif:"{{ $post->user->rif }}",
                     title:'{{ $post->title }}',
                     postId:'{{ $post->id }}',
+                    offerId:'',
                     description:'{{ $post->description }}',
                     requestShipping: '{{ $post->request_shipping }}',
                     address: '{{ $post->user->delivery_address  }}',
@@ -176,6 +115,17 @@
                         
                         if(res.data.success == true){
                             this.products = res.data.products
+                            window.setTimeout(() => {
+                                
+                                let products = JSON.parse('{!! $products !!}')
+                                this.offerId = products[0].id
+                                this.shippingCost = products[0].shipping_cost
+                                products[0].products.forEach((data) => {
+
+                                    $("#offer"+data.post_product_id).val(data.price)
+
+                                })
+                            }, 500);
                         }else{
                             alertify.error(res.data.msg)
                         }
@@ -183,7 +133,7 @@
                     })
 
                 },
-                storeOffer(){
+                updateOffer(){
 
                     var element = $('.offer').map((_,el) => el).get()
                     element.forEach((data, index) => {
@@ -192,7 +142,7 @@
                        
                     })
 
-                    axios.post("{{ url('/offer/post/') }}"+"/"+this.postId, {offerProducts: this.productOffer, postId: this.postId, shippingCost: this.shippingCost})
+                    axios.post("{{ url('/my-offers/update/') }}", {offerProducts: this.productOffer, offerId: this.offerId, shippingCost: this.shippingCost})
                     .then(res => {
 
                         if(res.data.success == true){
@@ -252,7 +202,6 @@
                 if("{{ url()->current() }}" == previousUrl){
                     localStorage.removeItem("previousUrl")
                 }
-                //this.fetchOffers(1)
 
             }
         }); 

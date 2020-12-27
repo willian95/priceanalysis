@@ -101,6 +101,8 @@ Route::get("/my-posts/edit/{id}", "PostController@edit");
 Route::get("/my-offers/index", "OfferController@index")->middleware("auth");
 Route::get("/my-offers/fetch/{page}", "OfferController@fetchMyOffers")->middleware("auth");
 Route::get("/my-offers/show/{id}", "OfferController@show")->middleware("auth");
+Route::get("/my-offers/edit/{id}", "OfferController@edit")->middleware("auth");
+Route::post("/my-offers/update", "OfferController@update")->middleware("auth");
 Route::get("/my-offers/show/{id}/page/{page}", "OfferController@showMyOffers")->middleware("auth");
 Route::get("/my-offers/fetch/post/{id}/page/{page}", "OfferController@myOffersFetch")->middleware("auth");
 
@@ -131,6 +133,7 @@ Route::post('/admin/product/update', "ProductController@update");
 Route::post('/admin/product/delete', "ProductController@delete");
 Route::post('/admin/product/search', "ProductController@adminSearch");
 Route::post('/product/search', "ProductController@search");
+Route::post('/product/proposal/send', "ProductController@newProposal");
 
 Route::get("/admin/unit/index", "UnitController@index");
 Route::get("/admin/unit/fetch/{page}", "UnitController@fetch");

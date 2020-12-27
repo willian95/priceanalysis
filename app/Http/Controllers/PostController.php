@@ -24,7 +24,9 @@ class PostController extends Controller
 
     function show($code){
 
-        $post = Post::with("products", "products.product")->where("code", $code)->first();
+        $post = Post::with(['products' => function ($q) {
+            $q->withTrashed();
+        }])->with("products.product")->where("code", $code)->first();
         return view("user.post.show", ["post" => $post]);
 
     }
@@ -49,7 +51,9 @@ class PostController extends Controller
 
         if($post){
 
-            $products = PostProduct::where("post_id", $id)->with("product")->get();
+            $products = PostProduct::where("post_id", $id)->with(['product' => function ($q) {
+                $q->withTrashed();
+            }])->get();
 
             return view("user.post.edit", ["post" => $post, "products" => $products]);
 
