@@ -14,9 +14,12 @@ class ProductController extends Controller
     
     function index(Request $request){
         $email = "";
-        dd($request->all());
-        if($request->has("emailresponse"))
+        
+        if($request->has("emailresponse")){
+            dd($request->all());
             $email = $request->emailReponse;
+        }
+           
 
         return view("admin.products.index", ["email" => $email]);
 
