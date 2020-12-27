@@ -167,6 +167,7 @@
                             alertify.success(res.data.msg)
                             this.name = ""
                             this.selectedUnits = ""
+                            this.emailResponse = ""
                             $(".unit-card").css("background-color", "white")
                             this.fetch()
                         }else{
