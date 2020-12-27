@@ -7,6 +7,7 @@ use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Product;
 use App\ProductUnit;
+use App\AdminEmail;
 
 class ProductController extends Controller
 {
@@ -135,13 +136,17 @@ class ProductController extends Controller
 
         try{
 
-            $data = ["body" => $request->proposal,];
-            \Mail::send("emails.register", $data, function($message) use ($email) {// se envía el email
+            $data = ["body" => $request->proposal];
 
-                $message->to($email)->subject("Nueva propuesta de producto");
-                $message->from(env("MAIL_FROM_ADDRESS"),env("MAIL_FROM_NAME"));
+            foreach(AdminEmail::all() as $admin){
+                \Mail::send("emails.register", $data, function($message) use ($admin) {// se envía el email
 
-            });
+                    $message->to($admin)->subject("Nueva propuesta de producto");
+                    $message->from(env("MAIL_FROM_ADDRESS"),env("MAIL_FROM_NAME"));
+    
+                });
+            }
+            
 
         }catch(\Exception $e){
             return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
