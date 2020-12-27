@@ -133,7 +133,7 @@ Route::post('/admin/product/update', "ProductController@update");
 Route::post('/admin/product/delete', "ProductController@delete");
 Route::post('/admin/product/search', "ProductController@adminSearch");
 Route::post('/product/search', "ProductController@search");
-Route::post('/product/proposal/send', "ProductController@newProposal");
+Route::post('/product/send/proposal', "ProductController@newProposal");
 
 Route::get("/admin/unit/index", "UnitController@index");
 Route::get("/admin/unit/fetch/{page}", "UnitController@fetch");
