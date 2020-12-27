@@ -64,15 +64,18 @@ class ProductController extends Controller
 
             }
 
-            $email = $request->emailResponse;
-            $data = ["body" => "El producto que solicitaste ya ha sido agregado"];
-            \Mail::send("emails.notification", $data, function($message) use ($email) {// se envía el email
+            if($request->emailResponse != null && $request->emailResponse != ""){
 
-                $message->to($email)->subject("Producto agregado");
-                $message->from(env("MAIL_FROM_ADDRESS"),env("MAIL_FROM_NAME"));
+                $email = $request->emailResponse;
+                $data = ["body" => "El producto que solicitaste ya ha sido agregado"];
+                \Mail::send("emails.notification", $data, function($message) use ($email) {// se envía el email
 
-            });
-       
+                    $message->to($email)->subject("Producto agregado");
+                    $message->from(env("MAIL_FROM_ADDRESS"),env("MAIL_FROM_NAME"));
+
+                });
+
+            }
 
             return response()->json(["success" => true, "msg" => "Producto creado"]);
 
