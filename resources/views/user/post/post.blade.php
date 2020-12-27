@@ -341,7 +341,7 @@
 
                 newProductSend(){
 
-                    axios.pot("{{ url('/product/send/proposal') }}", {"proposal": this.proposal}).then(res => {
+                    axios.post("{{ url('/product/send/proposal') }}", {"proposal": this.proposal}).then(res => {
 
                         if(res.data.success == true){
 
