@@ -16,8 +16,8 @@ class ProductController extends Controller
         $email = "";
         
         if($request->has("emailresponse")){
-            dd($request->all());
-            $email = $request->emailReponse;
+           
+            $email = $request->emailresponse;
         }
            
 
