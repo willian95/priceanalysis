@@ -139,9 +139,10 @@ class ProductController extends Controller
             $data = ["body" => $request->proposal];
 
             foreach(AdminEmail::all() as $admin){
-                \Mail::send("emails.productProposal", $data, function($message) use ($admin) {// se envía el email
+                $email = $admin->email;
+                \Mail::send("emails.productProposal", $data, function($message) use ($email) {// se envía el email
 
-                    $message->to($admin)->subject("Nueva propuesta de producto");
+                    $message->to($email)->subject("Nueva propuesta de producto");
                     $message->from(env("MAIL_FROM_ADDRESS"),env("MAIL_FROM_NAME"));
     
                 });
