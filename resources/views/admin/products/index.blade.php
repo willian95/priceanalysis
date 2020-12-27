@@ -144,6 +144,7 @@
                     brandName:"",
                     showBrand:false,
                     searchString:"",
+                    emailResponse:"{{ $email }}",
                     page:1,
                     pages:0
                 }
@@ -158,7 +159,7 @@
                 },
                 store(){
 
-                    axios.post("{{ url('/admin/product/store') }}", {name: this.name, units: this.selectedUnits, brandId: this.selectedBrand})
+                    axios.post("{{ url('/admin/product/store') }}", {name: this.name, units: this.selectedUnits, brandId: this.selectedBrand, emailResponse: this.emailResponse})
                     .then(res => {
 
                         if(res.data.success == true){
