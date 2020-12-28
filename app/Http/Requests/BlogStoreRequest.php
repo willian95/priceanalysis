@@ -13,7 +13,7 @@ class BlogStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class BlogStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "title" => "required",
+            "image" => "required",
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            "title.required" => "Tiulo es requerido",
+            "image.required" => "Imagen es requerida",
         ];
     }
 }

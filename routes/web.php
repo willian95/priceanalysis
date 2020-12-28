@@ -170,6 +170,14 @@ Route::get("/admin/post/index", "PostController@adminIndex");
 Route::get("/admin/post/fetch/{page}", "PostController@adminFetch");
 Route::post("/admin/post/delete", "PostController@adminDelete");
 
+Route::get("/admin/blogs/index", "BlogController@index");
+Route::get("/admin/blogs/create", "BlogController@create");
+Route::get("/admin/blogs/edit/{id}", "BlogController@edit");
+Route::get("/admin/blogs/fetch/{page}", "BlogController@fetch");
+Route::post("/admin/blogs/delete", "BlogController@delete");
+Route::post("/admin/blogs/store", "BlogController@store");
+Route::post("/admin/blogs/update", "BlogController@update");
+
 Route::get("/test-email", function(){
 
     $email = "test-jim9qdvie@srv1.mail-tester.com";
