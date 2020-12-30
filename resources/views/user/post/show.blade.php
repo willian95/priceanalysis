@@ -66,7 +66,7 @@
                         @else
                             <h3 class="text-center mt-2 mb-2">Ya has realizado una oferta para esta publicación</h3>
                             <p class="ml-5 mt-4">
-                                <button class="btn btn-success">Editar <i class="fa fa-plus ml-2"></i></button>
+                                <a :href="'{{ url('/my-offers/edit/) }}'+'/'+postId" class="btn btn-success">Editar <i class="fa fa-plus ml-2"></i></a>
                             </p>
                         @endif
                     @endif
