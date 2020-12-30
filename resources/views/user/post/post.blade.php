@@ -345,7 +345,7 @@
 
                         if(res.data.success == true){
 
-                            alertify.success(res.data.success)
+                            alertify.success(res.data.msg)
                             this.proposal = ""
 
                         }else{
