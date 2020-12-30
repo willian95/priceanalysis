@@ -168,7 +168,7 @@ class ProductController extends Controller
                 });
             }
             
-            return response()->json(["success" => true, "Propuesta de producto enviado, le responderemos a su correo"]);
+            return response()->json(["success" => true, "msg" => "Propuesta de producto enviado, le responderemos a su correo"]);
 
         }catch(\Exception $e){
             return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
