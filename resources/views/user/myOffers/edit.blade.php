@@ -47,7 +47,7 @@
                         <div class=" col-6 offset-3 mr-4">
                             <div class="form-group" v-if="requestShipping">
                                 <label>Flete</label>
-                                <input class="form-control  mr-4" type="text" placeholder="precio" v-model="shippingCost">
+                                <input class="form-control  mr-4" type="text" placeholder="precio" v-model="shippingCost" >
                             </div>
                             
                         </div>
@@ -191,6 +191,15 @@
 
                     })
 
+                },
+                isNumberDot(evt) {
+                    evt = (evt) ? evt : window.event;
+                    var charCode = (evt.which) ? evt.which : evt.keyCode;
+                    if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                        evt.preventDefault();;
+                    } else {
+                        return true;
+                    }
                 }
 
             },

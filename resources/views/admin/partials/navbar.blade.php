@@ -39,17 +39,13 @@
                     <a class="nav-link" href="{{ url('/admin/email/index') }}"><img class="filter" src="{{ asset('assets/img/iconos/bx-envelope.svg') }}" alt="">Emails</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/admin/price-history') }}"><img class="filter" src="{{ asset('assets/img/iconos/bx-envelope.svg') }}" alt="">Histórico de precios</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ url('/logout') }}"><img class="filter"  src="{{ asset('assets/img/iconos/bx-log-in.svg') }}" alt="">Cerrar sesión</a>
                 </li>
             @endif
       
-        @if(Auth::check() && Auth::user()->id)
-
-            <li class="nav-item">
-                <a class="nav-link" href="#"><img class="filter"  src="{{ asset('assets/img/iconos/bx-user.svg') }}" alt="">{{ Auth::user()->name }}</a>
-            </li>
-        </ul>
-        @endif
     </div>
 </nav>
     

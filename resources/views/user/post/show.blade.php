@@ -47,14 +47,14 @@
                         <div class=" col-6 offset-3 mr-4">
                             <div class="form-group" v-if="requestShipping">
                                 <label>Flete</label>
-                                <input class="form-control  mr-4" type="text" placeholder="precio" v-model="shippingCost">
+                                <input class="form-control  mr-4" type="text" placeholder="precio" v-model="shippingCost" @keypress="isNumberDot($event)">
                             </div>
                             
                         </div>
                         <div class="form-group offset-3 col-10" v-for="product in products">
                             <div class="">
                                 <label>@{{ product.product }} - @{{ product.amount }} @{{ product.unit_name }}</label>              
-                                <input class="offer form-control col-7  mr-4 " :id="'offer'+product.id" type="text" placeholder="precio">                                
+                                <input class="offer form-control col-7  mr-4 " :id="'offer'+product.id" type="text" placeholder="precio" @keypress="isNumberDot($event)">                                
                                 
                             </div>
                                                                 
@@ -79,54 +79,7 @@
 
             </div>
 
-  
 
-
-
-
-            <!--<div class="row">
-                <div class="offset-md-2 col-md-8">
-                    <h5 class="text-center">Ofertas</h5>
-                </div>
-                <div class="offset-md-2 col-md-8">
-                    <div class="form-group" v-for="offer in offers">
-                        
-                        <div class="card" v-if="offer.id == bestPriceId" style="background-color: green;">
-                            <div class="card-body">
-                                <p>@{{ offer.user.name }}</p>
-                                <p><label>Total: @{{ offer.sum }}</label></p>
-                                <label style="margin-right: 5px;" v-for="product in offer.products">@{{ product.post_product.product }} - @{{ product.price }}</label>
-                            </div>
-                        </div>
-
-
-                        <div class="card" v-if="offer.id == midPriceId" style="background-color: yellow;">
-                            <div class="card-body">
-                                <p>@{{ offer.user.name }}</p>
-                                <p><label>Total: @{{ offer.sum }}</label></p>
-                                <label style="margin-right: 5px;" v-for="product in offer.products">@{{ product.post_product.product }} - @{{ product.price }}</label>
-                            </div>
-                        </div>
-
-                        <div class="card" v-if="offer.id == worstPriceId" style="background-color: red;">
-                            <div class="card-body">
-                                <p>@{{ offer.user.name }}</p>
-                                <p><label>Total: @{{ offer.sum }}</label></p>
-                                <label style="margin-right: 5px;" v-for="product in offer.products">@{{ product.post_product.product }} - @{{ product.price }}</label>
-                            </div>
-                        </div>
-
-                        <div class="card" v-if="offer.id != bestPriceId && offer.id != midPriceId && offer.id != worstPriceId">
-                            <div class="card-body">
-                                <p>@{{ offer.user.name }}</p>
-                                <p><label>Total: @{{ offer.sum }}</label></p>
-                                <label style="margin-right: 5px;" v-for="product in offer.products">@{{ product.post_product.product }} - @{{ product.price }}</label>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>-->
             <div class="row">
                 <div class="col-12">
                     <nav aria-label="Page navigation example">
@@ -241,6 +194,15 @@
 
                     })
 
+                },
+                isNumberDot(evt) {
+                    evt = (evt) ? evt : window.event;
+                    var charCode = (evt.which) ? evt.which : evt.keyCode;
+                    if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                        evt.preventDefault();;
+                    } else {
+                        return true;
+                    }
                 }
 
             },

@@ -15,7 +15,6 @@
                                 <ul id="progressbar">
                                     <li class="active" id="account"><strong>Publicación</strong></li>
                                     <li id="producto"><strong>Producto</strong></li>
-                                    <li id="empresa"><strong>Empresa</strong></li>
                                     <li id="finalizar"><strong>Finalizar</strong></li>
                                 </ul>
                              <!--   <div class="progress">
@@ -29,16 +28,6 @@
                                             <div class="col-md-4">
                                                 <label for="title">Titulo</label>
                                                 <input type="text" class="form-control" id="title" v-model="title">
-                                            </div>
-        
-                                            <div class="col-md-4">
-                                            
-                                                    <label for="type">Tipo de publicación</label>
-                                                    <select class="form-control" id="type" v-model="type">
-                                                        <option value="public">Pública</option>
-                                                        <option value="private">Privada</option>
-                                                    </select>
-                                            
                                             </div>
                                             <div class="col-md-4 line-pag ">
                                                 <div class="form-check">
@@ -94,14 +83,14 @@
                                             <div class="col-md-2" v-if="productId == 0">
                                                 <div class="form-group inputBox">
                                                     <label for="unit">Unidad</label>
-                                                    <input type="text" class="form-control" id="unit" v-model="unit" placeholder="Kilos">
+                                                    <input type="text" class="form-control" id="unit" v-model="unit" placeholder="Kilos" @keypress="isNumberDot($event)">
                                                 </div>
                                             </div>
         
                                             <div class="col-md-2" v-if="productId != 0">
                                                 <div class="form-group inputBox">
                                                     <label for="amount">Cantidad</label>
-                                                    <input type="text" class="form-control" id="amount" v-model="amount" placeholder="15">
+                                                    <input type="text" class="form-control" id="amount" v-model="amount" placeholder="15" @keypress="isNumberDot($event)">
                                                 </div>
                                             </div>
         
@@ -149,41 +138,7 @@
         
                                     </div>
                                     
-                                    <button type="button" name="next" class="next action-button" value="Next" :disabled="products.length == 0">Siguiente</button>
-                                     <button type="button" name="previous" class="previous action-button-previous" value="Previous">Atrás</button>
-                                </fieldset>
-                                <fieldset>
-                                    <div class="card__shadow">
-                                        <h5 class="card-title mb-5">Selecciona empresas para que vean tu publicación.</h5>
-                                        <div class="div__step">
-                                            <button class="btn btn-primary" data-toggle="modal" data-target="#businessModal">Seleccionar empresa</button>
-                                            <!-----    <div class="container">
-                                                <div class="row" v-for="category in categories">
-                                                    <div class="col-12">
-                                                        <h3 class="text-center">@{{ category.name }}</h3>
-                                                    </div>
-                                                    <div class="col-md-3" v-for="user in category.users">
-                                                        <div class="card" :id="'user'+user.id" @click="selectUser(user)">
-                                                            <div class="card-body">
-                                                                @{{ user.name }}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <nav aria-label="Page navigation example">
-                                                            <ul class="pagination">
-                                                                <li v-for="page in pages" class="page-item"><a class="page-link"  @click="fetch(page)">@{{ page }}</a></li>
-                                                            </ul>
-                                                        </nav>
-                                                    </div>
-                                                </div>
-                                            </div>---->
-                                        </div>
-                                    </div>
-                                    <button name="next" class="next action-button"    @click="checkSelectedUsers()">Publicar</button>
-                                  
+                                    <button type="button" name="next" class="next action-button" value="Next" :disabled="products.length == 0"   @click="checkSelectedUsers()">Publicar</button>
                                      <button type="button" name="previous" class="previous action-button-previous" value="Previous">Atrás</button>
                                 </fieldset>
                                 <fieldset>
@@ -205,7 +160,7 @@
                                             <a class="nav-link pblicar" href="{{ url('/post/index') }}">Volver a publicar</a>
                                       
                                       
-                                    @endif
+                                        @endif
                                         
                                         <br><br>
                                       
@@ -477,14 +432,9 @@
                 },
                 checkSelectedUsers(){
 
-                    if(this.selectedUsers == ""){
-                        
-                        if(confirm("No has seleccionado empresas para que vean tu publicación. ¿Deseas continuar?")){
-                            this.store()
-                        }
-                    }else{
-                        this.store()
-                    }
+                   
+                    this.store()
+
 
                 },
                 store(){

@@ -185,3 +185,42 @@ tbody tr:nth-child(even) {
     background-color: #c82333;
     border-color: #c82333;
 }
+
+.select_search{
+    background: transparent;
+    box-shadow: 0px 6px 13px #00000026;
+    max-height: 20vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border-radius: 5px;
+    transition: .6s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.select_search li{
+    color: #007dc5;
+    transition: .6s;
+}
+
+.select_search a{
+    font-size: 13px;
+    font-weight: 800;
+    color: #007dc5;
+    text-decoration: none;
+    transition: .6s;
+}
+.select_search a:hover,.select_search li:hover  {
+    transform: translate(10px, 0px);
+    color: #4CAF50;
+    transition: .6s;
+}
+
+.select_search  li:nth-child(1) {
+    margin-top: 20px;
+}
+.select_search  li:last-child {
+    margin-bottom: 20px;
+}

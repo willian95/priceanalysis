@@ -182,6 +182,9 @@ Route::post("/admin/blogs/delete", "BlogController@delete");
 Route::post("/admin/blogs/store", "BlogController@store");
 Route::post("/admin/blogs/update", "BlogController@update");
 
+Route::get("/admin/price-history", "PriceHistoryController@index");
+Route::post("/admin/price-history/history", "PriceHistoryController@history");
+
 Route::get("/test-email", function(){
 
     $email = "test-jim9qdvie@srv1.mail-tester.com";
