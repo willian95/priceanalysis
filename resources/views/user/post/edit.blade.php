@@ -15,7 +15,6 @@
                                 <ul id="progressbar">
                                     <li class="active" id="account"><strong>Publicación</strong></li>
                                     <li id="producto"><strong>Producto</strong></li>
-                                    <li id="empresa"><strong>Empresa</strong></li>
                                     <li id="finalizar"><strong>Finalizar</strong></li>
                                 </ul>
                              <!--   <div class="progress">
@@ -69,20 +68,6 @@
                                                             </a>
                                                         </li>
                                                     </ul>
-                                                </div>
-                                            </div>
-        
-                                            <div class="col-md-2" v-if="productId == 0">
-                                                <div class="form-group inputBox">
-                                                    <label for="amount">Cantidad</label>
-                                                    <input type="text" class="form-control" id="amount" v-model="amount" placeholder="30">
-                                                </div>
-                                            </div>
-        
-                                            <div class="col-md-2" v-if="productId == 0">
-                                                <div class="form-group inputBox">
-                                                    <label for="unit">Unidad</label>
-                                                    <input type="text" class="form-control" id="unit" v-model="unit" placeholder="Kilos">
                                                 </div>
                                             </div>
         
@@ -175,51 +160,7 @@
 
         </div>
 
-        <!-- modal -->
-            <div class="modal fade" id="businessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Empresas</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    <div class="modal-body">
-
-                        <div class="container">
-                            <div class="row" v-for="category in categories">
-                                <div class="col-12 ">
-                                    <div class="categorias">
-                                        <p class="text-center">@{{ category.name }}</p>
-                                    </div>
-                                   
-                                </div>
-                                <div class="col-md-3" v-for="user in category.users">
-                                    <div class="card" :id="'user'+user.id" @click="selectUser(user)">
-                                        <div class="card-body">
-                                            @{{ user.name }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination">
-                                            <li v-for="page in pages" class="page-item"><a class="page-link"  @click="fetch(page)">@{{ page }}</a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    </div>
-                </div>
-            </div>
+        
         
 
         <!-- modal -->
