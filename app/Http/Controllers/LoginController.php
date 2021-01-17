@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -18,11 +19,22 @@ class LoginController extends Controller
         try{    
 
             $credentials = $request->only('email', 'password');
+            $user = User::where("email", $request->email)->first();
 
-            if (Auth::attempt($credentials)) {
+            if($user){
 
-                return response()->json(["success" => true, "msg" => "Te has logueado", "role_id" => Auth::user()->role_id]);
+                if($user->email_verified_at == null){
+                    return response()->json(["success" => false, "msg" => "Debe validar su correo para continuar"]);
+                }
+
+                if (Auth::attempt($credentials)) {
+
+                    return response()->json(["success" => true, "msg" => "Te has logueado", "role_id" => Auth::user()->role_id]);
+                 }
+
             }
+
+            
 
             return response()->json(["success" => false, "msg" => "Usuario no encontrado"]);
 
