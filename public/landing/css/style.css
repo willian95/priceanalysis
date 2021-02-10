@@ -874,7 +874,7 @@ a {
     position: relative;
 }
 
-.hero-carousel__slide::after {
+/*.hero-carousel__slide::after {
     content: "";
     display: block;
     position: absolute;
@@ -886,7 +886,7 @@ a {
     transform: translateY(50px);
     opacity: 0;
     transition: all .4s ease;
-}
+}*/
 
 .hero-carousel__slideOverlay {
     position: absolute;
@@ -927,15 +927,15 @@ a {
     transition: all .4s ease-in-out;
 }
 
-.hero-carousel__slide:hover .hero-carousel__slideOverlay {
+/*.hero-carousel__slide:hover .hero-carousel__slideOverlay {
     transform: translateY(0);
     opacity: 1;
     z-index: 2;
-    /* top: 50px; */
+    //top: 50px;
     transition: all .4s ease-in-out;
     transform: translateY(0rem);
     height: 30vh;
-}
+}*/
 
 .card-product {
     border: 0;

@@ -1,6 +1,12 @@
 @extends('layouts.user')
 
 @section('content')
+    
+    <style>
+        body{
+            background-color: #007DC5;
+        }
+    </style>
 
     <div class="container" id="dev-landing">
         <div class="grid__publicacion mt-5">

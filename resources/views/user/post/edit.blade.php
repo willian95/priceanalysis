@@ -319,14 +319,9 @@
                 },
                 checkSelectedUsers(){
 
-                    if(this.selectedUsers == ""){
-                        
-                        if(confirm("No has seleccionado empresas para que vean tu publicación. ¿Deseas continuar?")){
-                            this.store()
-                        }
-                    }else{
-                        this.store()
-                    }
+                    
+                    this.store()
+                    
 
                 },
                 store(){
