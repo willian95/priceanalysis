@@ -8,7 +8,7 @@
         @if(\Auth::check() && \Auth::user()->id)
         <ul class="navbar-nav mr-auto" style="padding-left: 40px;">
             <form class="form-inline">
-                <input style="width: 300px;" v-model="searchString" class="form-control mr-sm-2" type="search" placeholder="Ingresa código de publicación" aria-label="Search">
+                <input v-model="searchString" class="form-control mr-sm-2" type="search" placeholder="búsqueda" aria-label="Search">
                 <button @click="search()" style="color: #fff" class="btn btn-outline-success my-2 my-sm-0" type="button"><i class="fa fa-search"></i></button>
             </form>
         </ul>

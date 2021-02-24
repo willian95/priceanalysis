@@ -27,6 +27,7 @@ Route::get('/post/fetch/{page}', "PostController@fetch")->middleware("auth");
 Route::get('/post/show/{code}', "PostController@show")->middleware("auth");
 Route::get('/post/product/{id}', "PostController@products")->middleware("auth");
 
+Route::get("/search/{search}", "SearchController@searchView")->middleware("auth");
 Route::post("/search", "SearchController@search")->middleware("auth");
 
 Route::get("/category/fetchAll", "CategoryController@fetchAll")->middleware("auth");

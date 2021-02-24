@@ -73,17 +73,7 @@
                 
                 search(){
 
-                    axios.post("{{ url('/search') }}", {searchString: this.searchString}).then(res => {
-
-                        if(res.data.success == true){
-
-                            window.location.href="{{ url('/post/show/') }}"+"/"+res.data.code
-
-                        }else{
-                            alertify.error(res.data.msg)
-                        }
-
-                    })
+                    window.location.href="{{ url('/search') }}"+"/"+this.searchString
 
                 }
 
