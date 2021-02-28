@@ -28,30 +28,7 @@
             <div class="container">
                 
                 <div class="row">
-                    @foreach(App\Post::with("user")->has("user")->orderBy('id', 'desc')->take(3)->get() as $post)
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body--grid">
-                                <div class="card-body--item">
-                                    <img class="img_p" src="https://cdn.pixabay.com/photo/2016/11/14/17/39/person-1824144_960_720.png" alt="">
-                            
 
-                                
-                                </div>
-                                <div class="card-body--item">
-                                    <div class="top_title">
-                                        <p class="titulo text-dark">{{ $post->user->name }}</p>
-                                        <p class="fecha_">{{ $post->created_at->format('Y-m-d') }}</p>
-                                    </div>                               
-                                    <p class="text-dark">{{ $post->title }}</p>
-                                    <!--   <a href="" class="btn-general">Ver publicacion</a>-->
-                                </div>
-                            
-                            </div>
-                        </div>
-                    </div>
-
-                    @endforeach
                 </div>
                 
             </div>
