@@ -148,12 +148,12 @@ class PostController extends Controller
                 if($product["product_id"] != 0){
 
                     $postProduct->product_id = $product["product_id"];
-                    $postProduct->unit_id = $product["unit_id"];
+                    $postProduct->unit_id = 0;
                     
-                    $unit = Unit::find($product["unit_id"]);
+                    //$unit = Unit::find($product["unit_id"]);
                     $productModel = Product::find($product["product_id"]);
                     $postProduct->product = $productModel->name;
-                    $postProduct->unit_name = $unit->name;
+                    //$postProduct->unit_name = $unit->name;
 
                 }else{
                     

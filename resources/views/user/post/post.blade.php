@@ -59,7 +59,7 @@
                                             <div class="col-12">
                                                 <p style="cursor: pointer; font-weight: bold;" data-toggle="modal" data-target="#newProductModal">¿No encuentras el producto que buscas?</p>
                                             </div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-8">
                                                 <div class="form-group inputBox">
                                                     <label for="name">Nombre</label>
                                                     <input autocomplete="off" type="text" class="form-control" id="name" v-model="name" placeholder="ej: Harina de maíz" @keyup="search()">
@@ -81,14 +81,14 @@
                                                 </div>
                                             </div>
         
-                                            <div class="col-md-2" v-if="productId != 0">
+                                            {{--<div class="col-md-2" v-if="productId != 0">
                                                 <div class="form-group inputBox">
                                                     <label for="unit">Unidad</label>
                                                     <select class="form-control" v-model="selectedUnit">
                                                         <option :value="unit" v-for="unit in units">@{{ unit.unit.name }}</option>
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div>--}}
         
                                             <div class="col-md-2">
                                                 <label for="" style="visibility: hidden">hg</label>
@@ -113,7 +113,7 @@
                                                         <tr v-for="(product, index) in products">
                                                             <td>@{{ index + 1 }}</td>
                                                             <td>@{{ product.displayName }}</td>
-                                                            <td>@{{ product.amount }} @{{ product.unitName }}</td>
+                                                            <td>@{{ product.amount }}</td>
                                                             <td><button class="btn btn-danger" @click="remove(index)">X</button></td>
                                                         </tr>
                                                     </tbody>
@@ -266,7 +266,7 @@
                 },
                 add(){
 
-                    if(this.amount != '' && this.amount > 0 && this.productId > 0 && this.selectedUnit != ""){
+                    if(this.amount != '' && this.amount > 0 && this.productId > 0){
 
                         var exists = false
                         this.products.forEach((data, index) => {
@@ -280,15 +280,14 @@
                         if(!exists){
                             
                             if(this.productId > 0){
-                                this.products.push({product_id: this.productId, amount: this.amount,unit_id: this.selectedUnit.unit.id, displayName: this.name, unitName: this.selectedUnit.unit.name})
+                                this.products.push({product_id: this.productId, amount: this.amount,displayName: this.name})
                             }else{
-                                this.products.push({product_id: this.productId, amount: this.amount, displayName: this.name, unitName: this.unit})
+                                this.products.push({product_id: this.productId, amount: this.amount, displayName: this.name})
                             }
 
                             this.name = ""
                             this.productId = 0
                             this.amount = ""
-                            this.selectedUnit = ""
                         }else{
                             alertify.error("Este producto ya existe")
                         }
@@ -303,9 +302,9 @@
                             alertify.error("Debe seleccionar una cantidad")
                         }
 
-                        if(this.selectedUnit == 0 || this.selectedUnit == "" || this.selectedUnit == null){
+                        /*if(this.selectedUnit == 0 || this.selectedUnit == "" || this.selectedUnit == null){
                             alertify.error("Debe seleccionar una unidad")
-                        }
+                        }*/
 
                     }
                         

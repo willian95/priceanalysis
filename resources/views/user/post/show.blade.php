@@ -53,7 +53,7 @@
                         </div>
                         <div class="form-group offset-3 col-10" v-for="product in products">
                             <div class="">
-                                <label>@{{ product.product }} - @{{ product.amount }} @{{ product.unit_name }}</label>              
+                                <label>@{{ product.product }} - cant. @{{ product.amount }}</label>              
                                 <input class="offer form-control col-7  mr-4 " :id="'offer'+product.id" type="text" placeholder="precio" @keypress="isNumberDot($event)">                                
                                 
                             </div>

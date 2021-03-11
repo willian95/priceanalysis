@@ -130,7 +130,7 @@ class ProductController extends Controller
 
         try{
 
-            $products = Product::where('name', "like", '%'.$request->search.'%')->has("productUnits")->has("brand")->with("brand")->orderBy("name", "asc")->take(30)->get();
+            $products = Product::where('name', "like", '%'.$request->search.'%')->has("brand")->with("brand")->orderBy("name", "asc")->take(30)->get();
             return response()->json(["success" => true, "products" => $products]);
 
         }catch(\Exception $e){
@@ -143,7 +143,7 @@ class ProductController extends Controller
 
         try{
 
-            $products = Product::where('name', "like", '%'.$request->search.'%')->has("productUnits")->has("brand")->with("brand")->orderBy("name", "asc")->take(20)->get();
+            $products = Product::where('name', "like", '%'.$request->search.'%')->has("brand")->with("brand")->orderBy("name", "asc")->take(20)->get();
             return response()->json(["success" => true, "products" => $products]);
 
         }catch(\Exception $e){

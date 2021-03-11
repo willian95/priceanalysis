@@ -17,34 +17,29 @@ class BrandsImport implements ToCollection
     */
     public function collection(Collection $rows)
     {
+        $index = 0;
         foreach ($rows as $row) 
         {
-            /*if($row[2] != "" && $row[0] != ""){
 
-                $brand = Brand::firstOrCreate(
-                    ["name" => $row[2]]
-                );
+            if($index > 0){
+
+                if($row[0] != "" && $row[2] != ""){
+
+                    $brand = Brand::firstOrCreate(
+                        ["name" => $row[2]]
+                    );
+        
+                    $product = new Product;
+                    $product->brand_id = $brand->id;
+                    $product->name = $row[1];
+                    $product->save();
     
-               
-                $product = Product::where("id", $row[0])->first();
-                $product->brand_id = $brand->id;
-                $product->update();
-                
-
-            }*/
-
-            if($row[0] == "" && $row[2] != ""){
-
-                $brand = Brand::firstOrCreate(
-                    ["name" => $row[2]]
-                );
-    
-                $product = new Product;
-                $product->brand_id = $brand->id;
-                $product->name = $row[1];
-                $product->save();
+                }
 
             }
+            
+
+            $index++;
             
         }
     }
