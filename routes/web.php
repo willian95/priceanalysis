@@ -188,7 +188,7 @@ Route::post("/admin/price-history/history", "PriceHistoryController@history");
 
 Route::get("/test-email", function(){
 
-    $email = "test-jim9qdvie@srv1.mail-tester.com";
+    $email = "rodriguezwillian95@gmail.com";
     $data = ["body" => "Para validar tu correo haz click en el siguiente enlace", "link" =>url('/')."/validate/account/123123123"];
     $subject = "Validar tu correo";
 
