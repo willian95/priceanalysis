@@ -48,7 +48,7 @@
                 <div class="offset-md-3 col-md-6">
                     <div class="" style="width: 100%;">
                         
-                        <div class="card-body box">
+                        <div class="card-body box" v-cloak>
                             <div class="form-group inputBox">                      
                                 <input  type="text" class="form-control" id="email" v-model="email" required="">
                                 <label for="email">   <img class="icon__form" src="{{ asset('assets/img/iconos/bx-envelope.svg') }}" alt="">E-mail</label>

@@ -34,9 +34,6 @@
                                     </div>
                                  <!--   <a href="" class="btn-general">Ver publicacion</a>-->
                                 </div>
-                            
-                            
-    
     
                             </div>
                         </div>

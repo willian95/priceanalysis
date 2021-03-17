@@ -1,3 +1,9 @@
+
+[v-cloak] {
+  display: none;
+}
+
+
 .bestPrice {
     background-color: transparent;
 }
@@ -984,6 +990,7 @@ fieldset {
     flex-direction: column;
     justify-content: start;
 }
+
 
 .select_search li{
     color: #007dc5;

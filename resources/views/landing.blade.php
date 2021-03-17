@@ -193,6 +193,15 @@
       </div>
     </section>
 
+    <section class="container mt6 fqa mb-5" id="tutorial">
+      <div class="section-intro pb-60px">
+        <h2>¿Cómo <span class="section-intro__style">ingresar</span>?</h2>
+      </div>
+      <video controls class="w-100">
+        <source src="{{ asset('tutorial.mp4') }}" type="video/mp4">
+      </video>
+    </section>
+
     <section class="container mt6 fqa mb-5" id="fqa">
       <div class="section-intro pb-60px">
         <p>lo más frecuente</p>
