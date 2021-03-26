@@ -41,7 +41,7 @@
 
                         <div class="col-md-12 mt-4 flex_line">
                             <h5 class=" card-title">Agregar oferta</h5>
-                            <small>* Los precios son representados en dolares</small>
+                            <small>* Los precios son representados en dólares</small>
                         
                         </div>
                         <div class=" col-6 offset-3 mr-4">

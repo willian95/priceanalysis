@@ -213,7 +213,7 @@ class PostController extends Controller
                 }
             }*/
 
-            return response()->json(["success" => true, "msg" => "Publicación realizada"]);
+            return response()->json(["success" => true, "msg" => "Publicación realizada", "post" => $post]);
 
         }catch(\Exception $e){
             return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);

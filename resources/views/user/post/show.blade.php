@@ -41,11 +41,11 @@
 
                         <div class="col-md-12 mt-4 flex_line">
                             <h5 class=" card-title">Agregar oferta</h5>
-                            <small>* Los precios son representados en dolares</small>
+                            <small>* Los precios son representados en dólares</small>
                         
                         </div>
                         <div class=" col-6 offset-3 mr-4">
-                            <div class="form-group" v-if="requestShipping">
+                            <div class="form-group" v-if="requestShipping == 1">
                                 <label>Flete</label>
                                 <input class="form-control  mr-4" type="text" placeholder="precio" v-model="shippingCost" @keypress="isNumberDot($event)">
                             </div>
@@ -61,12 +61,18 @@
                         </div> 
 
                         <p class="ml-5 mt-4">
+                            @if(\Auth::user()->id != $post->user->id)
                             <button class="btn btn-success " @click="storeOffer()">Ofertar <i class="fa fa-plus ml-2"></i></button>
+                            @else
+                                <p>Esta publicación te pertenece, por lo tanto no puedes ofertar en ella</p>
+                            @endif
                         </p>
                         @else
                             <h3 class="text-center mt-2 mb-2">Ya has realizado una oferta para esta publicación</h3>
                             <p class="ml-5 mt-4">
-                                <a :href="'{{ url('/my-offers/edit/') }}'+'/'+postId" class="btn btn-success">Editar <i class="fa fa-plus ml-2"></i></a>
+                                @if(\Auth::user()->id != $post->user->id)
+                                    <a :href="'{{ url('/my-offers/edit/') }}'+'/'+postId" class="btn btn-success">Editar <i class="fa fa-plus ml-2"></i></a>
+                                @endif
                             </p>
                         @endif
                     @endif
@@ -162,7 +168,7 @@
 
                             this.fetchOffers()
                             window.setTimeout(() => {
-                                window.location.href="{{ url('/') }}"
+                                window.location.href="{{ url('/home') }}"
                             }, 2000);
 
                         }else{

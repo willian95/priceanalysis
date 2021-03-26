@@ -66,7 +66,7 @@
                                                     <ul class="select_search">
                                                         <li v-for="search in searches">
                                                             <a href="#" @click="selectProduct(search)">
-                                                                @{{ search.name }} @{{ search.brand.name }}
+                                                                @{{ search.name }}
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -390,7 +390,7 @@
                             this.selectedUsers = ""
                             this.shippingCheck = false
                             $(".card").css("background-color", "white")
-                            window.location.href="{{ url('/home') }}"
+                            window.location.href="{{ url('/post/show') }}"+"/"+res.data.post.code
 
                         }else{
                             alertify.error(res.data.msg)
