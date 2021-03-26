@@ -47,26 +47,37 @@
                         <div class=" col-6 offset-3 mr-4">
                             <div class="form-group" v-if="requestShipping == 1">
                                 <label>Flete</label>
-                                <input class="form-control  mr-4" type="text" placeholder="precio" v-model="shippingCost" @keypress="isNumberDot($event)">
+                                <input class="form-control  mr-4" type="text" placeholder="precio" v-model="shippingCost" @keyup="checkOfferProducts()"  @keypress="isNumberDot($event)">
                             </div>
                             
                         </div>
                         <div class="form-group offset-3 col-10" v-for="product in products">
                             <div class="">
-                                <label>@{{ product.product }} - cant. @{{ product.amount }}</label>              
-                                <input class="offer form-control col-7  mr-4 " :id="'offer'+product.id" type="text" placeholder="precio" @keypress="isNumberDot($event)">                                
+                                <label>@{{ product.product }}</label>              
+                                <input class="offer form-control col-7  mr-4 " :id="'offer'+product.id+'-'+product.amount" type="text" placeholder="precio unitario" @keyup="checkOfferProducts()"  @keypress="isNumberDot($event)"> x cant. @{{ product.amount }}                                
                                 
                             </div>
                                                                 
                         </div> 
 
-                        <p class="ml-5 mt-4">
-                            @if(\Auth::user()->id != $post->user->id)
-                            <button class="btn btn-success " @click="storeOffer()">Ofertar <i class="fa fa-plus ml-2"></i></button>
-                            @else
-                                <p>Esta publicación te pertenece, por lo tanto no puedes ofertar en ella</p>
-                            @endif
-                        </p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="ml-5 mt-4">
+                                    @if(\Auth::user()->id != $post->user->id)
+                                    <button class="btn btn-success " @click="storeOffer()">Ofertar <i class="fa fa-plus ml-2"></i></button>
+                                    @else
+                                        <p>Esta publicación te pertenece, por lo tanto no puedes ofertar en ella</p>
+                                    @endif
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="ml-5 mt-4 pr-4">
+                                    
+                                    <p class="text-right"><span class="font-weight-bold">Total:</span> $ @{{ this.total }}</p>
+                            
+                                </p>
+                            </div>
+                        </div>
                         @else
                             <h3 class="text-center mt-2 mb-2">Ya has realizado una oferta para esta publicación</h3>
                             <p class="ml-5 mt-4">
@@ -123,7 +134,8 @@
                     pages:0,
                     bestPriceId:0,
                     midPriceId:0,
-                    worstPriceId:0
+                    worstPriceId:0,
+                    total:0
                }
             },
             methods:{
@@ -142,12 +154,27 @@
                     })
 
                 },
+                checkOfferProducts(){
+                    this.total = 0
+                    var element = $('.offer').map((_,el) => el).get()
+                    element.forEach((data, index) => {
+                        
+                        let amount = data.id.substring(data.id.indexOf("-") + 1, data.id.length)
+                        let total = $("#"+data.id).val() * parseFloat(amount)
+
+                        this.total = this.total + total + this.shippingCost
+
+                    })
+
+                    
+                },
                 storeOffer(){
 
                     var element = $('.offer').map((_,el) => el).get()
                     element.forEach((data, index) => {
                         
-                        this.productOffer.push({postProductId: data.id.substring(5, data.id.length), price: $("#"+data.id).val()})
+                        let amount = data.id.substring(data.id.indexOf("-") + 1, data.id.length)
+                        this.productOffer.push({postProductId: data.id.substring(5, data.id.length), price: $("#"+data.id).val(), "amount": amount})
                        
                     })
 
@@ -207,6 +234,7 @@
                     if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
                         evt.preventDefault();;
                     } else {
+
                         return true;
                     }
                 }
