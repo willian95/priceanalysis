@@ -14,6 +14,10 @@ class Post extends Model
         return $this->hasMany(PostProduct::class);
     }
 
+    public function pendingProducts(){
+        return $this->hasMany(PostPendingProduct::class);
+    }
+
     public function offers(){
         return $this->hasMany(Offer::class);
     }

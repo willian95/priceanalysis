@@ -18,4 +18,8 @@ class Offer extends Model
         return $this->belongsTo(Post::class);
     }
 
+    public function offerPendingProducts(){
+        return $this->hasMany(OfferPendingProduct::class);
+    }
+
 }

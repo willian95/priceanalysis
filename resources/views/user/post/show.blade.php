@@ -60,6 +60,15 @@
                                                                 
                         </div> 
 
+                        <div class="form-group offset-3 col-10" v-for="product in pendingProducts">
+                            <div class="">
+                                <label>@{{ product.displayName }}</label>              
+                                <input class="pending-offer form-control col-7  mr-4 " :id="'pending_offer'+product.id+'-'+product.amount" type="text" placeholder="precio unitario" @keyup="checkOfferProducts()"  @keypress="isNumberDot($event)"> x cant. @{{ product.amount }}                                
+                                
+                            </div>
+                                                                
+                        </div> 
+
                         <div class="row">
                             <div class="col-md-6">
                                 <p class="ml-5 mt-4">
@@ -73,7 +82,7 @@
                             <div class="col-md-6">
                                 <p class="ml-5 mt-4 pr-4">
                                     
-                                    <p class="text-right"><span class="font-weight-bold">Total:</span> $ @{{ this.total }}</p>
+                                    <p class="text-right"><span class="font-weight-bold">Total:</span> $ @{{ total }}</p>
                             
                                 </p>
                             </div>
@@ -129,6 +138,8 @@
                     shippingCost:0,
                     products:[],
                     productOffer:[],
+                    pendingProductOffer:[],
+                    pendingProducts:[],
                     offers:[],
                     offersCount:0,
                     pages:0,
@@ -147,6 +158,7 @@
                         
                         if(res.data.success == true){
                             this.products = res.data.products
+                            this.pendingProducts = res.data.pendingProducts
                         }else{
                             alertify.error(res.data.msg)
                         }
@@ -161,7 +173,17 @@
                         
                         let amount = data.id.substring(data.id.indexOf("-") + 1, data.id.length)
                         let total = $("#"+data.id).val() * parseFloat(amount)
+                        
+                        this.total = this.total + total + this.shippingCost
 
+                    })
+
+                    var element = $('.pending-offer').map((_,el) => el).get()
+                    element.forEach((data, index) => {
+                        
+                        let amount = data.id.substring(data.id.indexOf("-") + 1, data.id.length)
+                        let total = $("#"+data.id).val() * parseFloat(amount)
+                        
                         this.total = this.total + total + this.shippingCost
 
                     })
@@ -178,7 +200,15 @@
                        
                     })
 
-                    axios.post("{{ url('/offer/post/') }}"+"/"+this.postId, {offerProducts: this.productOffer, postId: this.postId, shippingCost: this.shippingCost})
+                    var element = $('.pending-offer').map((_,el) => el).get()
+                    element.forEach((data, index) => {
+                        
+                        let amount = data.id.substring(data.id.indexOf("-") + 1, data.id.length)
+                        this.pendingProductOffer.push({id: data.id.substring(13, data.id.length), price: $("#"+data.id).val(), "amount": amount})
+                       
+                    })
+
+                    axios.post("{{ url('/offer/post/') }}"+"/"+this.postId, {offerProducts: this.productOffer, pendingOfferProduct: this.pendingProductOffer, postId: this.postId, shippingCost: this.shippingCost})
                     .then(res => {
 
                         if(res.data.success == true){

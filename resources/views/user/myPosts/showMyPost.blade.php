@@ -45,7 +45,7 @@
                                     @{{ (((offer.sum + offer.shipping_cost)/(offers[0].sum + offers[0].shipping_cost)*100) - 100).toFixed(4)  }} %
                                 </td>
                                 <td>
-                                    <button class="btn btn-info" @click="showOffer(offer.products)" data-toggle="modal" data-target="#productModal">ver</button>
+                                    <button class="btn btn-info" @click="showOffer(offer.products, offer.offer_pending_products)" data-toggle="modal" data-target="#productModal">ver</button>
                                 </td>    
                             </tr>
                         </tbody>
@@ -118,7 +118,12 @@
                             <tbody>
                                 <tr v-for="(product, index) in productsOffer">
                                     <td>@{{ index + 1 }}</td>
-                                    <td>@{{ product.post_product.product }} - @{{ product.post_product.amount }} @{{ product.post_product.unit_name }} </td>
+                                    <td>@{{ product.post_product.product }} - @{{ product.post_product.amount }} </td>
+                                    <td>@{{ product.price }}</td>
+                                </tr>
+                                <tr v-for="(product, index) in offerPendingProducts">
+                                    <td>@{{ index + 1 }}</td>
+                                    <td>@{{ product.post_pending_product.displayName }} - @{{ product.post_pending_product.amount }} </td>
                                     <td>@{{ product.price }}</td>
                                 </tr>
                             </tbody>
@@ -149,6 +154,7 @@
                     description:'{{ $post->description }}',
                     products:[],
                     productsOffer:[],
+                    offerPendingProducts:[],
                     offers:[],
                     offersCount:0,
                     pages:0,
@@ -173,8 +179,9 @@
                     })
 
                 },
-                showOffer(products){
+                showOffer(products, offerPendingProducts){
                     this.productsOffer = products
+                    this.offerPendingProducts = offerPendingProducts
                 },
                 storeOffer(){
 

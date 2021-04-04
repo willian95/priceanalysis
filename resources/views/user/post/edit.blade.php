@@ -110,8 +110,14 @@
                                                         <tr v-for="(product, index) in products">
                                                             <td>@{{ index + 1 }}</td>
                                                             <td>@{{ product.displayName }}</td>
-                                                            <td>@{{ product.amount }} @{{ product.unitName }}</td>
+                                                            <td>@{{ product.amount }}</td>
                                                             <td><button class="btn btn-danger" @click="remove(index)">X</button></td>
+                                                        </tr>
+                                                        <tr v-for="(product, index) in pendingProducts">
+                                                            <td>@{{ index + 1 }}</td>
+                                                            <td>@{{ product.displayName }}</td>
+                                                            <td>@{{ product.amount }}</td>
+                                                            <td><button class="btn btn-danger" @click="removePending(index)">X</button></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -182,6 +188,7 @@
                     step:1,
                     title:"{{ $post->title }}",
                     description:"{{ $post->description }}",
+                    pendingProducts:[],
                     products:[],
                     categories:[],
                     searches:"",
@@ -194,7 +201,7 @@
                     unit:"",
                     units:[],
                     type:"{{ $post->is_private ? 'private' : 'public' }}",
-                    shippingCheck:"{{ $post->request_shipping }}"
+                    shippingCheck:JSON.parse("{{ $post->request_shipping }}")
                }
             },
             methods:{
@@ -317,6 +324,17 @@
                     })
 
                 },
+                removePending(id){
+
+                    this.pendingProducts.forEach((data, index) => {
+
+                        if(index == id){
+                            this.pendingProducts.splice(index, 1)
+                        }
+
+                    })
+
+                },
                 checkSelectedUsers(){
 
                     
@@ -326,7 +344,7 @@
                 },
                 store(){
 
-                    axios.post("{{ url('/post/update') }}", {title: this.title, description: this.description, products: this.products, selectedUsers: this.selectedUsers, type: this.type, shippingCheck: this.shippingCheck, postId: this.postId})
+                    axios.post("{{ url('/post/update') }}", {title: this.title, description: this.description, products: this.products,pendingProducts: this.pendingProducts, selectedUsers: this.selectedUsers, type: this.type, shippingCheck: this.shippingCheck, postId: this.postId})
                     .then(res => {
 
                         if(res.data.success == true){
@@ -400,12 +418,21 @@
                 this.fetch()
 
                 let products = JSON.parse('{!! $products !!}')
+                let pendingProducts = JSON.parse('{!! $pendingProducts !!}')
 
                 products.forEach((data) => {
 
                     this.products.push({product_id: data.product_id, amount: data.amount, unit_id: data.unit_id, displayName: data.product.name, unitName: data.unit_name})
 
                 })
+
+                pendingProducts.forEach((data) => {
+
+                    this.pendingProducts.push({id:data.id, amount: data.amount, displayName: data.displayName})
+
+                })
+
+                
 
             }
         }); 

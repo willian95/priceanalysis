@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Offer;
 use App\OfferProduct;
+use App\OfferPendingProduct;
+use App\PostPendingProduct;
+use App\PostProduct;
 
 class OfferController extends Controller
 {
@@ -90,11 +93,11 @@ class OfferController extends Controller
 
             $offers = Offer::where("post_id", $id)->with(['products' => function ($q) {
                 $q->withTrashed();
-            }])->with("products.postProduct", "user")->skip($skip)->take(20)->orderBy('sum', 'asc')->get();
+            }])->with("products.postProduct", "user", "offerPendingProducts", "OfferPendingProducts.postPendingProduct")->skip($skip)->take(20)->orderBy('sum', 'asc')->get();
 
             $offersCount = Offer::where("post_id", $id)->with(['products' => function ($q) {
                 $q->withTrashed();
-            }])->with("products.postProduct", "user")->count();
+            }])->with("products.postProduct", "user", "offerPendingProducts", "OfferPendingProduct.postPendingProduct")->count();
 
             $bestPriceId = 0;
             $worstPriceId = 0;
@@ -156,7 +159,23 @@ class OfferController extends Controller
                 $offerProduct->price = $offerProductArr["price"] ? $offerProductArr["price"] : 0;
                 $offerProduct->save();
 
-                $total = floatval($total) + floatval($offerProductArr["price"]);
+                $postProduct = PostProduct::find($offerProduct->post_product_id);
+
+                $total = floatval($total) + floatval($offerProductArr["price"] * $postProduct->amount);
+
+            }
+
+            foreach($request->pendingOfferProduct as $pendingOfferProductArr){
+                
+                $pendingOfferProduct = new OfferPendingProduct;
+                $pendingOfferProduct->offer_id = $offer->id;
+                $pendingOfferProduct->post_pending_product_id = $pendingOfferProductArr["id"];
+                $pendingOfferProduct->price = $pendingOfferProductArr["price"] ? $pendingOfferProductArr["price"] : 0;
+                $pendingOfferProduct->save();
+
+                $postPendingProduct = PostPendingProduct::find($pendingOfferProduct->post_pending_product_id);
+
+                $total = floatval($total) + (floatval($pendingOfferProductArr["price"] * $postPendingProduct->amount));
 
             }
 

@@ -183,6 +183,14 @@
                                     <textarea v-model="proposal" class="form-control" rows="3" placeholder="Describe el producto y en breve serás notificado de la creación del producto"></textarea>
                                 
                                 </div>
+                                <div class="col-md-12 ">
+                                    
+                                    <div class="form-group">
+                                        <label for="">Cantidad</label>
+                                        <input type="text" class="form-control" v-model="amount"  @keypress="isNumberDot($event)">
+                                    </div>
+                                
+                                </div>
                                 <div class="col-md-12">
                                     <p class="text-center mt-2">
                                         <button class="btn btn-primary" @click="newProductSend()">Enviar</button>
@@ -222,9 +230,10 @@
                     selectedUsers:"",
                     pages:0,
                     name:"",
-                    amount:"",
+                    amount:0,
                     productId:0,
                     proposal:"",
+                    newProducts:[],
                     selectedUnit:"",
                     unit:"",
                     units:[],
@@ -236,20 +245,26 @@
 
                 newProductSend(){
 
-                    axios.post("{{ url('/product/send/proposal') }}", {"proposal": this.proposal}).then(res => {
+                    if(this.proposal != "" && this.amount != ""){
 
-                        if(res.data.success == true){
+                        this.products.push({amount: this.amount,displayName: this.proposal, pending:true})
 
-                            alertify.success(res.data.msg)
-                            this.proposal = ""
+                        axios.post("{{ url('/product/send/proposal') }}", {"proposal": this.proposal}).then(res => {
 
-                        }else{
+                            if(res.data.success == true){
 
-                            alertify.error(res.data.success)
+                                alertify.success(res.data.msg)
+                                this.proposal = ""
+                                this.amount = 0
 
-                        }
+                            }else{
 
-                    })
+                                alertify.error(res.data.success)
+
+                            }
+
+                        })
+                    }
 
                 },
                 checkDescriptionAndTitle(){
@@ -287,7 +302,7 @@
 
                             this.name = ""
                             this.productId = 0
-                            this.amount = ""
+                            this.amount = 0
                         }else{
                             alertify.error("Este producto ya existe")
                         }

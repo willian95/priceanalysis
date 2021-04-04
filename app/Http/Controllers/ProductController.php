@@ -8,6 +8,7 @@ use App\Http\Requests\ProductUpdateRequest;
 use App\Product;
 use App\ProductUnit;
 use App\AdminEmail;
+use App\PostPendingProduct;
 
 class ProductController extends Controller
 {

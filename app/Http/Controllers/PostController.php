@@ -10,6 +10,7 @@ use App\PostProduct;
 use App\Product;
 use App\ProductUnit;
 use App\Unit;
+use App\PostPendingProduct;
 
 class PostController extends Controller
 {   
@@ -36,7 +37,8 @@ class PostController extends Controller
         try{
 
             $products = PostProduct::where("post_id", $id)->get();
-            return response()->json(["success" => true, "products" => $products]);
+            $pendingProducts = PostPendingProduct::where("post_id", $id)->get();
+            return response()->json(["success" => true, "products" => $products, "pendingProducts" => $pendingProducts]);
 
         }catch(\Exception $e){
             return response()->json(["success" => false, "msg" => "Error en el servidor"]);
@@ -55,7 +57,9 @@ class PostController extends Controller
                 $q->withTrashed();
             }])->get();
 
-            return view("user.post.edit", ["post" => $post, "products" => $products]);
+            $pendingProducts = PostPendingProduct::where("post_id", $id)->get();
+
+            return view("user.post.edit", ["post" => $post, "products" => $products, "pendingProducts" => $pendingProducts]);
 
         }else{
 
@@ -145,7 +149,7 @@ class PostController extends Controller
             foreach($request->products as $product){
 
                 $postProduct = new PostProduct;
-                if($product["product_id"] != 0){
+                if(isset($product["product_id"])){
 
                     $postProduct->product_id = $product["product_id"];
                     $postProduct->unit_id = 0;
@@ -155,63 +159,23 @@ class PostController extends Controller
                     $postProduct->product = $productModel->name;
                     //$postProduct->unit_name = $unit->name;
 
+                    $postProduct->amount = $product["amount"];
+                
+                    $postProduct->post_id = $post->id;
+                    $postProduct->save();
+
                 }else{
                     
-                    $postProduct->product = $product["displayName"];
-                    $postProduct->unit_name = $product["unitName"];
-
-                    $unitName = strtoupper($product["unitName"]);
-                    $unitName = str_replace("Á", "A", $unitName);
-                    $unitName = str_replace("É", "E", $unitName);
-                    $unitName = str_replace("Í", "I", $unitName);
-                    $unitName = str_replace("Ó", "O", $unitName);
-                    $unitName = str_replace("Ú", "U", $unitName);
-
-                    $productName = strtoupper($product["displayName"]);
-                    $productName = str_replace("Á", "A", $productName);
-                    $productName = str_replace("É", "E", $productName);
-                    $productName = str_replace("Í", "I", $productName);
-                    $productName = str_replace("Ó", "O", $productName);
-                    $productName = str_replace("Ú", "U", $productName);
-
-
-                    $unit = Unit::firstOrCreate(
-                        ["name" => $unitName]
-                    );
-
-                    $productModel = Product::firstOrCreate(
-                        ["name" => $productName]
-                    );
-
-                    if(ProductUnit::where("product_id", $productModel->id)->where("unit_id", $unit->id)->count() <= 0){
-
-                        $productUnit = new ProductUnit;
-                        $productUnit->product_id = $productModel->id;
-                        $productUnit->unit_id = $unit->id;
-                        $productUnit->save();
-
-                    }
-
-                    //$this->sendAdminEmail("El usuario: ".\Auth::user()->name." con el correo: ".\Auth::user()->email." ha agregado el articulo ".$productModel->name." con la unidad: ".$unit->name);
-
-                    $postProduct->product_id = $productModel->id;
-                    $postProduct->unit_id = $unit->id;
-
+                    $pendingProduct = new PostPendingProduct;
+                    $pendingProduct->displayName = $product["displayName"];
+                    $pendingProduct->amount = $product["amount"];
+                    $pendingProduct->post_id = $post->id;
+                    $pendingProduct->save();
 
                 }
 
-                $postProduct->amount = $product["amount"];
-                
-                $postProduct->post_id = $post->id;
-                $postProduct->save();
 
             }
-
-            /*if($request->selectedUsers != null){
-                foreach($request->selectedUsers as $users){
-                    $this->sendEmail($users["name"], $users["email"], $post->code);
-                }
-            }*/
 
             return response()->json(["success" => true, "msg" => "Publicación realizada", "post" => $post]);
 
@@ -256,6 +220,23 @@ class PostController extends Controller
 
             }
 
+            foreach(PostPendingProduct::where("post_id", $request->postId)->get() as $postPendingProduct){
+
+                $exists = false;
+                foreach($request->pendingProducts as $product){
+
+                    if($product["product_id"] == $postPendingProduct->id){
+                        $exists = true;
+                    }
+
+                }
+
+                if($exists == false){
+                    PostPendingProduct::where("id", $postPendingProduct->id)->delete();
+                }
+
+            }
+
             foreach($request->products as $product){
 
                 $postProduct = PostProduct::where("post_id", $request->postId)->where("product_id", $product["product_id"])->first();
@@ -279,6 +260,26 @@ class PostController extends Controller
                     $postProduct->amount = $product["amount"];
                     $postProduct->post_id = $post->id;
                     $postProduct->save();
+
+                }
+
+
+            }
+
+            foreach($request->pendingProducts as $product){
+
+                $postPendingProduct = PostPendingProduct::where("post_id", $request->postId)->where("product_id", $product["product_id"])->first();
+
+                if($postPendingProduct){
+                    $postPendingProduct->amount = $product["amount"];
+                    $postPendingProduct->update();
+                }else{
+
+                    $postPendingProduct = new PostPendingProduct;
+                    $postPendingProduct->displayName = $product["displayName"];
+                    $postPendingProduct->amount = $product["amount"];
+                    $postPendingProduct->post_id = $post->id;
+                    $postPendingProduct->save();
 
                 }
 
