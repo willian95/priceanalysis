@@ -174,7 +174,7 @@
                         let amount = data.id.substring(data.id.indexOf("-") + 1, data.id.length)
                         let total = $("#"+data.id).val() * parseFloat(amount)
                         
-                        this.total = parseFloat(this.total) + parseFloat(total) + parseFloat(this.shippingCost)
+                        this.total = parseFloat(this.total) + parseFloat(total)
 
                     })
 
@@ -184,10 +184,11 @@
                         let amount = data.id.substring(data.id.indexOf("-") + 1, data.id.length)
                         let total = $("#"+data.id).val() * parseFloat(amount)
                         
-                        this.total = parseFloat(this.total) + parseFloat(total) + parseFloat(this.shippingCost)
+                        this.total = parseFloat(this.total) + parseFloat(total)
 
                     })
 
+                    this.total = this.total + this.shippingCost
                     
                 },
                 storeOffer(){
