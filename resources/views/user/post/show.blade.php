@@ -188,7 +188,7 @@
 
                     })
 
-                    this.total = this.total + this.shippingCost
+                    this.total = this.total + parseFloat(this.shippingCost)
                     
                 },
                 storeOffer(){
