@@ -156,6 +156,7 @@ class OfferController extends Controller
                 $offerProduct = new offerProduct;
                 $offerProduct->offer_id = $offer->id;
                 $offerProduct->post_product_id = $offerProductArr["postProductId"];
+                $offerProduct->description = $offerProductArr["description"];
                 $offerProduct->price = $offerProductArr["price"] ? $offerProductArr["price"] : 0;
                 $offerProduct->save();
 
@@ -171,6 +172,7 @@ class OfferController extends Controller
                 $pendingOfferProduct->offer_id = $offer->id;
                 $pendingOfferProduct->post_pending_product_id = $pendingOfferProductArr["id"];
                 $pendingOfferProduct->price = $pendingOfferProductArr["price"] ? $pendingOfferProductArr["price"] : 0;
+                $pendingOfferProduct->description = $offerProductArr["description"];
                 $pendingOfferProduct->save();
 
                 $postPendingProduct = PostPendingProduct::find($pendingOfferProduct->post_pending_product_id);

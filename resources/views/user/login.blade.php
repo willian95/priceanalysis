@@ -66,6 +66,8 @@
 
                          </div>
 
+                        <p class="mt-3 text-info" style="cursor:pointer" data-toggle="modal" data-target="#forgotPasswordModal">¿Olvidaste tu contraseña?</p>
+
                             <div class="content__btn">
                                 <a class="btn-login  mr-2" href="{{ url('facebook/auth/login') }}"> <i class="fa fa-facebook"></i> Facebook</a>
                                 <a class="btn-login btn-login2"href="{{ url('google/auth/login') }}"> <i class="fa fa-google"></i>Google</a>
@@ -73,6 +75,32 @@
                             </div>
 
                         </div>
+
+                        <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Recuperar contraseña</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    
+                                    <div class="form-group">
+                                        <label for="">Ingresa tu correo</label>
+                                        <input type="text" v-model="emailInputRestore" class="form-control">
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #95a5a6 !important; border-color:#95a5a6 !important">Cerrar</button>
+                                    <button type="button" class="btn btn-primary" @click="restorePassword()">Recuperar</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -93,7 +121,8 @@
             data(){
                return{
                    email:"",
-                   password:""
+                   password:"",
+                   emailInputRestore:""
                }
             },
             methods:{
@@ -133,6 +162,34 @@
                             alertify.error(value)
                         })
                     })
+
+                },
+                async restorePassword(){
+
+                    try{
+                        this.loading = true
+                        let res = await axios.post("{{ url('/restore-password') }}", {email: this.emailInputRestore})
+                        this.loading = false
+
+                        if(res.data.success == true){
+
+                            this.emailInputRestore = ""
+                            alertify.success(res.data.msg)
+
+                        }else{
+
+                            alertify.error(res.data.msg)
+
+                        }
+
+                    }catch(err){
+
+                        $.each(err.response.data.errors, function(key, value) {
+                            alertify.error(value)
+                        })
+
+                    }
+                    
 
                 }
 

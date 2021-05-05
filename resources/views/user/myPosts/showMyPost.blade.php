@@ -112,19 +112,25 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Descripción</th>
                                     <th>Precio</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(product, index) in productsOffer">
                                     <td>@{{ index + 1 }}</td>
-                                    <td>@{{ product.post_product.product }} - @{{ product.post_product.amount }} </td>
-                                    <td>@{{ product.price }}</td>
+                                    <td>@{{ product.post_product.product }} </td>
+                                    <td>@{{ product.post_product.amount }}</td>
+                                    <td>@{{ product.description }}</td>
+                                    <td>@{{ product.price }} $</td>
                                 </tr>
                                 <tr v-for="(product, index) in offerPendingProducts">
                                     <td>@{{ index + 1 }}</td>
-                                    <td>@{{ product.post_pending_product.displayName }} - @{{ product.post_pending_product.amount }} </td>
-                                    <td>@{{ product.price }}</td>
+                                    <td>@{{ product.post_pending_product.displayName }} </td>
+                                    <td>@{{ product.post_pending_product.amount }}</td>
+                                    <td>@{{ product.description }}</td>
+                                    <td>@{{ product.price }} $</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -180,6 +186,7 @@
 
                 },
                 showOffer(products, offerPendingProducts){
+
                     this.productsOffer = products
                     this.offerPendingProducts = offerPendingProducts
                 },

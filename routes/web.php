@@ -41,6 +41,10 @@ Route::get("/offer/fetch/post/{id}/page/{page}", "OfferController@fetch")->middl
 Route::get('/login', "LoginController@index")->name("login")->middleware("guest"); 
 Route::post('/login', "LoginController@login");
 
+Route::post('/restore-password', "RestorePasswordController@restorePassword");
+Route::get("/change/password/{recoveryHash}", "RestorePasswordController@verify");
+Route::post("/update/password", "RestorePasswordController@update");
+
 Route::get('/logout', function(){
     \Auth::logout();
     return redirect()->to("/");

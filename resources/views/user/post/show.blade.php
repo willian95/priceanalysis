@@ -51,21 +51,35 @@
                             </div>
                             
                         </div>
-                        <div class="form-group offset-3 col-10" v-for="product in products">
-                            <div class="">
+                        <div class="row" v-for="product in products">
+                           
+                            <div class="col-md-6">
                                 <label>@{{ product.product }}</label>              
-                                <input class="offer form-control col-7  mr-4 " :id="'offer'+product.id+'-'+product.amount" type="text" placeholder="precio unitario" @keyup="checkOfferProducts()"  @keypress="isNumberDot($event)"> x cant. @{{ product.amount }}                                
-                                
-                            </div>
+                                <input class="offer form-control col-7  mr-4 " :id="'offer'+product.id+'-'+product.amount" type="text" placeholder="precio unitario" @keyup="checkOfferProducts()"  @keypress="isNumberDot($event)">  
+                            </div>   
+                            <div class="col-md-6">              
+                                <textarea class="offer-observation form-control col-7  mr-4 " :id="'offer-observation'+product.id+'-'+product.amount" type="text" placeholder="observación" style="height:100%;"></textarea>  
+                            </div>                              
+                            <div class="col-12">
+                                <p>x cant. @{{ product.amount }} </p>
+                            </div>    
+
+                            
                                                                 
                         </div> 
 
-                        <div class="form-group offset-3 col-10" v-for="product in pendingProducts">
-                            <div class="">
+                        <div class="row" v-for="product in pendingProducts">
+                          
+                            <div class="col-md-6">
                                 <label>@{{ product.displayName }}</label>              
-                                <input class="pending-offer form-control col-7  mr-4 " :id="'pending_offer'+product.id+'-'+product.amount" type="text" placeholder="precio unitario" @keyup="checkOfferProducts()"  @keypress="isNumberDot($event)"> x cant. @{{ product.amount }}                                
-                                
+                                <input class="pending-offer form-control col-7  mr-4 " :id="'pending_offer'+product.id+'-'+product.amount" type="text" placeholder="precio unitario" @keyup="checkOfferProducts()"  @keypress="isNumberDot($event)">
                             </div>
+                            <div class="col-md-6">
+                                     
+                                <textarea class="pending-offer-observation form-control col-7  mr-4 " :id="'pending_offer-observation'+product.id+'-'+product.amount" type="text" placeholder="observación" style="height:100%;"></textarea>  
+                            </div>                              
+                   
+                            x cant. @{{ product.amount }}  
                                                                 
                         </div> 
 
@@ -196,16 +210,20 @@
                     var element = $('.offer').map((_,el) => el).get()
                     element.forEach((data, index) => {
                         
+                        let obervation = data.id.replace("offer", "offer-observation")
+
                         let amount = data.id.substring(data.id.indexOf("-") + 1, data.id.length)
-                        this.productOffer.push({postProductId: data.id.substring(5, data.id.length), price: $("#"+data.id).val(), "amount": amount})
+                        this.productOffer.push({postProductId: data.id.substring(5, data.id.length), price: $("#"+data.id).val(), "amount": amount, "description": $("#"+obervation).val()})
                        
                     })
 
                     var element = $('.pending-offer').map((_,el) => el).get()
                     element.forEach((data, index) => {
                         
+                        let obervation = data.id.replace("offer", "pending_offer-observation")
+
                         let amount = data.id.substring(data.id.indexOf("-") + 1, data.id.length)
-                        this.pendingProductOffer.push({id: data.id.substring(13, data.id.length), price: $("#"+data.id).val(), "amount": amount})
+                        this.pendingProductOffer.push({id: data.id.substring(13, data.id.length), price: $("#"+data.id).val(), "amount": amount, "description": $("#"+observation).val()})
                        
                     })
 
@@ -220,7 +238,18 @@
                             var element = $('.offer').map((_,el) => el).get()
                             element.forEach((data, index) => {
                                 
+                                let observation = data.id.replace("offer", "offer-observation")
                                 $("#"+data.id).val("")
+                                $("#"+observation).val("")
+                            
+                            })
+
+                            var element = $('.offer-observation').map((_,el) => el).get()
+                            element.forEach((data, index) => {
+                                
+                                let observation = data.id.replace("offer", "pending_offer-observation")
+                                $("#"+data.id).val("")
+                                $("#"+observation).val("")
                             
                             })
 
