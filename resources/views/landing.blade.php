@@ -30,7 +30,7 @@
             Commerceprice es la herramienta que permite una comparación eficiente, en tiempo breve, de los distintos precios que se visualizan en el mercado, de uno o varios productos en particular.
           </p>
           <p>
-          A través del uso de la herramienta, puedes solicitar a una red de empresas registradas en la plataforma una cotización o presupuesto -de uno o varios productos- y con un simple Clic, analizar rápidamente la mejor oferta en cuanto a precios, seleccionando el contacto que deseas establecer, evitando, el uso de tiempo innecesario en llamadas, correos y contactos que finalmente no ofrecen lo que buscas en los tiempos que requeridos.  
+          A través del uso de la herramienta, puedes solicitar a una red de empresas registradas en la plataforma una cotización o presupuesto -de uno o varios productos- y con un simple Clic, analizar rápidamente la mejor oferta en cuanto a precios, seleccionando el contacto que deseas establecer, evitando, el uso de tiempo innecesario en llamadas, correos y contactos que finalmente no ofrecen lo que buscas en los tiempos requeridos.  
           </p>
           <p>
           Entonces ¿Tienes un proyecto y necesitas productos para ejecutarlo? ¿Debes invertir una cantidad de tiempo considerable buscando las mejores opciones de precios? ¿Necesitas optimizar tus costos o gastos? Entre tus responsabilidades, el proyecto, la necesidad de darle un respiro a tu mente y tu cuerpo ¿Crees que tengas el tiempo necesario para movilizarte a ejecutar la búsqueda de precios? Seguramente la respuesta es “NO”, por eso, Nuestra solución es simple, indica los productos que necesitas, envía esa necesidad a la red de empresas registradas (Según sea tu Criterio), espera sus propuestas de precios, compara con un clic y contacta a la mejor o las mejores propuestas. Ah, te acotamos que el servicio es gratis.
@@ -123,25 +123,25 @@
                 <div class="row">
 
                   <div class="col-lg-12">
-                    <div class="card" >
+                    <div class="card" style="cursor:pointer;" onclick="goToNew('https://www.elnacional.com/opinion/la-capacidad-ociosa-y-la-recuperacion-de-la-economia-venezolana/')">
                       <div class="card-body" style="height: 70px;">
-                        <p >Bitcoin por encima de los 40.000 USD</p>
+                        <p >La recuperación de la economía venezolana</p>
                       </div>
                     </div>
                   </div>
 
                   <div class="col-lg-12 mt-1">
-                    <div class="card" >
-                      <div class="card-body" style="height: 70px;">
-                        <p >Bitcoin por encima de los 40.000 USD</p>
+                    <div class="card" style="cursor:pointer;" onclick="goToNew('https://www.bancaynegocios.com/cinco-recomendaciones-para-fijar-precios-segun-asdrubal-oliveros/')">
+                      <div class="card-body" style="height: 70px;" >
+                        <p >Cinco recomendaciones para fijar precios</p>
                       </div>
                     </div>
                   </div>
 
                   <div class="col-lg-12 mt-1">
-                    <div class="card" >
+                    <div class="card" style="cursor:pointer;" onclick="goToNew('https://www.diariodelexportador.com/2020/03/el-dumping-y-su-impacto-en-el-comercio.html')">
                       <div class="card-body" style="height: 70px;">
-                        <p >Bitcoin por encima de los 40.000 USD</p>
+                        <p >El dumping y su impacto en el comercio</p>
                       </div>
                     </div>
                   </div>
@@ -213,40 +213,49 @@
         <div class="row mt-50">
           <div class="col-md-6">
             <div class="main-collapse">
-              <button class="collapsible">¿Que necesitas saber?</button>
+              <button class="collapsible">¿Qué puedo hacer en Commerceprice?</button>
               <div class="collapsibleContent">
-                <p>La inversión publicitaria es el recurso que se utiliza para lograr visibilidad y audiencia en el
-                  corto plazo, a través de los distintos… canales digitales como Facebook, Google o LinkedIn Ads.</p>
+                <p>Obtener los precios de los productos que estoy buscando a través de las empresas y/o personas registradas.</p>
               </div>
             </div>
             <div class="main-collapse">
-              <button class="collapsible">¿Que necesitas saber?</button>
+              <button class="collapsible">¿Puedo Comprar productos a través de la página?</button>
               <div class="collapsibleContent">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat.</p>
+                <p>Inicialmente, “NO”. Nuestro objetivo es enlazar compradores y vendedores, minimizar los tiempos para búsquedas de precios y los costos para los compradores.</p>
               </div>
             </div>
             <div class="main-collapse">
-              <button class="collapsible">¿Que necesitas saber?</button>
+              <button class="collapsible">¿Commerceprice tiene alguna responsabilidad en la negociación entre comprador-vendedor?</button>
               <div class="collapsibleContent">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat.</p>
+                <p><strong>NO.</strong> Commerceprice solo enlaza, el requerimiento del comprador con la mejor(es) propuesta(s) del Vendedor(es). Luego es decisión del comprador llamar al vendedor elegido y establecer la negociación entre ambas partes, con los acuerdos que ellos consideren según las políticas internas de cada uno.</p>
               </div>
             </div>
 
           </div>
           <div class="col-md-6">
             <div class="main-collapse">
-              <button class="collapsible">¿Que necesitas saber?</button>
+              <button class="collapsible">¿Qué pasa si la negociación no salió según lo acordado y una de las partes se vio afectada?</button>
               <div class="collapsibleContent">
-                <p>Al ser parte de nuestra familia, se asigna un ejecutivo comercial y un jefe de proyectos para que
-                  estén en constante comunicación…</p>
+                <p>Recomendamos tomar las siguientes previsiones para concretar las negociaciones:</p>
+                <ul>
+                  <li>1.- Nunca realizar ningún pago por adelantado, si no conoce o tiene certeza de la procedencia del proveedor.</li>
+                  <li>2.- Nunca acceder a negociaciones que estipulen quebrantamiento de las leyes vigentes. Por Ejemplo, recibir alimentos en otra dirección diferente a la registrada en el portal SICA (Sunagro).</li>
+                  <li>3.- Solventar las dudas que pueda tener respecto a los productos, su naturaleza, composición, precio, flete, formas y condiciones de pagos, tiempos de despacho.</li>
+                  <li>4.- Siempre estar atentos a ofertas que se salen -considerablemente- del rango de precios de la mayoría de los ofertantes. </li>
+                </ul>
+                <p>Vendedores:</p>
+                <ul>
+                  <li>1.- Validar que la mercancía sea entregada en la dirección establecida en los documentos legales y al negocio correspondiente.</li>
+                  <li>2.- Solicitar las referencias comerciales, bancarias necesarias para verificar la capacidad de pago del comprador cuando la mercancía no sea negociada con pago inmediato.</li>
+                  <li>
+                  3.- Solventar las dudas que el cliente pueda tener respecto a los productos, su naturaleza, composición, precio, flete, formas y condiciones de pagos, tiempos de despacho.
+                  </li>
+                </ul>
+                <p><strong>De igual forma, nuestro portal dará opciones para calificar a las partes involucradas.</strong></p>
               </div>
             </div>
             <div class="main-collapse">
-              <button class="collapsible">¿Que necesitas saber?</button>
+              <button class="collapsible">¿Cómo saben que los datos suministrados son reales?</button>
               <div class="collapsibleContent">
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
                   et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -256,9 +265,13 @@
             <div class="main-collapse">
               <button class="collapsible">¿Que necesitas saber?</button>
               <div class="collapsibleContent">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat.</p>
+                <p>Los datos suministrados por las empresas o personas registradas en la página, son validados a través del portal fiscal (SENIAT) o en su defecto si es persona natural y no aporta RIF, sino solo cedula, es validado a través del portal del CNE, esto solo con la finalidad de validar que efectivamente son empresas o individuos con capacidad para involucrarse en el comercio.</p>
+              </div>
+            </div>
+            <div class="main-collapse">
+              <button class="collapsible">¿Cómo hago si el producto que deseo no aparece en el listado disponible?</button>
+              <div class="collapsibleContent">
+                <p>Coloca la descripción del producto, indica la cantidad de unidades por bulto y selecciona agregar. Nuestro personal se encargará de validar la naturaleza del mismo, su descripción y entonces se formalizará su anexo a la lista disponible. Ejemplo: <strong>Sardina en lata Rey del Mar 24unidX1 130 Grs.</strong></p>
               </div>
             </div>
 
@@ -276,7 +289,10 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+          <div class="col-md-12 mb-5">
+            <h3 class="text-center mt-3 mb-5">Proximamente</h3>
+          </div>
+          {{--<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
             <div class="card card-blog">
               <div class="card-blog__img">
                 <img class="card-img rounded-0"
@@ -338,7 +354,7 @@
                 <a class="card-blog__link" href="#">Leer más <i class="ti-arrow-right"></i></a>
               </div>
             </div>
-          </div>
+          </div>--}}
 
 
 
@@ -389,6 +405,13 @@
   <script src="{{ url('landing/js/main.js') }}"></script>
 
   <script>
+
+    function goToNew(url){
+
+      window.open(url)
+
+    }
+
     function initCollapsibleWithjQuery() {
       var collapsibleButtons$ = $(".collapsible");
       collapsibleButtons$.each(function (index, ele) {
