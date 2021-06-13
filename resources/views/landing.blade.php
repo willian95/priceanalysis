@@ -257,9 +257,7 @@
             <div class="main-collapse">
               <button class="collapsible">¿Cómo saben que los datos suministrados son reales?</button>
               <div class="collapsibleContent">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat.</p>
+                <p>Los datos suministrados por las empresas o personas registradas en la página, son validados a través del portal fiscal (SENIAT) o en su defecto si es persona natural y no aporta RIF, sino solo cedula, es validado a través del portal del CNE, esto solo con la finalidad de validar que efectivamente son empresas o individuos con capacidad para involucrarse en el comercio.</p>
               </div>
             </div>
             <div class="main-collapse">
