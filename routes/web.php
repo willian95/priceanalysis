@@ -71,9 +71,9 @@ Route::get("/facebook/auth/redirect", "SocialAuthController@facebookCallback");
 
 });*/
 
-/*Route::get("xml", function(){
+Route::get("xml", function(){
 
-    ini_set('max_execution_time', 0)
+    ini_set('max_execution_time', 0);
 
     $xml=simplexml_load_file("inventario.xml");
     foreach($xml->Registro->Masubgrupos as $subgrupos){
@@ -88,7 +88,7 @@ Route::get("/facebook/auth/redirect", "SocialAuthController@facebookCallback");
         }
     }
 
-});*/
+});
 
 Route::get('/register', "RegisterController@index"); 
 Route::post('/register', "RegisterController@register");
